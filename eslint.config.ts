@@ -1,6 +1,5 @@
 import globals from "globals";
 import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
 import perfectionist from "eslint-plugin-perfectionist";
 import reactHooks from "eslint-plugin-react-hooks";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
@@ -10,14 +9,12 @@ import { defineConfig, globalIgnores } from "eslint/config";
 export default defineConfig([
   tseslint.configs.recommended,
   pluginRouter.configs["flat/recommended"],
-  pluginReact.configs.flat.recommended,
-  pluginReact.configs.flat["jsx-runtime"], // Add this if you are using React 17+
   reactHooks.configs.flat.recommended,
   eslintConfigPrettier,
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     languageOptions: { globals: globals.browser },
-    plugins: { perfectionist, pluginReact },
+    plugins: { perfectionist },
     rules: {
       "perfectionist/sort-interfaces": ["error"],
       "perfectionist/sort-objects": [
@@ -31,9 +28,6 @@ export default defineConfig([
       perfectionist: {
         partitionByComment: true,
         type: "line-length",
-      },
-      react: {
-        version: "detect",
       },
     },
   },
