@@ -8,11 +8,11 @@ export default defineConfig({
   plugins: [
     tanstackRouter({
       autoCodeSplitting: true,
-      target: "react",
-      routesDirectory: "src/routes",
       generatedRouteTree: "src/routeTree.gen.ts",
-      routeFileIgnorePrefix: "-",
       quoteStyle: "single",
+      routeFileIgnorePrefix: "-",
+      routesDirectory: "src/routes",
+      target: "react",
     }),
     tailwindcss(),
     react({

@@ -81,10 +81,10 @@ function useDock() {
 function Dock({
   children,
   className,
-  spring = { mass: 0.1, stiffness: 150, damping: 12 },
-  magnification = DEFAULT_MAGNIFICATION,
   distance = DEFAULT_DISTANCE,
+  magnification = DEFAULT_MAGNIFICATION,
   panelHeight = DEFAULT_PANEL_HEIGHT,
+  spring = { damping: 12, mass: 0.1, stiffness: 150 },
   style,
 }: DockProps) {
   const mouseX = useMotionValue(Infinity);
@@ -122,7 +122,7 @@ function Dock({
         role='toolbar'
         aria-label='Application dock'
       >
-        <DockProvider value={{ mouseX, spring, distance, magnification }}>
+        <DockProvider value={{ distance, magnification, mouseX, spring }}>
           {children}
         </DockProvider>
       </motion.div>
@@ -138,7 +138,7 @@ function DockItem({ children, className, onClick }: DockItemProps) {
   const isHovered = useMotionValue(0);
 
   const mouseDistance = useTransform(mouseX, (val) => {
-    const domRect = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
+    const domRect = ref.current?.getBoundingClientRect() ?? { width: 0, x: 0 };
     return val - domRect.x - domRect.width / 2;
   });
 
@@ -168,7 +168,7 @@ function DockItem({ children, className, onClick }: DockItemProps) {
       onClick={onClick}
     >
       {Children.map(children, (child) =>
-        cloneElement(child as React.ReactElement<{ width: MotionValue<number>; isHovered: MotionValue<number> }>, { width, isHovered })
+        cloneElement(child as React.ReactElement<{ width: MotionValue<number>; isHovered: MotionValue<number> }>, { isHovered, width })
       )}
     </motion.div>
   );

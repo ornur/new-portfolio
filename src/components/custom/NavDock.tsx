@@ -17,56 +17,56 @@ import { WaitLink } from "@/components/custom/LinkWait";
 
 const data = [
   {
-    title: 'Home',
-    icon: (
-      <HomeIcon className='h-full w-full dark:text-neutral-50' />
-    ),
     href: '/',
+    icon: (
+      <HomeIcon className='h-full w-full dark:text-foreground in-active:dark:text-background' />
+    ),
+    title: 'Home',
   },
   {
-    title: 'Products',
-    icon: (
-      <Package className='h-full w-full dark:text-neutral-50' />
-    ),
     href: '/products',
+    icon: (
+      <Package className='h-full w-full dark:text-foreground in-active:dark:text-background' />
+    ),
+    title: 'Products',
   },
   {
-    title: 'Components',
-    icon: (
-      <Component className='h-full w-full dark:text-neutral-50' />
-    ),
     href: '/components',
+    icon: (
+      <Component className='h-full w-full dark:text-foreground in-active:dark:text-background' />
+    ),
+    title: 'Components',
   },
   {
-    title: 'Activity',
-    icon: (
-      <Activity className='h-full w-full dark:text-neutral-50' />
-    ),
     href: '/activities',
+    icon: (
+      <Activity className='h-full w-full dark:text-foreground in-active:dark:text-background' />
+    ),
+    title: 'Activity',
   },
   {
-    title: 'Change Log',
-    icon: (
-      <ScrollText className='h-full w-full dark:text-neutral-50' />
-    ),
     href: '/changelog',
-  },
-  {
-    title: 'Email',
     icon: (
-      <Mail className='h-full w-full dark:text-neutral-50' />
+      <ScrollText className='h-full w-full dark:text-foreground in-active:dark:text-background' />
     ),
-    href: 'mailto:contact@example.com',
+    title: 'Change Log',
   },
   {
-    title: 'Theme',
+    href: 'mailto:contact@example.com',
     icon: (
-      <Moon className='h-full w-full dark:text-neutral-50 in-active:text-neutral-200' />
+      <Mail className='h-full w-full in-active:dark:text-background dark:text-foreground' />
+    ),
+    title: 'Email',
+  },
+  {
+    href: '',
+    icon: (
+      <Moon className='h-full w-full in-active:dark:text-background dark:text-foreground' />
     ),
     icon2: (
-      <Sun className='h-full w-full dark:text-neutral-50 in-active:dark:text-gray-800' />
+      <Sun className='h-full w-full dark:text-foreground in-active:dark:text-background' />
     ),
-    href: '',
+    title: 'Theme',
   },
 ];
 
@@ -75,13 +75,13 @@ export function AppleStyleDock() {
   return (
     <div className='z-10 fixed bottom-2 left-1/2 max-w-full -translate-x-1/2'>
       <Dock
-        className='items-end pb-3 cursor-pointer bg-transparent dark:bg-transparent border border-neutral-800 dark:border-white/60 backdrop-blur-[3px]'
+        className='items-end pb-3 cursor-pointer bg-transparent dark:bg-transparent border border-black/20 dark:border-foreground/30 backdrop-blur-[3px]'
       >
         {data.map((item, idx) => (
           item.title === 'Theme' ? (
             <DockItem
               key={idx}
-              className='aspect-square rounded-full bg-black/10 hover:bg-gray-200 dark:bg-white/30 dark:hover:bg-neutral-800 backdrop-blur-[50px] active:bg-slate-800 dark:active:bg-yellow-400'
+              className='aspect-square rounded-full bg-black/10 hover:bg-black/15 dark:bg-foreground/20 dark:hover:bg-foreground/10 backdrop-blur-[50px] active:bg-neon dark:active:bg-neon'
               onClick={toggleTheme}
             >
               <DockLabel>{item.title}</DockLabel>
@@ -99,7 +99,7 @@ export function AppleStyleDock() {
             >
               <DockItem
                 key={idx}
-                  className='aspect-square rounded-full bg-black/10 hover:bg-gray-100 dark:bg-white/30 dark:hover:bg-neutral-800 backdrop-blur-[50px]'
+                className='aspect-square rounded-full bg-black/10 hover:bg-black/15 dark:bg-foreground/20 dark:hover:bg-foreground/10 backdrop-blur-[50px] active:bg-neon dark:active:bg-neon'
               >
                 <DockLabel>{item.title}</DockLabel>
                 <DockIcon>{item.icon}</DockIcon>

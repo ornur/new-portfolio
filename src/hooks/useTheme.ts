@@ -1,16 +1,15 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export function useTheme() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
-
-  useEffect(() => {
-    // Apply initial theme (default to dark)
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
     const saved = (localStorage.getItem("theme") as "light" | "dark") ?? "dark";
     document.documentElement.classList.toggle("dark", saved === "dark");
-    setTheme(saved);
     localStorage.setItem("theme", saved);
+    return saved;
+  });
 
+  useLayoutEffect(() => {
     // Listen for theme changes using MutationObserver
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
@@ -25,8 +24,8 @@ export function useTheme() {
     });
 
     observer.observe(document.documentElement, {
-      attributes: true,
       attributeFilter: ["class"],
+      attributes: true,
     });
 
     // Also listen for custom theme change events
