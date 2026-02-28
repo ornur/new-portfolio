@@ -7,7 +7,7 @@
 :root {
   --background: oklch(96.5% 0.005 105);
   --foreground: oklch(0.145 0 0);
-  --neon:oklch(0.9295 0.2025 115.99);
+  --neon: oklch(0.9295 0.2025 115.99);
   --neon-foreground: oklch(0.6885 0.0037 247.88);
   --card: oklch(96.5% 0.005 105);
   --card-foreground: oklch(0.145 0 0);

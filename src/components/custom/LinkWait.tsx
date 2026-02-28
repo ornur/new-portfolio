@@ -4,7 +4,7 @@ import {
   useNavigate,
   type LinkComponent,
 } from "@tanstack/react-router";
-import { transitionStore } from "@/contexts/TransitionContext";
+import { transitionStore } from "../loader/TransitionStore";
 
 interface BasicLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   waitTime?: number;

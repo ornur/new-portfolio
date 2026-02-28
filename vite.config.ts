@@ -9,7 +9,7 @@ export default defineConfig({
     tanstackRouter({
       autoCodeSplitting: true,
       generatedRouteTree: "src/routeTree.gen.ts",
-      quoteStyle: "single",
+      quoteStyle: "double",
       routeFileIgnorePrefix: "-",
       routesDirectory: "src/routes",
       target: "react",
@@ -17,7 +17,7 @@ export default defineConfig({
     tailwindcss(),
     react({
       babel: {
-        plugins: ['babel-plugin-react-compiler'],
+        plugins: ["babel-plugin-react-compiler"],
       },
     }),
   ],

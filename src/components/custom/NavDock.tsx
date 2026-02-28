@@ -7,9 +7,14 @@ import {
   Package,
   ScrollText,
   Sun,
-} from 'lucide-react';
+} from "lucide-react";
 
-import { Dock, DockIcon, DockItem, DockLabel } from '@/components/motion-primitives/dock';
+import {
+  Dock,
+  DockIcon,
+  DockItem,
+  DockLabel,
+} from "@/components/motion-primitives/dock";
 
 import { useTheme } from "@/hooks/useTheme";
 
@@ -17,96 +22,99 @@ import { WaitLink } from "@/components/custom/LinkWait";
 
 const data = [
   {
-    href: '/',
+    href: "/",
     icon: (
-      <HomeIcon className='h-full w-full dark:text-foreground in-active:dark:text-background' />
+      <HomeIcon className="dark:text-foreground in-active:dark:text-background h-full w-full" />
     ),
-    title: 'Home',
+    title: "Home",
   },
   {
-    href: '/products',
+    href: "/products",
     icon: (
-      <Package className='h-full w-full dark:text-foreground in-active:dark:text-background' />
+      <Package className="dark:text-foreground in-active:dark:text-background h-full w-full" />
     ),
-    title: 'Products',
+    title: "Products",
   },
   {
-    href: '/components',
+    href: "/components",
     icon: (
-      <Component className='h-full w-full dark:text-foreground in-active:dark:text-background' />
+      <Component className="dark:text-foreground in-active:dark:text-background h-full w-full" />
     ),
-    title: 'Components',
+    title: "Components",
   },
   {
-    href: '/activities',
+    href: "/activities",
     icon: (
-      <Activity className='h-full w-full dark:text-foreground in-active:dark:text-background' />
+      <Activity className="dark:text-foreground in-active:dark:text-background h-full w-full" />
     ),
-    title: 'Activity',
+    title: "Activity",
   },
   {
-    href: '/changelog',
+    href: "/changelog",
     icon: (
-      <ScrollText className='h-full w-full dark:text-foreground in-active:dark:text-background' />
+      <ScrollText className="dark:text-foreground in-active:dark:text-background h-full w-full" />
     ),
-    title: 'Change Log',
+    title: "Change Log",
   },
   {
-    href: 'mailto:contact@example.com',
+    href: "mailto:contact@example.com",
     icon: (
-      <Mail className='h-full w-full in-active:dark:text-background dark:text-foreground' />
+      <Mail className="in-active:dark:text-background dark:text-foreground h-full w-full" />
     ),
-    title: 'Email',
+    title: "Email",
   },
   {
-    href: '',
+    href: "",
     icon: (
-      <Moon className='h-full w-full in-active:dark:text-background dark:text-foreground' />
+      <Moon className="in-active:dark:text-background dark:text-foreground h-full w-full" />
     ),
     icon2: (
-      <Sun className='h-full w-full dark:text-foreground in-active:dark:text-background' />
+      <Sun className="dark:text-foreground in-active:dark:text-background h-full w-full" />
     ),
-    title: 'Theme',
+    title: "Theme",
   },
 ];
 
 export function AppleStyleDock() {
   const { theme, toggleTheme } = useTheme();
   return (
-    <div className='z-10 fixed bottom-2 left-1/2 max-w-full -translate-x-1/2'>
-      <Dock
-        className='items-end pb-3 cursor-pointer bg-transparent dark:bg-transparent border border-black/20 dark:border-foreground/30 backdrop-blur-[3px]'
-      >
-        {data.map((item, idx) => (
-          item.title === 'Theme' ? (
+    <div className="fixed bottom-2 left-1/2 z-10 max-w-full -translate-x-1/2">
+      <Dock className="dark:border-foreground/30 cursor-pointer items-end border border-black/20 bg-transparent pb-3 backdrop-blur-[3px] dark:bg-transparent">
+        {data.map((item, idx) =>
+          item.title === "Theme" ? (
             <DockItem
               key={idx}
-              className='aspect-square rounded-full bg-black/10 hover:bg-black/15 dark:bg-foreground/20 dark:hover:bg-foreground/10 backdrop-blur-[50px] active:bg-neon dark:active:bg-neon'
+              className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 backdrop-blur-[50px] hover:bg-black/15"
               onClick={toggleTheme}
             >
               <DockLabel>{item.title}</DockLabel>
-              {theme === 'dark' ?
-                <DockIcon key='dark' className='animate-in fade-in'>{item.icon2}</DockIcon> :
-                <DockIcon key='light' className='animate-in fade-in'>{item.icon}</DockIcon>
-              }
+              {theme === "dark" ? (
+                <DockIcon key="dark" className="animate-in fade-in">
+                  {item.icon2}
+                </DockIcon>
+              ) : (
+                <DockIcon key="light" className="animate-in fade-in">
+                  {item.icon}
+                </DockIcon>
+              )}
             </DockItem>
           ) : (
             <WaitLink
               key={idx}
               to={item.href}
               waitTime={700}
-              className='cursor-pointer'
+              className="cursor-pointer"
             >
               <DockItem
                 key={idx}
-                className='aspect-square rounded-full bg-black/10 hover:bg-black/15 dark:bg-foreground/20 dark:hover:bg-foreground/10 backdrop-blur-[50px] active:bg-neon dark:active:bg-neon'
+                className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 backdrop-blur-[50px] hover:bg-black/15"
               >
                 <DockLabel>{item.title}</DockLabel>
                 <DockIcon>{item.icon}</DockIcon>
               </DockItem>
             </WaitLink>
-          )
-        ))}
+          ),
+        )}
       </Dock>
     </div>
   );

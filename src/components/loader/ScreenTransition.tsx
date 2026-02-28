@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { useTransitionStore } from "@/contexts/TransitionContext";
+import { useTransitionStore } from "./TransitionStore";
 import * as constants from "./constants";
 import { useTheme } from "@/hooks/useTheme";
 

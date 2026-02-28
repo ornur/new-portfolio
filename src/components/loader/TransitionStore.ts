@@ -19,12 +19,28 @@ const listeners = new Set<() => void>();
 const notify = () => listeners.forEach((fn) => fn());
 
 export const transitionStore: Store = {
-  draw:        () => { state = { ...state, phase: 2 };        notify(); },
-  fadeContent: () => { state = { isActive: false, phase: 0 }; notify(); },
-  get isActive() { return state.isActive; },
-  get phase()    { return state.phase; },
-  scaleUp:     () => { state = { ...state, phase: 3 };        notify(); },
-  start:       () => { state = { isActive: true,  phase: 1 }; notify(); },
+  draw: () => {
+    state = { ...state, phase: 2 };
+    notify();
+  },
+  fadeContent: () => {
+    state = { isActive: false, phase: 0 };
+    notify();
+  },
+  get isActive() {
+    return state.isActive;
+  },
+  get phase() {
+    return state.phase;
+  },
+  scaleUp: () => {
+    state = { ...state, phase: 3 };
+    notify();
+  },
+  start: () => {
+    state = { isActive: true, phase: 1 };
+    notify();
+  },
 };
 
 const subscribe = (cb: () => void) => {
