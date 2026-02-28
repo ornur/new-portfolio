@@ -13,6 +13,6 @@ export default defineConfig({
     tailwindcss(),
     react(),
   ],
-  resolve: { alias: { "@": "/src" } },
   publicDir: "src/public",
+  resolve: { alias: { "@": "/src" } },
 });
