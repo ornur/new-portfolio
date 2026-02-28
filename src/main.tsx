@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import "./styles/index.css";
+import ScreenTransition from "./components/loader/ScreenTransition";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
@@ -22,6 +23,7 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
+      <ScreenTransition />
       <RouterProvider router={router} />
     </StrictMode>,
   );
