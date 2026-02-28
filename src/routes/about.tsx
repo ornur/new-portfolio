@@ -1,4 +1,3 @@
-import { AnimationImages } from "@/components/animation-images";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/about")({
@@ -6,5 +5,5 @@ export const Route = createFileRoute("/about")({
 });
 
 function About() {
-  return <AnimationImages/>
+  return <></>
 }
