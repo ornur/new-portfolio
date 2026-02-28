@@ -1,3 +1,4 @@
+import { AnimationImages } from "@/components/animation-images";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/about")({
@@ -5,5 +6,5 @@ export const Route = createFileRoute("/about")({
 });
 
 function About() {
-  return <div className="bg-red-500 p-2">Hello from About!</div>;
+  return <AnimationImages/>
 }
