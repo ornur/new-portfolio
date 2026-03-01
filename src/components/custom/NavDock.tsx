@@ -2,9 +2,9 @@ import {
   Activity,
   Component,
   HomeIcon,
+  Languages,
   Mail,
   Moon,
-  Package,
   ScrollText,
   Sun,
 } from "lucide-react";
@@ -19,6 +19,7 @@ import {
 import { useTheme } from "@/hooks/useTheme";
 
 import { WaitLink } from "@/components/custom/LinkWait";
+import { changeLocale } from "@/i18n/LocaleStore";
 
 const data = [
   {
@@ -27,13 +28,6 @@ const data = [
       <HomeIcon className="dark:text-foreground in-active:dark:text-background h-full w-full" />
     ),
     title: "Home",
-  },
-  {
-    href: "/products",
-    icon: (
-      <Package className="dark:text-foreground in-active:dark:text-background h-full w-full" />
-    ),
-    title: "Products",
   },
   {
     href: "/components",
@@ -73,6 +67,13 @@ const data = [
     ),
     title: "Theme",
   },
+  {
+    href: "",
+    icon: (
+      <Languages className="dark:text-foreground in-active:dark:text-background h-full w-full" />
+    ),
+    title: "Language",
+  },
 ];
 
 export function AppleStyleDock() {
@@ -97,6 +98,15 @@ export function AppleStyleDock() {
                   {item.icon}
                 </DockIcon>
               )}
+            </DockItem>
+          ) : item.title === "Language" ? (
+            <DockItem
+              key={idx}
+              className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 backdrop-blur-[50px] hover:bg-black/15"
+              onClick={changeLocale}
+            >
+              <DockLabel>{item.title}</DockLabel>
+              <DockIcon>{item.icon}</DockIcon>
             </DockItem>
           ) : (
             <WaitLink
