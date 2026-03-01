@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { useTransitionStore } from "./TransitionStore";
+import { useTransitionStore, Phase } from "./TransitionStore";
 import * as constants from "./constants";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -19,10 +19,12 @@ function ClipRect({
       width="120"
       initial={{ height: 0, y: initY }}
       animate={
-        phase >= 2 ? { height: constants.SVG_H, y: 0 } : { height: 0, y: initY }
+        phase >= Phase.drawing
+          ? { height: constants.SVG_H, y: 0 }
+          : { height: 0, y: initY }
       }
       transition={
-        phase === 2
+        phase === Phase.drawing
           ? { delay, duration: constants.PATH_TIME, ease: "easeInOut" }
           : { duration: 0 }
       }
@@ -76,7 +78,7 @@ export default function ScreenTransition() {
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.div
               initial={{ scale: 1 }}
-              animate={{ scale: phase === 3 ? 150 : 1 }}
+              animate={{ scale: phase === Phase.scaling ? 150 : 1 }}
               transition={{ duration: constants.SCALE_TIME, ease: "easeIn" }}
             >
               <svg

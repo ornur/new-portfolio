@@ -23,9 +23,9 @@ export const CLIPS = [
 ] as const;
 
 // Phase → [action, delay ms] — stable module-level map, no re-creation on render
-const { draw, fadeContent, scaleUp } = transitionStore;
+const { finish, markDrawComplete, startDrawing } = transitionStore;
 export const PHASE_SCHEDULE: Partial<Record<number, [() => void, number]>> = {
-  1: [draw, PANEL_TIME * 1000],
-  2: [scaleUp, DRAW_TOTAL * 1000],
-  3: [fadeContent, SCALE_TIME * 1000],
+  1: [startDrawing, PANEL_TIME * 1000],
+  2: [markDrawComplete, DRAW_TOTAL * 1000], // unblocks awaitDrawComplete() in LinkWait
+  3: [finish, SCALE_TIME * 1000],
 };

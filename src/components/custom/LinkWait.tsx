@@ -6,21 +6,21 @@ import {
 } from "@tanstack/react-router";
 import { transitionStore } from "../loader/TransitionStore";
 
-interface BasicLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  waitTime?: number;
-}
+type BasicLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 const BasicLinkComponent = forwardRef<HTMLAnchorElement, BasicLinkProps>(
   (props, ref) => {
-    const { href, waitTime = 0, ...rest } = props;
+    const { href, ...rest } = props;
     const navigate = useNavigate();
 
-    const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const handleClick = async (event: React.MouseEvent<HTMLAnchorElement>) => {
       event.preventDefault();
-      transitionStore.start();
-      setTimeout(() => {
-        navigate({ to: href });
-      }, waitTime);
+      transitionStore.begin();
+      // Wait for the draw animation to finish before changing the URL
+      await transitionStore.awaitDrawComplete();
+      // Navigate — TanStack Router resolves when all loaders are done
+      await navigate({ to: href });
+      transitionStore.startScaling();
     };
 
     return <a ref={ref} {...rest} onClick={handleClick} />;
