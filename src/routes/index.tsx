@@ -16,6 +16,7 @@ function Index() {
   return (
     <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden">
       <div className="flex flex-col items-center text-center">
+        {/* Image */}
         <BoxReveal
           boxColor={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
           duration={0.5}
@@ -29,26 +30,20 @@ function Index() {
             loading="eager"
           />
         </BoxReveal>
-        <div className="flex flex-col space-x-1 md:w-full">
-          <BoxReveal
-            boxColor={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
-            duration={0.5}
-          >
-            <h1 className="flex items-center text-4xl font-medium md:text-5xl">
-              {t("name")}
-            </h1>
-          </BoxReveal>
-        </div>
-        <div className="flex items-center space-x-3">
-          <BoxReveal
-            boxColor={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
-            duration={0.5}
-          >
-            <h2 className="text-2xl font-medium md:text-4xl">
-              Frontend Developer
-            </h2>
-          </BoxReveal>
-        </div>
+        {/* Name */}
+        <BoxReveal
+          boxColor={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
+          duration={0.5}
+        >
+          <h1 className="flex items-center text-4xl font-bold">{t("name")}</h1>
+        </BoxReveal>
+        {/* Profession */}
+        <BoxReveal
+          boxColor={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
+          duration={0.5}
+        >
+          <h2 className="text-2xl font-medium">{t("profession")}</h2>
+        </BoxReveal>
       </div>
       <BoxReveal
         boxColor={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
