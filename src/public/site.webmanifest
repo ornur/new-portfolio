@@ -1,0 +1,22 @@
+{
+  "background_color": "#000000",
+  "description": "Frontend developer with 3+ years of experience. I create web applications with React, TypeScript, and other modern technologies.",
+  "display": "standalone",
+  "icons": [
+    {
+      "sizes": "any",
+      "src": "/favicon.ico",
+      "type": "image/x-icon"
+    },
+    {
+      "purpose": "any maskable",
+      "sizes": "180x180",
+      "src": "/apple-touch-icon.png",
+      "type": "image/png"
+    }
+  ],
+  "name": "Nurdaulet",
+  "short_name": "Nurda",
+  "start_url": "/",
+  "theme_color": "#e2f72e"
+}
