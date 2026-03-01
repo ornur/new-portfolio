@@ -11,10 +11,8 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: seo({
-      title: "Nurdaulet Orynbasarov - Software Engineer",
       description:
         "My personal portfolio showcasing my projects, skills, and experience as a software engineer specializing in frontend development with React and TypeScript.",
-      url: "https://nurda.vercel.app",
       image: "https://nurda.vercel.app/opengraph-image.png",
       keywords: [
         "Nurdaulet Orynbasarov",
@@ -27,6 +25,8 @@ export const Route = createFileRoute("/")({
         "Нурдаулет Орынбасаров",
         "Нұрдәулет Орынбасаров",
       ].join(", "),
+      title: "Nurdaulet Orynbasarov - Software Engineer",
+      url: "https://nurda.vercel.app",
     }),
   }),
 });

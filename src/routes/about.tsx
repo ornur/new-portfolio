@@ -5,9 +5,9 @@ export const Route = createFileRoute("/about")({
   component: About,
   head: () => ({
     meta: seo({
-      title: "About - Nurdaulet Orynbasarov",
       description:
         "Learn more about Nurdaulet Orynbasarov — a frontend developer with experience in React, TypeScript, and modern web technologies.",
+      title: "About - Nurdaulet Orynbasarov",
       url: "https://nurda.vercel.app/about",
     }),
   }),
