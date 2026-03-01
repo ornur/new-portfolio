@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Unbounded:wght@200..900&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -42,6 +43,8 @@
   --font-sans: Geist, sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: Geist Mono, monospace;
+  --font-unbounded: "Unbounded", monospace;
+  --font-space-mono: "Space Mono", monospace;
 
   --radius: 0.625rem;
 
@@ -146,6 +149,8 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-serif: var(--font-serif);
+  --font-unbounded: var(--font-unbounded);
+  --font-space-mono: var(--font-space-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -167,7 +172,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/50 font-space-mono;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
