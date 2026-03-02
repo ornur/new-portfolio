@@ -1,17 +1,25 @@
-import { IntlProvider } from "use-intl";
-import { AppleStyleDock } from "@/components/custom/NavDock";
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import {
+  createRootRouteWithContext,
+  Outlet,
+  HeadContent,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { IntlProvider } from "use-intl";
+
+import { AppleStyleDock } from "@/components/custom/NavDock";
 import { useLocale } from "@/i18n/LocaleStore";
 import { messages } from "@/i18n/messages";
-import { HeadContent } from "@tanstack/react-router";
 import appCss from "@/styles/index.css?url";
+
+type TRootContext = {
+  theme: "dark" | "light";
+};
 
 const RootLayout = () => {
   const lang = useLocale();
   return (
     <>
-      <IntlProvider messages={messages[lang]} locale={lang}>
+      <IntlProvider locale={lang} messages={messages[lang]}>
         <HeadContent />
         <Outlet />
         <AppleStyleDock />
@@ -21,7 +29,7 @@ const RootLayout = () => {
   );
 };
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<TRootContext>()({
   component: RootLayout,
   head: () => ({
     links: [

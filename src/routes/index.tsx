@@ -1,34 +1,25 @@
-import { FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa6";
-import { BoxReveal } from "@/components/BoxReveal";
 import { createFileRoute } from "@tanstack/react-router";
-import { useTheme } from "@/hooks/useTheme";
+import { FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa6";
 import { useTranslations } from "use-intl";
+
+import { BoxReveal } from "@/components/BoxReveal";
 import { GridPattern } from "@/components/GridPattern";
+import { useTheme } from "@/hooks/useTheme";
+import { getTranslations } from "@/i18n/getTranslations";
 import { cn } from "@/lib/utils";
 import { seo } from "@/utils/seo";
 
 export const Route = createFileRoute("/")({
   component: Index,
-  head: () => ({
-    meta: seo({
-      description:
-        "My personal portfolio showcasing my projects, skills, and experience as a software engineer specializing in frontend development with React and TypeScript.",
-      image: "https://nurda.vercel.app/opengraph-image.png",
-      keywords: [
-        "Nurdaulet Orynbasarov",
-        "software engineer",
-        "web developer",
-        "portfolio",
-        "react",
-        "typescript",
-        "frontend",
-        "Нурдаулет Орынбасаров",
-        "Нұрдәулет Орынбасаров",
-      ].join(", "),
-      title: "Nurdaulet Orynbasarov - Software Engineer",
-      url: "https://nurda.vercel.app",
-    }),
-  }),
+  head: () => {
+    const t = getTranslations("Home");
+    return {
+      meta: seo({
+        description: t("seo.description"),
+        title: t("seo.title"),
+      }),
+    };
+  },
 });
 
 function Index() {
@@ -43,12 +34,12 @@ function Index() {
           duration={0.5}
         >
           <img
-            src="/me.webp"
             alt="me"
             className="mx-auto mb-6 aspect-square rounded-full object-cover"
             height={300}
-            width={300}
             loading="eager"
+            src="/me.webp"
+            width={300}
           />
         </BoxReveal>
         {/* Name */}
@@ -56,21 +47,21 @@ function Index() {
           boxColor={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
           duration={0.5}
         >
-          <h1 className="flex items-center text-4xl font-bold">{t("name")}</h1>
+          <h1 className="text-center text-4xl font-bold">{t("name")}</h1>
         </BoxReveal>
         {/* Profession */}
         <BoxReveal
           boxColor={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
           duration={0.5}
         >
-          <h2 className="text-2xl font-medium">{t("profession")}</h2>
+          <h2 className="text-lg font-medium">{t("profession")}</h2>
         </BoxReveal>
       </div>
       <BoxReveal
         boxColor={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
         duration={0.5}
       >
-        <ul className="mt-3 flex space-x-2">
+        <ul className="mt-2 flex gap-2">
           <li>
             <a href={"https://github.com/ornur"} target="_blank">
               <FaGithub className="size-7 md:size-8" />
@@ -92,13 +83,13 @@ function Index() {
         </ul>
       </BoxReveal>
       <GridPattern
-        numSquares={30}
-        maxOpacity={1}
-        duration={2}
         className={cn(
           "mask-[radial-gradient(500px_circle_at_center,white,transparent)]",
           "inset-x-0 inset-y-[-30%] -z-50 h-[200%] skew-y-12 lg:inset-y-[-30%] xl:inset-y-[-50%]",
         )}
+        duration={2}
+        maxOpacity={1}
+        numSquares={30}
       />
     </div>
   );

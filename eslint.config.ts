@@ -1,35 +1,20 @@
-import globals from "globals";
-import tseslint from "typescript-eslint";
+import pluginRouter from "@tanstack/eslint-plugin-router";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
 import perfectionist from "eslint-plugin-perfectionist";
 import reactHooks from "eslint-plugin-react-hooks";
-import eslintConfigPrettier from "eslint-config-prettier/flat";
-import pluginRouter from "@tanstack/eslint-plugin-router";
 import { defineConfig, globalIgnores } from "eslint/config";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
 export default defineConfig([
   tseslint.configs.recommended,
   pluginRouter.configs["flat/recommended"],
   reactHooks.configs.flat.recommended,
   eslintConfigPrettier,
+  perfectionist.configs["recommended-natural"],
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     languageOptions: { globals: globals.browser },
-    plugins: { perfectionist },
-    rules: {
-      "perfectionist/sort-interfaces": ["error"],
-      "perfectionist/sort-objects": [
-        "error",
-        {
-          type: "alphabetical",
-        },
-      ],
-    },
-    settings: {
-      perfectionist: {
-        partitionByComment: true,
-        type: "line-length",
-      },
-    },
   },
   globalIgnores([
     "!node_modules/", // unignore `node_modules/` directory

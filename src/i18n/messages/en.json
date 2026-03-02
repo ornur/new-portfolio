@@ -1,6 +1,10 @@
 {
   "Home": {
     "name": "I'm Nurdaulet",
-    "profession": "Frontend Developer"
+    "profession": "Software Engineer",
+    "seo": {
+      "title": "Nurdaulet - Software Engineer",
+      "description": "My personal portfolio is a showcase of my projects, skills, and experience as a software engineer specializing in front-end development using React and TypeScript."
+    }
   }
 }

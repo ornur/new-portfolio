@@ -1,14 +1,14 @@
 export const seo = ({
   description,
-  image,
-  keywords,
+  image = "https://nurda.vercel.app/opengraph-image.png",
+  keywords = "Nurdaulet Orynbassarov, software engineer, web developer, personal website, frontend developer, portfolio, react, typescript, frontend, Нурдаулет Орынбасаров, Разработчик, Нұрдәулет Орынбасаров",
   title,
   url = "https://nurda.vercel.app",
 }: {
-  title: string;
   description?: string;
   image?: string;
   keywords?: string;
+  title: string;
   url?: string;
 }) => {
   const tags = [
