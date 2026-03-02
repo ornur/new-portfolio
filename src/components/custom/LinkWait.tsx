@@ -8,13 +8,13 @@ import { forwardRef } from "react";
 import { transitionStore } from "../loader/TransitionStore";
 
 type BasicLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-  href: string;
   disabled?: boolean;
+  href: string;
 };
 
 const BasicLinkComponent = forwardRef<HTMLAnchorElement, BasicLinkProps>(
   (props, ref) => {
-    const { href, disabled, ...rest } = props;
+    const { disabled, href, ...rest } = props;
     const navigate = useNavigate();
 
     const handleClick = async (event: React.MouseEvent<HTMLAnchorElement>) => {
