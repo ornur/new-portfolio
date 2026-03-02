@@ -3,9 +3,9 @@ import type { Messages, NamespaceKeys, NestedKeyOf } from "use-intl";
 import { type Locale, locales } from "./LocaleStore";
 import { messages } from "./messages";
 
-type SimpleTranslator<N extends keyof Messages> = (
+export type SimpleTranslator<N extends keyof Messages> = (
   key: NestedKeyOf<Messages[N]>,
-  values?: Record<string, unknown>,
+  values?: Record<string, Date | number | string>,
 ) => string;
 
 /**

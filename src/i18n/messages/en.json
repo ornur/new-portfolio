@@ -6,5 +6,14 @@
       "title": "Nurdaulet - Software Engineer",
       "description": "My personal portfolio is a showcase of my projects, skills, and experience as a software engineer specializing in front-end development using React and TypeScript."
     }
+  },
+  "Nav": {
+    "home": "Home",
+    "about": "About",
+    "techStack": "Tech Stack",
+    "experience": "Experience",
+    "projects": "Projects",
+    "theme": "Theme",
+    "language": "Language"
   }
 }

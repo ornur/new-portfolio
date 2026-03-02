@@ -5,7 +5,7 @@ export type Locale = (typeof locales)[number];
 
 let locale: Locale = (() => {
   const saved = localStorage.getItem("locale") as Locale;
-  return locales.includes(saved) ? saved : "ru";
+  return locales.includes(saved) ? saved : "en";
 })();
 
 const listeners = new Set<() => void>();
