@@ -7,15 +7,19 @@ import { forwardRef } from "react";
 
 import { transitionStore } from "../loader/TransitionStore";
 
-type BasicLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
+type BasicLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  href: string;
+  disabled?: boolean;
+};
 
 const BasicLinkComponent = forwardRef<HTMLAnchorElement, BasicLinkProps>(
   (props, ref) => {
-    const { href, ...rest } = props;
+    const { href, disabled, ...rest } = props;
     const navigate = useNavigate();
 
     const handleClick = async (event: React.MouseEvent<HTMLAnchorElement>) => {
       event.preventDefault();
+      if (disabled) return;
       transitionStore.begin();
       // Wait for the draw animation to finish before changing the URL
       await transitionStore.awaitDrawComplete();
