@@ -1,3 +1,4 @@
+import { useLocation } from "@tanstack/react-router";
 import {
   Activity,
   Component,
@@ -9,18 +10,15 @@ import {
   Sun,
 } from "lucide-react";
 
+import { WaitLink } from "@/components/custom/LinkWait";
 import {
   Dock,
   DockIcon,
   DockItem,
   DockLabel,
 } from "@/components/motion-primitives/dock";
-
 import { useTheme } from "@/hooks/useTheme";
-
-import { WaitLink } from "@/components/custom/LinkWait";
 import { changeLocale } from "@/i18n/LocaleStore";
-import { useLocation } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 
 const data = [
@@ -75,34 +73,33 @@ export function AppleStyleDock() {
         {data.map((item, idx) =>
           item.title === "Theme" ? (
             <DockItem
-              key={idx}
               className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 backdrop-blur-[50px] hover:bg-black/15"
+              key={idx}
               onClick={toggleTheme}
             >
               <DockLabel>{item.title}</DockLabel>
               {theme === "dark" ? (
-                <DockIcon key="dark" className="animate-in fade-in">
+                <DockIcon className="animate-in fade-in" key="dark">
                   {item.icon2}
                 </DockIcon>
               ) : (
-                <DockIcon key="light" className="animate-in fade-in">
+                <DockIcon className="animate-in fade-in" key="light">
                   {item.icon}
                 </DockIcon>
               )}
             </DockItem>
           ) : item.title === "Language" ? (
             <DockItem
-              key={idx}
               className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 backdrop-blur-[50px] hover:bg-black/15"
+              key={idx}
               onClick={changeLocale}
             >
               <DockLabel>{item.title}</DockLabel>
               <DockIcon>{item.icon}</DockIcon>
             </DockItem>
           ) : (
-            <WaitLink key={idx} to={item.href} className="cursor-pointer">
+            <WaitLink className="cursor-pointer" key={idx} to={item.href}>
               <DockItem
-                key={idx}
                 className={cn(
                   pathname === item.href
                     ? "bg-neon dark:text-background"
@@ -111,6 +108,7 @@ export function AppleStyleDock() {
                   "aspect-square rounded-full backdrop-blur-[50px]",
                   "active:bg-neon hover:bg-black/15",
                 )}
+                key={idx}
               >
                 <DockLabel>{item.title}</DockLabel>
                 <DockIcon>{item.icon}</DockIcon>

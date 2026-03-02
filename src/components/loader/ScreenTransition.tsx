@@ -1,36 +1,10 @@
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { useTransitionStore, Phase } from "./TransitionStore";
-import * as constants from "./constants";
+
 import { useTheme } from "@/hooks/useTheme";
 
-function ClipRect({
-  delay,
-  initY,
-  phase,
-}: {
-  initY: number;
-  delay: number;
-  phase: number;
-}) {
-  return (
-    <motion.rect
-      x="-5"
-      width="120"
-      initial={{ height: 0, y: initY }}
-      animate={
-        phase >= Phase.drawing
-          ? { height: constants.SVG_H, y: 0 }
-          : { height: 0, y: initY }
-      }
-      transition={
-        phase === Phase.drawing
-          ? { delay, duration: constants.PATH_TIME, ease: "easeInOut" }
-          : { duration: 0 }
-      }
-    />
-  );
-}
+import * as constants from "./constants";
+import { Phase, useTransitionStore } from "./TransitionStore";
 
 export default function ScreenTransition() {
   const { isActive, phase } = useTransitionStore();
@@ -48,67 +22,67 @@ export default function ScreenTransition() {
     <AnimatePresence mode="wait">
       {isActive && (
         <motion.div
-          className="pointer-events-auto fixed inset-0 z-9999"
-          initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
+          className="pointer-events-auto fixed inset-0 z-9999"
           exit={{ opacity: 0 }}
+          initial={{ opacity: 1 }}
           transition={{ duration: constants.FADE_TIME, ease: "easeInOut" }}
         >
           {/* LEFT PANEL */}
           <motion.div
-            className="bg-foreground dark:bg-neon absolute inset-0"
-            style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
-            initial={{ x: "-100%" }}
             animate={{ x: 0 }}
+            className="bg-foreground dark:bg-neon absolute inset-0"
+            initial={{ x: "-100%" }}
+            style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
             transition={{ duration: constants.PANEL_TIME, ease: "easeInOut" }}
           />
 
           {/* RIGHT PANEL */}
           <motion.div
+            animate={{ x: 0 }}
             className="bg-foreground dark:bg-neon absolute inset-0"
+            initial={{ x: "100%" }}
             style={{
               clipPath: "polygon(99% 0, 100% 0, 100% 100%, 0 100%, 0 99%)",
             }}
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
             transition={{ duration: constants.PANEL_TIME, ease: "easeInOut" }}
           />
 
           {/* N SVG — centered over both panels */}
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.div
-              initial={{ scale: 1 }}
               animate={{ scale: phase === Phase.scaling ? 150 : 1 }}
+              initial={{ scale: 1 }}
               transition={{ duration: constants.SCALE_TIME, ease: "easeIn" }}
             >
               <svg
+                fill="none"
+                height="300"
                 viewBox="0 0 48 51"
                 width="270"
-                height="300"
-                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <defs>
                   {constants.CLIPS.map(({ delay, id, initY }) => (
-                    <clipPath key={id} id={id}>
-                      <ClipRect initY={initY} delay={delay} phase={phase} />
+                    <clipPath id={id} key={id}>
+                      <ClipRect delay={delay} initY={initY} phase={phase} />
                     </clipPath>
                   ))}
                 </defs>
                 <path
+                  clipPath="url(#clip-n-left)"
                   d={constants.PATHS.left}
                   fill={theme === "dark" ? "var(--background)" : "var(--neon)"}
-                  clipPath="url(#clip-n-left)"
                 />
                 <path
+                  clipPath="url(#clip-n-middle)"
                   d={constants.PATHS.middle}
                   fill={theme === "dark" ? "var(--background)" : "var(--neon)"}
-                  clipPath="url(#clip-n-middle)"
                 />
                 <path
+                  clipPath="url(#clip-n-right)"
                   d={constants.PATHS.right}
                   fill={theme === "dark" ? "var(--background)" : "var(--neon)"}
-                  clipPath="url(#clip-n-right)"
                 />
               </svg>
             </motion.div>
@@ -116,5 +90,33 @@ export default function ScreenTransition() {
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+function ClipRect({
+  delay,
+  initY,
+  phase,
+}: {
+  delay: number;
+  initY: number;
+  phase: number;
+}) {
+  return (
+    <motion.rect
+      animate={
+        phase >= Phase.drawing
+          ? { height: constants.SVG_H, y: 0 }
+          : { height: 0, y: initY }
+      }
+      initial={{ height: 0, y: initY }}
+      transition={
+        phase === Phase.drawing
+          ? { delay, duration: constants.PATH_TIME, ease: "easeInOut" }
+          : { duration: 0 }
+      }
+      width="120"
+      x="-5"
+    />
   );
 }

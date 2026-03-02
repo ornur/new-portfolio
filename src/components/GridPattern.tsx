@@ -1,21 +1,21 @@
 "use client";
 
-import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { motion } from "motion/react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 
-import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/useTheme";
+import { cn } from "@/lib/utils";
 
 interface GridPatternProps {
+  className?: string;
+  duration?: number;
+  height?: number;
+  maxOpacity?: number;
+  numSquares?: number;
+  strokeDasharray?: number;
+  width?: number;
   x?: number;
   y?: number;
-  width?: number;
-  height?: number;
-  duration?: number;
-  className?: string;
-  numSquares?: number;
-  maxOpacity?: number;
-  strokeDasharray?: number;
 }
 
 export function GridPattern({
@@ -90,20 +90,20 @@ export function GridPattern({
 
   return (
     <svg
-      ref={containerRef}
       aria-hidden="true"
       className={cn(
         "pointer-events-none absolute inset-0 h-full w-full fill-gray-400/30 stroke-gray-400/30",
         className,
       )}
+      ref={containerRef}
       {...props}
     >
       <defs>
         <pattern
-          id={id}
-          width={width}
           height={height}
+          id={id}
           patternUnits="userSpaceOnUse"
+          width={width}
           x={x}
           y={y}
         >
@@ -114,26 +114,26 @@ export function GridPattern({
           />
         </pattern>
       </defs>
-      <rect width="100%" height="100%" fill={`url(#${id})`} />
-      <svg x={x} y={y} className="overflow-visible">
+      <rect fill={`url(#${id})`} height="100%" width="100%" />
+      <svg className="overflow-visible" x={x} y={y}>
         {squares.map(({ id, pos: [x, y] }, index) => (
           <motion.rect
-            initial={{ opacity: 0 }}
             animate={{ opacity: maxOpacity }}
+            fill={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
+            height={height - 1}
+            initial={{ opacity: 0 }}
+            key={`${x}-${y}-${index}`}
+            onAnimationComplete={() => updateSquarePosition(id)}
+            strokeWidth="0"
             transition={{
               delay: index * 0.1,
               duration,
               repeat: 1,
               repeatType: "reverse",
             }}
-            onAnimationComplete={() => updateSquarePosition(id)}
-            key={`${x}-${y}-${index}`}
             width={width - 1}
-            height={height - 1}
             x={x * width + 1}
             y={y * height + 1}
-            fill={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
-            strokeWidth="0"
           />
         ))}
       </svg>

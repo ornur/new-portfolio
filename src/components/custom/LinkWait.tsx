@@ -1,9 +1,10 @@
-import { forwardRef } from "react";
 import {
   createLink,
-  useNavigate,
   type LinkComponent,
+  useNavigate,
 } from "@tanstack/react-router";
+import { forwardRef } from "react";
+
 import { transitionStore } from "../loader/TransitionStore";
 
 type BasicLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;

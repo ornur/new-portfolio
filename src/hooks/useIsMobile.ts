@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface UseIsMobileReturn {
-  isMobile: boolean;
   isLoading: boolean;
+  isMobile: boolean;
 }
 
 export const useIsMobile = (): UseIsMobileReturn => {

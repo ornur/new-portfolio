@@ -16,18 +16,18 @@ type State = {
 };
 
 type TransitionStore = State & {
-  /** Kick off the transition (panels slide in) */
-  begin: () => void;
-  /** Advance to the drawing phase */
-  startDrawing: () => void;
-  /** Signal that the draw animation finished; unblocks awaitDrawComplete() */
-  markDrawComplete: () => void;
   /** Promise that resolves when the draw animation is done */
   awaitDrawComplete: () => Promise<void>;
-  /** Advance to the scale-up phase (called after nav resolves) */
-  startScaling: () => void;
+  /** Kick off the transition (panels slide in) */
+  begin: () => void;
   /** End the transition and return to idle */
   finish: () => void;
+  /** Signal that the draw animation finished; unblocks awaitDrawComplete() */
+  markDrawComplete: () => void;
+  /** Advance to the drawing phase */
+  startDrawing: () => void;
+  /** Advance to the scale-up phase (called after nav resolves) */
+  startScaling: () => void;
 };
 
 // ─── Internal state ──────────────────────────────────────────────────────────
