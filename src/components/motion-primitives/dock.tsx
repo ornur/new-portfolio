@@ -20,6 +20,7 @@ import {
   useState,
 } from "react";
 
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { cn } from "@/lib/utils";
 
 const DOCK_HEIGHT = 128;
@@ -88,7 +89,7 @@ function Dock({
 
   return (
     <motion.div
-      className="mx-2 flex max-w-full items-end overflow-x-auto"
+      className={cn("mx-2 flex max-w-full items-end overflow-x-auto")}
       style={{
         height: height,
         scrollbarWidth: "none",
@@ -137,7 +138,7 @@ function DockIcon({ children, className, ...rest }: DockIconProps) {
 
 function DockItem({ children, className, onClick }: DockItemProps) {
   const ref = useRef<HTMLDivElement>(null);
-
+  const { isMobile } = useIsMobile();
   const { distance, magnification, mouseX, spring } = useDock();
 
   const isHovered = useMotionValue(0);
@@ -153,7 +154,9 @@ function DockItem({ children, className, onClick }: DockItemProps) {
     [40, magnification, 40],
   );
 
-  const width = useSpring(widthTransform, spring);
+  const animatedWidth = useSpring(widthTransform, spring);
+  const staticWidth = useMotionValue(40);
+  const width = isMobile ? staticWidth : animatedWidth;
 
   return (
     <motion.div
@@ -164,9 +167,10 @@ function DockItem({ children, className, onClick }: DockItemProps) {
       )}
       onBlur={() => isHovered.set(0)}
       onClick={onClick}
-      onFocus={() => isHovered.set(1)}
-      onHoverEnd={() => isHovered.set(0)}
-      onHoverStart={() => isHovered.set(1)}
+      onFocus={isMobile ? undefined : () => isHovered.set(1)}
+      onHoverEnd={isMobile ? undefined : () => isHovered.set(0)}
+      onHoverStart={isMobile ? undefined : () => isHovered.set(1)}
+      onTouchEnd={() => ref.current?.blur()}
       ref={ref}
       role="button"
       style={{ width }}
