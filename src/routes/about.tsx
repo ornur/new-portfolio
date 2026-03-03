@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import Galaxy from "@/components/react-bits/Galaxy";
 import { seo } from "@/utils/seo";
 
 export const Route = createFileRoute("/about")({
@@ -15,5 +16,22 @@ export const Route = createFileRoute("/about")({
 });
 
 function About() {
-  return <></>;
+  return (
+    <div className="relative h-screen w-screen">
+      <Galaxy
+        density={1.1}
+        glowIntensity={0.12}
+        hueShift={140}
+        mouseInteraction={false}
+        mouseRepulsion={false}
+        repulsionStrength={0}
+        rotationSpeed={0}
+        saturation={0}
+        speed={0.2}
+        starSpeed={0.3}
+        transparent
+        twinkleIntensity={0}
+      />
+    </div>
+  );
 }
