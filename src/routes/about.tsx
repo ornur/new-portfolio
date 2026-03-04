@@ -1,28 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ArrowDown } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { lazy, Suspense, useRef } from "react";
 
 import TimelineCard from "@/components/about/TimelineCard";
 import { timelineData } from "@/components/about/timelineData";
 import useIsMobile from "@/hooks/useIsMobile";
+import { getTranslations } from "@/i18n/getTranslations";
 import { seo } from "@/utils/seo";
 
 const Galaxy = lazy(() => import("@/components/react-bits/Galaxy"));
 
 export const Route = createFileRoute("/about")({
   component: About,
-  head: () => ({
-    meta: seo({
-      description:
-        "Learn more about Nurdaulet Orynbasarov — a frontend developer with experience in React, TypeScript, and modern web technologies.",
-      title: "About - Nurdaulet Orynbasarov",
-      url: "https://nurda.vercel.app/about",
-    }),
-  }),
+  head: () => {
+    const t = getTranslations("About");
+    return {
+      meta: seo({
+        description: t("seo.description"),
+        title: t("seo.title"),
+        url: "https://nurda.vercel.app/about",
+      }),
+    };
+  },
 });
 
 function About() {
   const containerRef = useRef(null);
+  const data = timelineData();
   const { isMobile } = useIsMobile();
 
   // Track scroll progress of the specific container
@@ -65,26 +70,34 @@ function About() {
           />
         </Suspense>
 
-        {timelineData.map((item, index) => (
+        {data.map((item, index) => (
           <TimelineCard
             index={index}
             isMobile={isMobile}
             item={item}
             key={index}
             scrollYProgress={scrollYProgress}
-            total={timelineData.length}
+            total={data.length}
           />
         ))}
 
         {/* Subtle Background Tunnel Guide */}
         <motion.h1
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform text-2xl font-bold text-neutral-500 md:text-4xl"
+          className="pointer-events-none absolute top-1/2 left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center gap-2 text-2xl font-bold text-neutral-500 opacity-0 md:text-4xl"
           style={{
             opacity: useTransform(scrollYProgress, [0, 0.05], [1, 0]),
             pointerEvents: "none",
           }}
         >
+          <ArrowDown
+            className="animate-[caret-blink_1.7s_infinite_ease-out]"
+            size={32}
+          />
           Scroll Down
+          <ArrowDown
+            className="animate-[caret-blink_1.7s_infinite_ease-out]"
+            size={32}
+          />
         </motion.h1>
       </div>
     </div>

@@ -7,6 +7,39 @@
       "description": "My personal portfolio is a showcase of my projects, skills, and experience as a software engineer specializing in front-end development using React and TypeScript."
     }
   },
+  "About": {
+    "data": {
+      "2004": {
+        "date": "2004",
+        "desc": "I was born 1 of January 2004 in Kentau, Kazakhstan. I knew I am connected with engineering and technology things, but I don't expect choice of my future profession will be related to software development.",
+        "title": "The Beginning"
+      },
+      "2016": {
+        "date": "2016",
+        "desc": "In 2016 I entered Nazarbayev Intellectual School in Shymkent. It was a great experience for me, because I had an opportunity to learn programming and other technical subjects.",
+        "title": "School - NIS"
+      },
+      "2022": {
+        "date": "2022",
+        "desc": "In 2022 I entered Astana IT University. I chose Software Engineering as my major, because I wanted to learn more about software development and become a developer.",
+        "title": "University - AITU"
+      },
+      "2023": {
+        "date": "2023",
+        "desc": "After internship at outsourcing company, I got an offer to work as a frontend developer at ZIZ INC. I worked on various projects, including e-commerce and corporate websites. Of course, working with other developers and learning from them was a great experience for me",
+        "title": "First Career Step - ZIZ INC."
+      },
+      "Today": {
+        "date": "Today",
+        "desc": "I am currently working as a middle frontend developer at LLP Digital Bridge, where I continue to grow my skills and contribute to exciting projects.",
+        "title": "Now - LLP Digital Bridge"
+      }
+    },
+    "seo": {
+      "title": "About - Nurdaulet",
+      "description": "Learn more about Nurdaulet Orynbassarov — a frontend developer."
+    }
+  },
   "Nav": {
     "home": "Home",
     "about": "About",
