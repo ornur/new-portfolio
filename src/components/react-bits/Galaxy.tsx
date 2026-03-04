@@ -353,5 +353,7 @@ export default function Galaxy({
     transparent,
   ]);
 
-  return <div className="relative h-full w-full" ref={ctnDom} {...rest} />;
+  return (
+    <div className="relative h-full w-full bg-black" ref={ctnDom} {...rest} />
+  );
 }
