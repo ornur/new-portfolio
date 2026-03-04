@@ -5,6 +5,17 @@ import { defineConfig } from "vite";
 
 // https://vite.dev/config/
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          icons: ["lucide-react", "react-icons"],
+          motion: ["motion/react"],
+          vendor: ["react", "react-dom", "@tanstack/react-router"],
+        },
+      },
+    },
+  },
   plugins: [
     tanstackRouter({
       autoCodeSplitting: true,
