@@ -5,6 +5,8 @@ import {
 } from "@tanstack/react-router";
 import { forwardRef } from "react";
 
+import { useTheme } from "@/hooks/useTheme";
+
 import { transitionStore } from "../loader/TransitionStore";
 
 type BasicLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
@@ -16,10 +18,12 @@ const BasicLinkComponent = forwardRef<HTMLAnchorElement, BasicLinkProps>(
   (props, ref) => {
     const { disabled, href, ...rest } = props;
     const navigate = useNavigate();
+    const { toggleTheme } = useTheme();
 
     const handleClick = async (event: React.MouseEvent<HTMLAnchorElement>) => {
       event.preventDefault();
       if (disabled) return;
+      if (href === "/about") toggleTheme("dark"); // Prevent navigation if already on the target page
       transitionStore.begin();
       // Wait for the draw animation to finish before changing the URL
       await transitionStore.awaitDrawComplete();

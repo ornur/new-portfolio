@@ -43,6 +43,7 @@ export type DockIconProps = {
 export type DockItemProps = {
   children: React.ReactNode;
   className?: string;
+  disabled?: boolean;
   onClick?: () => void;
 };
 
@@ -136,7 +137,7 @@ function DockIcon({ children, className, ...rest }: DockIconProps) {
   );
 }
 
-function DockItem({ children, className, onClick }: DockItemProps) {
+function DockItem({ children, className, disabled, onClick }: DockItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { isMobile } = useIsMobile();
   const { distance, magnification, mouseX, spring } = useDock();
@@ -166,7 +167,7 @@ function DockItem({ children, className, onClick }: DockItemProps) {
         className,
       )}
       onBlur={() => isHovered.set(0)}
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
       onFocus={isMobile ? undefined : () => isHovered.set(1)}
       onHoverEnd={isMobile ? undefined : () => isHovered.set(0)}
       onHoverStart={isMobile ? undefined : () => isHovered.set(1)}
@@ -175,6 +176,7 @@ function DockItem({ children, className, onClick }: DockItemProps) {
       role="button"
       style={{ width }}
       tabIndex={0}
+      title={disabled ? "Disabled" : ""}
     >
       {Children.map(children, (child) =>
         cloneElement(

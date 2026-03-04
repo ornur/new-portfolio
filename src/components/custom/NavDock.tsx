@@ -118,15 +118,19 @@ export function LanguageDock() {
 
 export function ThemeDock() {
   const t = useTranslations("Nav");
+  const { pathname } = useLocation();
   const { theme, toggleTheme } = useTheme();
   return (
     <div>
       <DockItem
         className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 backdrop-blur-[50px] hover:bg-black/15"
+        disabled={pathname === "/about"} // Disable on About page
         key={theme}
         onClick={toggleTheme}
       >
-        <DockLabel>{t("theme")}</DockLabel>
+        <DockLabel>
+          {pathname === "/about" ? "You can't :)" : t("theme")}
+        </DockLabel>
         {theme === "dark" ? (
           <DockIcon className="animate-in fade-in" key="dark">
             <Sun className="size-full" />

@@ -42,9 +42,9 @@ export function useTheme() {
     };
   }, []);
 
-  const toggleTheme = () => {
+  const toggleTheme = (value?: "dark" | "light") => {
     setTheme((prev) => {
-      const newTheme = prev === "dark" ? "light" : "dark";
+      const newTheme = value ?? (prev === "dark" ? "light" : "dark");
       document.documentElement.classList.toggle("dark", newTheme === "dark");
       localStorage.setItem("theme", newTheme);
 
