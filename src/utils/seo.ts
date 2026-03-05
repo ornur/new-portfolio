@@ -13,18 +13,18 @@ export const seo = ({
 }) => {
   const tags = [
     { title },
-    { content: description, property: "description" },
-    { content: keywords, property: "keywords" },
-    { content: "website", property: "og:type" },
-    { content: url, property: "og:url" },
-    { content: "Nurdaulet Orynbassarov", property: "og:site_name" },
-    { content: title, property: "og:title" },
-    { content: description, property: "og:description" },
-    { content: image, property: "og:image" },
-    { content: title, property: "twitter:title" },
-    { content: description, property: "twitter:description" },
-    { content: image, property: "twitter:card" },
-    { content: image, property: "twitter:image" },
+    { property: "description", content: description},
+    { property: "keywords", content: keywords },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: url },
+    { property: "og:site_name", content: "Nurdaulet Orynbassarov" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:image", content: image },
+    { property: "twitter:title", content: title },
+    { property: "twitter:description", content: description },
+    { property: "twitter:card", content: image },
+    { property: "twitter:image", content: image },
   ];
 
   return tags;
