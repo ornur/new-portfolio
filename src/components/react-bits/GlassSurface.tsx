@@ -104,8 +104,13 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     const isWebkit =
       /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
     const isFirefox = /Firefox/.test(navigator.userAgent);
+    // Skip expensive SVG backdrop filter on touch/mobile devices and Linux desktops
+    const isTouchDevice = navigator.maxTouchPoints > 0;
+    const isLinux =
+      /Linux/.test(navigator.platform ?? "") &&
+      !/Android/.test(navigator.userAgent);
 
-    if (isWebkit || isFirefox) {
+    if (isWebkit || isFirefox || isTouchDevice || isLinux) {
       return false;
     }
 

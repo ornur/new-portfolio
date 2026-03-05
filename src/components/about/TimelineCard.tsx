@@ -1,11 +1,10 @@
+import type { LucideIcon } from "lucide-react";
 import type { MotionValue } from "motion/react";
 
 import { motion, useTransform } from "motion/react";
 import { lazy, Suspense } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-import type { TimelineItem } from "./timelineData";
 
 const GlassSurface = lazy(() => import("@/components/react-bits/GlassSurface"));
 
@@ -15,6 +14,13 @@ interface TimelineCardProps {
   item: TimelineItem;
   scrollYProgress: MotionValue<number>;
   total: number;
+}
+
+interface TimelineItem {
+  date: string;
+  desc: string;
+  icon: LucideIcon;
+  title: string;
 }
 
 export default function TimelineCard({
@@ -49,6 +55,7 @@ export default function TimelineCard({
       style={{
         scale,
         visibility,
+        willChange: "transform",
         zIndex: total - index,
       }}
     >
