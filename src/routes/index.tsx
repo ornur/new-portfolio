@@ -36,9 +36,9 @@ function Index() {
           <img
             alt="me"
             className="mx-auto mb-6 aspect-square rounded-full object-cover"
+            fetchPriority="high"
             height={300}
             loading="eager"
-            fetchPriority="high"
             src="/me1.webp"
             width={300}
           />
