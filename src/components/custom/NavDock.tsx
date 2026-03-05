@@ -126,7 +126,7 @@ export function ThemeDock() {
         className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 backdrop-blur-[50px] hover:bg-black/15"
         disabled={pathname === "/about"} // Disable on About page
         key={theme}
-        onClick={toggleTheme}
+        onClick={() => toggleTheme()}
       >
         <DockLabel>
           {pathname === "/about" ? "You can't :)" : t("theme")}
