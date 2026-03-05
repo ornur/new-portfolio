@@ -38,7 +38,8 @@ function Index() {
             className="mx-auto mb-6 aspect-square rounded-full object-cover"
             height={300}
             loading="eager"
-            src="/me.webp"
+            fetchPriority="high"
+            src="/me1.webp"
             width={300}
           />
         </BoxReveal>
