@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDown } from "lucide-react";
+import { Baby, Rocket, School, Star, University } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { lazy, Suspense, useRef } from "react";
+import { useTranslations } from "use-intl";
 
 import TimelineCard from "@/components/about/TimelineCard";
-import { timelineData } from "@/components/about/timelineData";
 import useIsMobile from "@/hooks/useIsMobile";
 import { getTranslations } from "@/i18n/getTranslations";
 import { seo } from "@/utils/seo";
@@ -27,7 +28,6 @@ export const Route = createFileRoute("/about")({
 
 function About() {
   const containerRef = useRef(null);
-  const data = timelineData();
   const { isMobile } = useIsMobile();
 
   // Track scroll progress of the specific container
@@ -35,6 +35,40 @@ function About() {
     offset: ["start start", "end end"],
     target: containerRef,
   });
+
+  const t = useTranslations("About.data");
+  const data = [
+    {
+      date: t("2004.date"),
+      desc: t("2004.desc"),
+      icon: Baby,
+      title: t("2004.title"),
+    },
+    {
+      date: t("2016.date"),
+      desc: t("2016.desc"),
+      icon: School,
+      title: t("2016.title"),
+    },
+    {
+      date: t("2022.date"),
+      desc: t("2022.desc"),
+      icon: University,
+      title: t("2022.title"),
+    },
+    {
+      date: t("2023.date"),
+      desc: t("2023.desc"),
+      icon: Rocket,
+      title: t("2023.title"),
+    },
+    {
+      date: t("Today.date"),
+      desc: t("Today.desc"),
+      icon: Star,
+      title: t("Today.title"),
+    },
+  ];
 
   return (
     <div className="h-[500vh] bg-black" ref={containerRef}>
@@ -81,9 +115,8 @@ function About() {
           />
         ))}
 
-        {/* Subtle Background Tunnel Guide */}
         <motion.h1
-          className="pointer-events-none absolute top-1/2 left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center gap-2 text-2xl font-bold text-neutral-500 opacity-0 md:text-4xl"
+          className="pointer-events-none absolute top-1/2 left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center gap-2 text-2xl font-bold text-nowrap text-neutral-500 opacity-0 md:text-4xl"
           style={{
             opacity: useTransform(scrollYProgress, [0, 0.05], [1, 0]),
             pointerEvents: "none",
