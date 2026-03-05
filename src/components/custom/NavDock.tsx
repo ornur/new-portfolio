@@ -63,13 +63,19 @@ export function AppleStyleDock() {
   const { isMobile } = useIsMobile();
   const data = links(useTranslations("Nav"));
   return (
-    <div className="fixed bottom-2 left-1/2 z-10 max-w-full -translate-x-1/2">
+    <nav
+      className="fixed bottom-2 left-1/2 z-10 max-w-full -translate-x-1/2"
+      role="navigation"
+    >
       <Dock className="dark:border-foreground/30 cursor-pointer items-end border border-black/20 bg-transparent pb-3 backdrop-blur-[3px] dark:bg-transparent">
         {data.map((item) => (
           <WaitLink
+            aria-label={item.title}
             className="cursor-pointer"
             disabled={pathname === item.href}
+            href={item.href}
             key={item.id}
+            role="link"
             to={item.href}
           >
             <DockItem
@@ -94,7 +100,7 @@ export function AppleStyleDock() {
         )}
         <LanguageDock />
       </Dock>
-    </div>
+    </nav>
   );
 }
 

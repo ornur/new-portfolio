@@ -37,10 +37,10 @@ function Index() {
             alt="me"
             className="mx-auto mb-6 aspect-square rounded-full object-cover"
             fetchPriority="high"
-            height={300}
+            height={1280}
             loading="eager"
             src="/me1.webp"
-            width={300}
+            width={1280}
           />
         </BoxReveal>
         {/* Name */}
@@ -64,18 +64,30 @@ function Index() {
       >
         <ul className="mt-2 flex gap-2">
           <li>
-            <a href={"https://github.com/ornur"} target="_blank">
+            <a
+              aria-label="Github Account"
+              href={"https://github.com/ornur"}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <FaGithub className="size-7 md:size-8" />
             </a>
           </li>
           <li>
-            <a href={"https://t.me/nurda_oryn"} target="_blank">
+            <a
+              aria-label="Telegram Profile"
+              href={"https://t.me/nurda_oryn"}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <FaTelegram className="size-7 md:size-8" />
             </a>
           </li>
           <li>
             <a
+              aria-label="LinkedIn Profile"
               href={"https://www.linkedin.com/in/nurdaulet-orynbasarov/"}
+              rel="noopener noreferrer"
               target="_blank"
             >
               <FaLinkedin className="size-7 md:size-8" />
