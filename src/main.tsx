@@ -1,4 +1,5 @@
 import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 
@@ -27,6 +28,7 @@ function App() {
     <>
       <ScreenTransition />
       <RouterProvider context={{ theme }} router={router} />
+      <SpeedInsights />
     </>
   );
 }
