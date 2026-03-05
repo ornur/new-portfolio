@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react";
-import type { MotionValue } from "motion/react";
 
-import { motion, useTransform } from "motion/react";
+import { type MotionValue, useTransform } from "motion/react";
+import * as motion from "motion/react-m";
 import { lazy, Suspense } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

@@ -1,5 +1,6 @@
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { LazyMotion } from "motion/react";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 
@@ -8,6 +9,9 @@ import ScreenTransition from "./components/loader/ScreenTransition";
 import { useTheme } from "./hooks/useTheme";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
+
+const loadFeatures = () =>
+  import("./lib/motion-features").then((m) => m.default);
 
 // Create a new router instance
 const router = createRouter({
@@ -26,9 +30,11 @@ function App() {
   const { theme } = useTheme();
   return (
     <>
-      <ScreenTransition />
-      <RouterProvider context={{ theme }} router={router} />
-      <SpeedInsights />
+      <LazyMotion features={loadFeatures}>
+        <ScreenTransition />
+        <RouterProvider context={{ theme }} router={router} />
+        <SpeedInsights />
+      </LazyMotion>
     </>
   );
 }

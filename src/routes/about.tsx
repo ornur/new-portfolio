@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDown } from "lucide-react";
 import { Baby, Rocket, School, Star, University } from "lucide-react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { useScroll, useTransform } from "motion/react";
+import * as motion from "motion/react-m";
 import { lazy, Suspense, useRef } from "react";
 import { useTranslations } from "use-intl";
 

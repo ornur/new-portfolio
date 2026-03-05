@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import * as motion from "motion/react-m";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 import { useTheme } from "@/hooks/useTheme";

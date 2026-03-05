@@ -1,4 +1,5 @@
-import { motion, useAnimation, useInView } from "motion/react";
+import { useAnimation, useInView } from "motion/react";
+import * as motion from "motion/react-m";
 import { useEffect, useRef } from "react";
 
 interface BoxRevealProps {
