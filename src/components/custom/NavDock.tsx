@@ -90,9 +90,9 @@ export function AppleStyleDock() {
         {!isMobile && (
           <>
             <ThemeDock />
-            <LanguageDock />
           </>
         )}
+        <LanguageDock />
       </Dock>
     </div>
   );

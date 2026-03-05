@@ -72,7 +72,7 @@ export default function TimelineCard({
           mixBlendMode="screen"
           opacity={0.93}
           redOffset={0}
-          width={isMobile ? "70vw" : "25vw"}
+          width={isMobile ? "85vw" : "25vw"}
         >
           <Card className="h-full w-full border-none bg-transparent">
             <CardHeader className="flex flex-row items-center gap-4 space-y-0">
