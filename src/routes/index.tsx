@@ -37,10 +37,10 @@ function Index() {
             alt="me"
             className="mx-auto mb-6 aspect-square rounded-full object-cover"
             fetchPriority="high"
-            height={1280}
+            height={300}
             loading="eager"
-            src="/me1.webp"
-            width={1280}
+            src="/me.webp"
+            width={300}
           />
         </BoxReveal>
         {/* Name */}
