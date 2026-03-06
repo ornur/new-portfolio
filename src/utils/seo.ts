@@ -13,30 +13,27 @@ export const seo = ({
 }) => {
   const tags = [
     { title },
-    { content: description, name: "description", property: "description" },
-    { content: keywords, name: "keywords", property: "keywords" },
-    { content: "website", name: "og:type", property: "og:type" },
-    { content: url, name: "og:url", property: "og:url" },
+    { content: description, name: "description" },
+    { content: keywords, name: "keywords" },
+    { content: "website", property: "og:type" },
+    { content: url, property: "og:url" },
     {
       content: "Nurdaulet Orynbassarov",
-      name: "og:site_name",
       property: "og:site_name",
     },
-    { content: title, name: "og:title", property: "og:title" },
+    { content: title, property: "og:title" },
     {
       content: description,
-      name: "og:description",
       property: "og:description",
     },
-    { content: image, name: "og:image", property: "og:image" },
-    { content: title, name: "twitter:title", property: "twitter:title" },
+    { content: image, property: "og:image" },
+    { content: title, name: "twitter:title" },
     {
       content: description,
       name: "twitter:description",
-      property: "twitter:description",
     },
-    { content: image, name: "twitter:card", property: "twitter:card" },
-    { content: image, name: "twitter:image", property: "twitter:image" },
+    { content: "summary_large_image", name: "twitter:card" },
+    { content: image, name: "twitter:image" },
   ];
 
   return tags;

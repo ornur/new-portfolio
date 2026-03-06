@@ -45,11 +45,11 @@ export const Route = createRootRouteWithContext<TRootContext>()({
     meta: [
       { charSet: "utf-8" },
       { content: "width=device-width, initial-scale=1", name: "viewport" },
-      { content: "website", name: "og:type" },
+      { content: "website", property: "og:type" },
       // Fallback og:image for any route that doesn't set its own
       {
         content: "https://nurda.vercel.app/opengraph-image.png",
-        name: "og:image",
+        property: "og:image",
       },
     ],
   }),
