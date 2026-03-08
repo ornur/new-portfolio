@@ -41,8 +41,8 @@ export default function TimelineCard({
     scrollYProgress,
     isLastData ? [start, maxAt] : [start, maxAt, shrinkStart, end],
     isLastData
-      ? [0, isMobile ? 1 : 1.5]
-      : [0, isMobile ? 1 : 1.5, isMobile ? 1 : 1.5, 0],
+      ? [0, isMobile ? 1 : 1.3]
+      : [0, isMobile ? 1 : 1.3, isMobile ? 1 : 1.3, 0],
   );
 
   const visibility = useTransform(scrollYProgress, (v) =>
@@ -63,10 +63,10 @@ export default function TimelineCard({
         <GlassSurface
           blueOffset={20}
           borderRadius={50}
-          brightness={50}
+          brightness={70}
           className="overflow-hidden"
-          displace={0.5}
-          distortionScale={-180}
+          displace={0.1}
+          distortionScale={-150}
           greenOffset={10}
           height={"100%"}
           mixBlendMode="screen"
@@ -88,10 +88,8 @@ export default function TimelineCard({
                 </CardTitle>
               </div>
             </CardHeader>
-            <CardContent>
-              <p className="text-foreground text-xs leading-relaxed md:text-lg">
-                {item.desc}
-              </p>
+            <CardContent className="text-foreground text-justify text-xs leading-relaxed md:text-lg">
+              {item.desc}
             </CardContent>
           </Card>
         </GlassSurface>
