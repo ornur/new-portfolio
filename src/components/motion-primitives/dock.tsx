@@ -137,7 +137,13 @@ function DockIcon({ children, className, ...rest }: DockIconProps) {
   );
 }
 
-function DockItem({ children, className, disabled, onClick }: DockItemProps) {
+function DockItem({
+  children,
+  className,
+  disabled,
+  onClick,
+  ...rest
+}: DockItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { isMobile } = useIsMobile();
   const { distance, magnification, mouseX, spring } = useDock();
@@ -177,6 +183,7 @@ function DockItem({ children, className, disabled, onClick }: DockItemProps) {
       style={{ width }}
       tabIndex={0}
       title={disabled ? "Disabled" : ""}
+      {...rest}
     >
       {Children.map(children, (child) =>
         cloneElement(
