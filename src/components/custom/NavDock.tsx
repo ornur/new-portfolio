@@ -119,6 +119,8 @@ export function LanguageDock() {
   return (
     <div>
       <DockItem
+        aria-label={t("language")}
+        aria-labelledby={`dock-item-language`}
         className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 backdrop-blur-[50px] hover:bg-black/15"
         key="language"
         onClick={changeLocale}
@@ -139,6 +141,8 @@ export function ThemeDock() {
   return (
     <div>
       <DockItem
+        aria-label={t("theme")}
+        aria-labelledby={`dock-item-theme`}
         className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 backdrop-blur-[50px] hover:bg-black/15"
         disabled={pathname === "/about"} // Disable on About page
         key={theme}
