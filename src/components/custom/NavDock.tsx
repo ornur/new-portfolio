@@ -78,7 +78,7 @@ export function AppleStyleDock() {
         {data.map((item) => (
           <WaitLink
             aria-label={item.title}
-            aria-labelledby={`dock-item-${item.id}`}
+            aria-labelledby={`dock-link-${item.id}`}
             className="cursor-pointer"
             disabled={pathname === item.href}
             href={item.href}
@@ -87,6 +87,8 @@ export function AppleStyleDock() {
             to={item.href}
           >
             <DockItem
+              aria-label={item.title}
+              aria-labelledby={`dock-item-${item.id}`}
               className={cn(
                 pathname === item.href
                   ? "bg-neon dark:text-background dark:hover:bg-background dark:hover:text-neon transition-colors duration-300"
