@@ -5,7 +5,9 @@ export type Locale = (typeof locales)[number];
 
 let locale: Locale = (() => {
   const saved = localStorage.getItem("locale") as Locale;
-  return locales.includes(saved) ? saved : "en";
+  const initial = locales.includes(saved) ? saved : "en";
+  document.documentElement.lang = initial;
+  return initial;
 })();
 
 const listeners = new Set<() => void>();
@@ -22,6 +24,7 @@ export const changeLocale = (next?: Locale) => {
   }
   locale = next;
   localStorage.setItem("locale", next);
+  document.documentElement.lang = next;
   listeners.forEach((l) => l());
 };
 

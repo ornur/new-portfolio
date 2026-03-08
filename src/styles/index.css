@@ -24,8 +24,8 @@
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
 
-  --font-unbounded: "Unbounded", monospace;
-  --font-space-mono: "Space Mono", "Unbounded", monospace;
+  --font-montserrat: "Montserrat", monospace;
+  --font-space-mono: "Space Mono", monospace;
 
   --radius: 0.625rem;
 
@@ -97,7 +97,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --font-unbounded: var(--font-unbounded);
+  --font-montserrat: var(--font-montserrat);
   --font-space-mono: var(--font-space-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -129,5 +129,15 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  :root,
+  :lang(en) {
+    @apply font-space-mono;
+  }
+  :lang(kk) {
+    @apply font-space-mono;
+  }
+  :lang(ru) {
+    @apply font-montserrat;
   }
 }

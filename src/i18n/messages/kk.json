@@ -1,52 +1,52 @@
 {
   "Home": {
-    "name": "Мен Нұрдәулет",
-    "profession": "Бағдарламалық Инженер",
+    "name": "Men Nurdáýlet",
+    "profession": "Baǵdarlamalyq Injener",
     "seo": {
-      "title": "Нұрдәулет - Бағдарламалық Инженер",
-      "description": "Менің жеке портфолиом - бұл React және TypeScript көмегімен интерфейсті дамытуға мамандандырылған бағдарламалық жасақтама инженері ретінде менің жобаларымды, дағдыларымды және тәжірибемді көрсету."
+      "title": "Nurdáýlet - Baǵdarlamalyq Injener",
+      "description": "Meniń jeke portfolıom - bul React jáne TypeScript kómegimen ınterfeısti damytýǵa mamandandyrylǵan baǵdarlamalyq jasaqtama ınjeneri retinde meniń jobalarymdy, daǵdylarymdy jáne tájirıbemdi kórsetý."
     }
   },
   "About": {
     "data": {
       "2004": {
         "date": "2004",
-        "desc": "Мен 2004 жылы 1 қаңтарда Қентау қаласында, Қазақстанда туылдым. Мен әрқашан инженерия және технологиялармен байланысты мамандық таңдайтынымды білгем, бірақ Бағдарламалық Жасақтама дамытуымен байланысты болатынын күтпедім.",
-        "title": "Бастама"
+        "desc": "Men 2004 jyly 1 qańtarda Kentaý qalasynda, Qazaqstanda týyldym. Men árqashan ınjenerıa jáne tehnologıalarmen baılanysty mamandyq tańdaıtynymdy bilgem, biraq Baǵdarlamalyq Jasaqtama damytýymen baılanysty bolatynyn kútpedim.",
+        "title": "Bastama - Kentaý"
       },
       "2016": {
         "date": "2016",
-        "desc": "2016 жылы мен Шымкентте Назарбаев Зияткерлік Мектебіне түстім. Бұл маған тамаша тәжірибе болды, өйткені мен бағдарламалау және басқа техникалық пәндерді оқу мүмкіндігіне ие болдым.",
-        "title": "Мектеп - NIS"
+        "desc": "2016 jyly men Shymkentte Nazarbaev Zıatkerlik Mektebine tústim. Bul maǵan tamasha tájirıbe boldy, óıtkeni men baǵdarlamalaý jáne basqa tehnıkalyq pánderdi oqý múmkindigine ıe boldym.",
+        "title": "Mektep - NIS"
       },
       "2022": {
         "date": "2022",
-        "desc": "2022 жылы мен Astana IT University-ге түстім. Мен Software Engineering мамандығын таңдадым, өйткені бағдарламалық жасақтама дамытуы туралы көбірек білгім келді және дамытушы болғым келді.",
-        "title": "Университет - AITU"
+        "desc": "2022 jyly men Astana IT University-ge tústim. Men Software Engineering mamandyǵyn tańdadym, óıtkeni baǵdarlamalyq jasaqtama damytýy týraly kóbirek bilgim keldi jáne damytýshy bolǵym keldi.",
+        "title": "Ýnıversıtet - AITU"
       },
       "2023": {
         "date": "2023",
-        "desc": "Аутсорсинг компаниясында тағылымданудан кейін маған ZIZ INC компаниясында frontend әзірлеушісінің лауазымын ұсынды. Мен электронды сауда және корпоративтік вебсайттарын қоса алғанда, әртүрлі жобалар бойынша жұмыс істедім. Әрине, басқа әзірлеушілермен жұмыс істеу тамаша тәжірибе болды.",
-        "title": "Карьерадағы бірінші қадам - ZIZ INC."
+        "desc": "Aýtsorsıng kompanıasynda taǵylymdanýdan keıin maǵan ZIZ INC kompanıasynda frontend ázirleýshisiniń laýazymyn usyndy. Men elektrondy saýda jáne korporatıvtik vebsaıttaryn qosa alǵanda, ártúrli jobalar boıynsha jumys istedim. Árıne, basqa ázirleýshilermen jumys isteý tamasha tájirıbe boldy.",
+        "title": "Kareradaǵy birinshi qadam - ZIZ INC."
       },
       "Today": {
-        "date": "Бүгін",
-        "desc": "Мен қазіргі уақытта ТОО Digital Bridge компаниясында middle frontend әзірлеушісі болып жұмыс істеп жатырмын, онда өз дағдыларымды дамытуды және қызықты жобалармен жұмыс жасаудамын.",
-        "title": "Қазір - ТОО Digital Bridge"
+        "date": "Búgin",
+        "desc": "Men qazirgi ýaqytta TOO Digital Bridge kompanıasynda middle frontend ázirleýshisi bolyp jumys istep jatyrmyn, onda óz daǵdylarymdy damytýdy jáne qyzyqty jobalarmen jumys jasaýdamyn.",
+        "title": "Qazir - TOO Digital Bridge"
       }
     },
     "seo": {
-      "title": "Мен туралы - Нұрдәулет",
-      "description": "Нұрдәулет Орынбасаров - frontend әзірлеушісі туралы көбірек біліңіз."
+      "title": "Men týraly - Nurdáýlet",
+      "description": "Nurdáýlet Orynbasarov - frontend ázirleýshisi týraly kóbirek bilińiz."
     }
   },
   "Nav": {
-    "home": "Басты бет",
-    "about": "Мен туралы",
-    "techStack": "Технологиялар стекі",
-    "experience": "Тәжірибе",
-    "projects": "Жобалар",
-    "theme": "Тема",
-    "language": "Тіл"
+    "home": "Basty bet",
+    "about": "Men týraly",
+    "techStack": "Tehnologıalar steki",
+    "experience": "Tájirıbe",
+    "projects": "Jobalar",
+    "theme": "Tema",
+    "language": "Til"
   }
 }
