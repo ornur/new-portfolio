@@ -67,7 +67,14 @@ export function AppleStyleDock() {
       className="fixed bottom-2 left-1/2 z-10 max-w-full -translate-x-1/2"
       role="navigation"
     >
-      <Dock className="dark:border-foreground/30 cursor-pointer items-end border border-black/20 bg-transparent pb-3 backdrop-blur-[3px] dark:bg-transparent">
+      <Dock
+        className={cn(
+          "dark:border-foreground/30 cursor-pointer items-end border border-black/20 pb-3 backdrop-blur-[3px]",
+          pathname === "/tech-stack"
+            ? "bg-white dark:bg-black"
+            : "bg-transparent dark:bg-transparent",
+        )}
+      >
         {data.map((item) => (
           <WaitLink
             aria-label={item.title}
