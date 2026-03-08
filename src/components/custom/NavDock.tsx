@@ -78,6 +78,7 @@ export function AppleStyleDock() {
         {data.map((item) => (
           <WaitLink
             aria-label={item.title}
+            aria-labelledby={`dock-item-${item.id}`}
             className="cursor-pointer"
             disabled={pathname === item.href}
             href={item.href}
