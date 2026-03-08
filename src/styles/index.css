@@ -118,6 +118,30 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./Montserrat/Montserrat-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./Space_Mono/SpaceMono-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./Space_Mono/SpaceMono-Bold.ttf") format("truetype");
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50 font-space-mono;
