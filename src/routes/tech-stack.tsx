@@ -16,6 +16,7 @@ import { TanstackSVG } from "@/components/logos/tanstack";
 import { VercelSVG } from "@/components/logos/vercel";
 import { ViteSVG } from "@/components/logos/vite";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { useScrollRestore } from "@/hooks/useScrollRestore";
 import { getTranslations } from "@/i18n/getTranslations";
 import { seo } from "@/utils/seo";
 
@@ -105,6 +106,7 @@ function RouteComponent() {
   const outerRef = useRef<HTMLDivElement>(null);
   const t = useTranslations("TechStack");
   const { isMobile } = useIsMobile();
+  useScrollRestore("/tech-stack");
 
   const { scrollYProgress } = useScroll({
     offset: ["start start", "end end"],

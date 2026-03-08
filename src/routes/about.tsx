@@ -8,6 +8,7 @@ import { useTranslations } from "use-intl";
 
 import TimelineCard from "@/components/about/TimelineCard";
 import useIsMobile from "@/hooks/useIsMobile";
+import { useScrollRestore } from "@/hooks/useScrollRestore";
 import { getTranslations } from "@/i18n/getTranslations";
 import { seo } from "@/utils/seo";
 
@@ -30,6 +31,7 @@ export const Route = createFileRoute("/about")({
 function About() {
   const containerRef = useRef(null);
   const { isMobile } = useIsMobile();
+  useScrollRestore("/about");
 
   // Track scroll progress of the specific container
   const { scrollYProgress } = useScroll({
