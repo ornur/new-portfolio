@@ -40,6 +40,13 @@
       "description": "Nurdáýlet Orynbasarov - frontend ázirleýshisi týraly kóbirek bilińiz."
     }
   },
+  "TechStack": {
+    "title": "Meniń Teh-Stekim",
+    "seo": {
+      "title": "Tehnologıalar Steki - Nurdáýlet",
+      "description": "Nurdáýlet Orynbasarov software damytý jobalarynda qoldanatyn tehnologıalarmen quraldardy zertteńiz."
+    }
+  },
   "Nav": {
     "home": "Basty bet",
     "about": "Men týraly",

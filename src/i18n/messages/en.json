@@ -40,6 +40,13 @@
       "description": "Learn more about Nurdaulet Orynbassarov — a frontend developer."
     }
   },
+  "TechStack": {
+    "title": "My Tech-Stack",
+    "seo": {
+      "title": "Tech Stack - Nurdaulet",
+      "description": "Explore the technologies and tools that Nurdaulet Orynbassarov uses in his software development projects."
+    }
+  },
   "Nav": {
     "home": "Home",
     "about": "About",
