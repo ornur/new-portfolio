@@ -34,6 +34,14 @@ const ROUTES = [
     title: "About - Nurdaulet",
     url: `${SITE_URL}/about`,
   },
+  {
+    description:
+      "Explore the tech stack of Nurdaulet Orynbassarov, a frontend developer specializing in React, TypeScript, and modern web technologies.",
+    image: DEFAULT_IMAGE,
+    path: "/tech-stack",
+    title: "Tech Stack - Nurdaulet",
+    url: `${SITE_URL}/tech-stack`,
+  },
 ];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────

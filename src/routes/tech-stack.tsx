@@ -16,9 +16,21 @@ import { TanstackSVG } from "@/components/logos/tanstack";
 import { VercelSVG } from "@/components/logos/vercel";
 import { ViteSVG } from "@/components/logos/vite";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { getTranslations } from "@/i18n/getTranslations";
+import { seo } from "@/utils/seo";
 
 export const Route = createFileRoute("/tech-stack")({
   component: RouteComponent,
+  head: () => {
+    const t = getTranslations("TechStack");
+    return {
+      meta: seo({
+        description: t("seo.description"),
+        title: t("seo.title"),
+        url: "https://nurda.vercel.app/tech-stack",
+      }),
+    };
+  },
 });
 
 const techLogos: TechLogo[] = [
