@@ -4,7 +4,6 @@ export const PANEL_TIME = 0.5;
 export const PATH_TIME = 0.25;
 export const SCALE_TIME = 0.6;
 export const FADE_TIME = 0.2;
-export const DRAW_TOTAL = PATH_TIME * 3 + 0.15; // sequential: left → middle → right + small buffer before scaling
 export const SVG_H = 51;
 
 // SVG path data
@@ -26,6 +25,6 @@ export const CLIPS = [
 const { finish, markDrawComplete, startDrawing } = transitionStore;
 export const PHASE_SCHEDULE: Partial<Record<number, [() => void, number]>> = {
   1: [startDrawing, PANEL_TIME * 1000],
-  2: [markDrawComplete, DRAW_TOTAL * 1000], // unblocks awaitDrawComplete() in LinkWait
+  2: [markDrawComplete, (PATH_TIME * 3 + 0.15) * 1000], // unblocks awaitDrawComplete() in LinkWait
   3: [finish, SCALE_TIME * 1000],
 };

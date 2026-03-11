@@ -1,6 +1,5 @@
-import { useAnimation, useInView } from "motion/react";
+import { useAnimation } from "motion/react";
 import * as motion from "motion/react-m";
-import { useEffect, useRef } from "react";
 
 interface BoxRevealProps {
   boxColor?: string;
@@ -18,21 +17,18 @@ export const BoxReveal = ({
   const mainControls = useAnimation();
   const slideControls = useAnimation();
 
-  const ref = useRef(null);
-  const isInView = useInView(ref);
-
-  useEffect(() => {
-    if (isInView) {
-      slideControls.start("visible");
-      mainControls.start("visible");
-    } else {
-      slideControls.start("hidden");
-      mainControls.start("hidden");
-    }
-  }, [isInView, mainControls, slideControls]);
-
   return (
-    <div ref={ref} style={{ overflow: "hidden", position: "relative", width }}>
+    <motion.div
+      onViewportEnter={() => {
+        slideControls.start("visible");
+        mainControls.start("visible");
+      }}
+      onViewportLeave={() => {
+        slideControls.start("hidden");
+        mainControls.start("hidden");
+      }}
+      style={{ overflow: "hidden", position: "relative", width }}
+    >
       <motion.div
         animate={mainControls}
         initial="hidden"
@@ -63,6 +59,6 @@ export const BoxReveal = ({
           visible: { left: "100%" },
         }}
       />
-    </div>
+    </motion.div>
   );
 };

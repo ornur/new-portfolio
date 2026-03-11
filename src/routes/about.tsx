@@ -7,7 +7,7 @@ import { lazy, Suspense, useRef } from "react";
 import { useTranslations } from "use-intl";
 
 import TimelineCard from "@/components/about/TimelineCard";
-import useIsMobile from "@/hooks/useIsMobile";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { useScrollRestore } from "@/hooks/useScrollRestore";
 import { getTranslations } from "@/i18n/getTranslations";
 import { seo } from "@/utils/seo";
@@ -114,7 +114,7 @@ function About() {
             index={index}
             isMobile={isMobile}
             item={item}
-            key={index}
+            key={item.date}
             scrollYProgress={scrollYProgress}
             total={data.length}
           />

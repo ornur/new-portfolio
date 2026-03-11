@@ -116,14 +116,14 @@ export function GridPattern({
       </defs>
       <rect fill={`url(#${id})`} height="100%" width="100%" />
       <svg className="overflow-visible" x={x} y={y}>
-        {squares.map(({ id, pos: [x, y] }, index) => (
+        {squares.map(({ id: squareId, pos: [x, y] }, index) => (
           <motion.rect
             animate={{ opacity: maxOpacity }}
             fill={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
             height={height - 1}
             initial={{ opacity: 0 }}
-            key={`${x}-${y}-${index}`}
-            onAnimationComplete={() => updateSquarePosition(id)}
+            key={squareId}
+            onAnimationComplete={() => updateSquarePosition(squareId)}
             strokeWidth="0"
             transition={{
               delay: index * 0.1,

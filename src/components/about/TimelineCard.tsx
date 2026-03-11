@@ -55,7 +55,6 @@ export default function TimelineCard({
       style={{
         scale,
         visibility,
-        willChange: "transform",
         zIndex: total - index,
       }}
     >

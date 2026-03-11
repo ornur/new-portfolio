@@ -2,13 +2,13 @@
 
 import {
   AnimatePresence,
-  motion,
   MotionValue,
   type SpringOptions,
   useMotionValue,
   useSpring,
   useTransform,
 } from "motion/react";
+import * as motion from "motion/react-m";
 import {
   Children,
   cloneElement,
@@ -28,31 +28,31 @@ const DEFAULT_MAGNIFICATION = 80;
 const DEFAULT_DISTANCE = 150;
 const DEFAULT_PANEL_HEIGHT = 64;
 
-export type DocContextType = {
+type DocContextType = {
   distance: number;
   magnification: number;
   mouseX: MotionValue;
   spring: SpringOptions;
 };
 
-export type DockIconProps = {
+type DockIconProps = {
   children: React.ReactNode;
   className?: string;
 };
 
-export type DockItemProps = {
+type DockItemProps = {
   children: React.ReactNode;
   className?: string;
   disabled?: boolean;
   onClick?: () => void;
 };
 
-export type DockLabelProps = {
+type DockLabelProps = {
   children: React.ReactNode;
   className?: string;
 };
 
-export type DockProps = {
+type DockProps = {
   children: React.ReactNode;
   className?: string;
   distance?: number;
@@ -62,7 +62,7 @@ export type DockProps = {
   style?: React.CSSProperties;
 };
 
-export type DockProviderProps = {
+type DockProviderProps = {
   children: React.ReactNode;
   value: DocContextType;
 };

@@ -20,7 +20,7 @@ import {
   DockItem,
   DockLabel,
 } from "@/components/motion-primitives/dock";
-import useIsMobile from "@/hooks/useIsMobile";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { useTheme } from "@/hooks/useTheme";
 import { changeLocale } from "@/i18n/LocaleStore";
 import { cn } from "@/lib/utils";
@@ -63,10 +63,7 @@ export function AppleStyleDock() {
   const { isMobile } = useIsMobile();
   const data = links(useTranslations("Nav"));
   return (
-    <nav
-      className="fixed bottom-2 left-1/2 z-10 max-w-full -translate-x-1/2"
-      role="navigation"
-    >
+    <nav className="fixed bottom-2 left-1/2 z-10 max-w-full -translate-x-1/2">
       <Dock
         className={cn(
           "dark:border-foreground/30 cursor-pointer items-end border border-black/20 pb-3 backdrop-blur-[3px]",
@@ -114,7 +111,7 @@ export function AppleStyleDock() {
   );
 }
 
-export function LanguageDock() {
+function LanguageDock() {
   const t = useTranslations("Nav");
   return (
     <div>
@@ -134,7 +131,7 @@ export function LanguageDock() {
   );
 }
 
-export function ThemeDock() {
+function ThemeDock() {
   const t = useTranslations("Nav");
   const { pathname } = useLocation();
   const { theme, toggleTheme } = useTheme();

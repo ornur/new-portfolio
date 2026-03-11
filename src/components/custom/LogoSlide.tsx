@@ -66,7 +66,6 @@ export function LogoSlide({
       className="absolute inset-0 flex items-center justify-center"
       style={{
         visibility: slideVisibility,
-        willChange: "visibility",
         zIndex: index + 1 - logoCount,
       }}
     >
@@ -96,7 +95,6 @@ export function LogoSlide({
             style={{
               opacity: logoOpacity,
               translateY: logoBounce,
-              willChange: "opacity, transform",
               y: logoY,
             }}
           >
