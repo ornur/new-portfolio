@@ -1,0 +1,5 @@
+{
+  "ignore": {
+    "files": ["src/routes/**", "src/components/ui/**", "src/i18n/globals.d.ts"]
+  }
+}
