@@ -32,15 +32,7 @@ const BasicLinkComponent = forwardRef<HTMLAnchorElement, BasicLinkProps>(
       transitionStore.startScaling();
     };
 
-    return (
-      <a
-        ref={ref}
-        {...rest}
-        onClick={handleClick}
-        onKeyDown={(e) => e.preventDefault}
-        role="link"
-      />
-    );
+    return <a ref={ref} {...rest} onClick={handleClick} role="link" />;
   },
 );
 
