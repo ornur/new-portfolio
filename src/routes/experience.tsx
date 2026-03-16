@@ -2,11 +2,22 @@ import { createFileRoute } from "@tanstack/react-router";
 import { lazy, Suspense } from "react";
 
 import { useTheme } from "@/hooks/useTheme";
+import { getTranslations } from "@/i18n/getTranslations";
+import { seo } from "@/utils/seo";
 
 const ShapeGrid = lazy(() => import("@/components/react-bits/ShapeGrid"));
 
 export const Route = createFileRoute("/experience")({
   component: RouteComponent,
+  head: () => {
+    const t = getTranslations("Experience");
+    return {
+      meta: seo({
+        description: t("seo.description"),
+        title: t("seo.title"),
+      }),
+    };
+  },
 });
 
 function RouteComponent() {

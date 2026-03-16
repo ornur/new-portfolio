@@ -42,6 +42,14 @@ const ROUTES = [
     title: "Tech Stack - Nurdaulet",
     url: `${SITE_URL}/tech-stack`,
   },
+  {
+    description:
+      "Discover the professional journey and work experience of Nurdaulet Orynbassarov.",
+    image: DEFAULT_IMAGE,
+    path: "/experience",
+    title: "Experience - Nurdaulet",
+    url: `${SITE_URL}/experience`,
+  },
 ];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
