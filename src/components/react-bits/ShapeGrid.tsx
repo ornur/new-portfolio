@@ -18,7 +18,7 @@ interface ShapeGridProps {
   vinetteColor?: string;
 }
 
-export const ShapeGrid: React.FC<ShapeGridProps> = ({
+const ShapeGrid: React.FC<ShapeGridProps> = ({
   borderColor = "#999",
   direction = "right",
   hoverFillColor = "oklch(0.9295 0.2025 115.99)",
@@ -457,3 +457,5 @@ export const ShapeGrid: React.FC<ShapeGridProps> = ({
     ></canvas>
   );
 };
+
+export default ShapeGrid;
