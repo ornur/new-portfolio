@@ -20,12 +20,12 @@ export const BoxReveal = ({
   return (
     <motion.div
       onViewportEnter={() => {
-        slideControls.start("visible");
-        mainControls.start("visible");
+        void slideControls.start("visible");
+        void mainControls.start("visible");
       }}
       onViewportLeave={() => {
-        slideControls.start("hidden");
-        mainControls.start("hidden");
+        void slideControls.start("hidden");
+        void mainControls.start("hidden");
       }}
       style={{ overflow: "hidden", position: "relative", width }}
     >
