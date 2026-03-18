@@ -42,15 +42,5 @@ export const Route = createRootRouteWithContext<TRootContext>()({
       { color: "#e2f72e", href: "/site.webmanifest", rel: "manifest" },
       { href: "/favicon.ico", rel: "icon" },
     ],
-    meta: [
-      { charSet: "utf-8" },
-      { content: "width=device-width, initial-scale=1", name: "viewport" },
-      { content: "website", property: "og:type" },
-      // Fallback og:image for any route that doesn't set its own
-      {
-        content: "https://nurda.vercel.app/opengraph-image.png",
-        property: "og:image",
-      },
-    ],
   }),
 });
