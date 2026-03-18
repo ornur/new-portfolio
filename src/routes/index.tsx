@@ -4,6 +4,7 @@ import { useTranslations } from "use-intl";
 
 import { BoxReveal } from "@/components/BoxReveal";
 import { GridPattern } from "@/components/GridPattern";
+import { useSEO } from "@/hooks/useSEO";
 import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +15,12 @@ export const Route = createFileRoute("/")({
 function Index() {
   const { theme } = useTheme();
   const t = useTranslations("Home");
+
+  useSEO({
+    description: t("seo.description"),
+    title: t("seo.title"),
+  });
+
   return (
     <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden">
       <div className="flex flex-col items-center text-center">

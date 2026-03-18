@@ -17,6 +17,7 @@ import { VercelSVG } from "@/components/logos/vercel";
 import { ViteSVG } from "@/components/logos/vite";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useScrollRestore } from "@/hooks/useScrollRestore";
+import { useSEO } from "@/hooks/useSEO";
 
 export const Route = createFileRoute("/tech-stack")({
   component: RouteComponent,
@@ -95,6 +96,10 @@ function RouteComponent() {
   const t = useTranslations("TechStack");
   const { isMobile } = useIsMobile();
   useScrollRestore("/tech-stack");
+  useSEO({
+    description: t("seo.description"),
+    title: t("seo.title"),
+  });
 
   const { scrollYProgress } = useScroll({
     offset: ["start start", "end end"],

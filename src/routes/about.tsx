@@ -9,6 +9,7 @@ import { useTranslations } from "use-intl";
 import TimelineCard from "@/components/about/TimelineCard";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useScrollRestore } from "@/hooks/useScrollRestore";
+import { useSEO } from "@/hooks/useSEO";
 
 const Galaxy = lazy(() => import("@/components/react-bits/Galaxy"));
 
@@ -27,37 +28,43 @@ function About() {
     target: containerRef,
   });
 
-  const t = useTranslations("About.data");
+  const t = useTranslations("About");
+
+  useSEO({
+    description: t("seo.description"),
+    title: t("seo.title"),
+  });
+
   const data = [
     {
-      date: t("2004.date"),
-      desc: t("2004.desc"),
+      date: t("data.2004.date"),
+      desc: t("data.2004.desc"),
       icon: Baby,
-      title: t("2004.title"),
+      title: t("data.2004.title"),
     },
     {
-      date: t("2016.date"),
-      desc: t("2016.desc"),
+      date: t("data.2016.date"),
+      desc: t("data.2016.desc"),
       icon: School,
-      title: t("2016.title"),
+      title: t("data.2016.title"),
     },
     {
-      date: t("2022.date"),
-      desc: t("2022.desc"),
+      date: t("data.2022.date"),
+      desc: t("data.2022.desc"),
       icon: University,
-      title: t("2022.title"),
+      title: t("data.2022.title"),
     },
     {
-      date: t("2023.date"),
-      desc: t("2023.desc"),
+      date: t("data.2023.date"),
+      desc: t("data.2023.desc"),
       icon: Rocket,
-      title: t("2023.title"),
+      title: t("data.2023.title"),
     },
     {
-      date: t("Today.date"),
-      desc: t("Today.desc"),
+      date: t("data.Today.date"),
+      desc: t("data.Today.desc"),
       icon: Star,
-      title: t("Today.title"),
+      title: t("data.Today.title"),
     },
   ];
 

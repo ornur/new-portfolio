@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { lazy, Suspense } from "react";
+import { useTranslations } from "use-intl/react";
 
+import { useSEO } from "@/hooks/useSEO";
 import { useTheme } from "@/hooks/useTheme";
 
 const ShapeGrid = lazy(() => import("@/components/react-bits/ShapeGrid"));
@@ -11,6 +13,11 @@ export const Route = createFileRoute("/experience")({
 
 function RouteComponent() {
   const { theme } = useTheme();
+  const t = useTranslations("Experience");
+  useSEO({
+    description: t("seo.description"),
+    title: t("seo.title"),
+  });
   return (
     <div className="relative h-screen">
       <Suspense fallback={null}>
