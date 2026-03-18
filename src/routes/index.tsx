@@ -5,21 +5,10 @@ import { useTranslations } from "use-intl";
 import { BoxReveal } from "@/components/BoxReveal";
 import { GridPattern } from "@/components/GridPattern";
 import { useTheme } from "@/hooks/useTheme";
-import { getTranslations } from "@/i18n/getTranslations";
 import { cn } from "@/lib/utils";
-import { seo } from "@/utils/seo";
 
 export const Route = createFileRoute("/")({
   component: Index,
-  head: () => {
-    const t = getTranslations("Home");
-    return {
-      meta: seo({
-        description: t("seo.description"),
-        title: t("seo.title"),
-      }),
-    };
-  },
 });
 
 function Index() {

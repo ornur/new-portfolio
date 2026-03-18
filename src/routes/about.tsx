@@ -9,23 +9,11 @@ import { useTranslations } from "use-intl";
 import TimelineCard from "@/components/about/TimelineCard";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useScrollRestore } from "@/hooks/useScrollRestore";
-import { getTranslations } from "@/i18n/getTranslations";
-import { seo } from "@/utils/seo";
 
 const Galaxy = lazy(() => import("@/components/react-bits/Galaxy"));
 
 export const Route = createFileRoute("/about")({
   component: About,
-  head: () => {
-    const t = getTranslations("About");
-    return {
-      meta: seo({
-        description: t("seo.description"),
-        title: t("seo.title"),
-        url: "https://nurda.vercel.app/about",
-      }),
-    };
-  },
 });
 
 function About() {
