@@ -31,7 +31,7 @@ const ROUTES = [
       "Learn more about Nurdaulet Orynbassarov — a frontend developer passionate about React, TypeScript, and building great user experiences.",
     image: DEFAULT_IMAGE,
     path: "/about",
-    title: "About - Nurdaulet",
+    title: "About - Nurdaulet | Middle Frontend Developer",
     url: `${SITE_URL}/about`,
   },
   {
@@ -39,7 +39,7 @@ const ROUTES = [
       "Explore the tech stack of Nurdaulet Orynbassarov, a frontend developer specializing in React, TypeScript, and modern web technologies.",
     image: DEFAULT_IMAGE,
     path: "/tech-stack",
-    title: "Tech Stack - Nurdaulet",
+    title: "Tech Stack - Nurdaulet | Middle Frontend Developer",
     url: `${SITE_URL}/tech-stack`,
   },
   {
@@ -47,7 +47,7 @@ const ROUTES = [
       "Discover the professional journey and work experience of Nurdaulet Orynbassarov.",
     image: DEFAULT_IMAGE,
     path: "/experience",
-    title: "Experience - Nurdaulet",
+    title: "Experience - Nurdaulet | Middle Frontend Developer",
     url: `${SITE_URL}/experience`,
   },
 ];

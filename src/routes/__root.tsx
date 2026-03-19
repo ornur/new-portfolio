@@ -42,5 +42,45 @@ export const Route = createRootRouteWithContext<TRootContext>()({
       { color: "#e2f72e", href: "/site.webmanifest", rel: "manifest" },
       { href: "/favicon.ico", rel: "icon" },
     ],
+    scripts: [
+      {
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          address: {
+            "@type": "PostalAddress",
+            addressCountry: "Kazakhstan",
+            addressLocality: "Astana",
+          },
+          alumniOf: {
+            "@type": "CollegeOrUniversity",
+            name: "Astana IT University",
+          },
+          jobTitle: "Middle Frontend Developer",
+          knowsAbout: [
+            "Frontend Development",
+            "React",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Zustand",
+            "React Query",
+            "Docker",
+          ],
+          name: "Nurdaulet Orynbassarov",
+          sameAs: [
+            "https://github.com/ornur",
+            "https://linkedin.com/in/ornur",
+            "https://t.me/seqiza",
+          ],
+          url: "https://nurda.vercel.app",
+          worksFor: {
+            "@type": "Organization",
+            name: "LLP Digital Bridge",
+          },
+        }),
+        type: "application/ld+json",
+      },
+    ],
   }),
 });
