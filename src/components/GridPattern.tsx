@@ -122,7 +122,7 @@ export function GridPattern({
             fill={theme === "dark" ? "var(--neon)" : "var(--foreground)"}
             height={height - 1}
             initial={{ opacity: 0 }}
-            key={squareId}
+            key={`${squareId}-${x}-${y}`}
             onAnimationComplete={() => updateSquarePosition(squareId)}
             strokeWidth="0"
             transition={{
