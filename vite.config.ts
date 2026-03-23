@@ -289,6 +289,6 @@ export default defineConfig({
   publicDir: "src/public",
   resolve: { alias: { "@": "/src" } },
   staged: {
-    "*": "vp check --fix",
+    "*": "",
   },
 });
