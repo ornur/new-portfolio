@@ -1,43 +1,10 @@
 import { type MotionValue, useMotionValueEvent } from "motion/react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useTranslations } from "use-intl";
 
 import { useTheme } from "@/hooks/useTheme";
 
 import { DecryptedText } from "../ui/DecryptedText";
-
-const experiences = [
-  {
-    company: "LLP Digital Bridge",
-    highlights: [
-      {
-        name: "School Nutrition Control System",
-        summary:
-          "Developing a state-mandated food control system using React.js, Vite, and TanStack Router. Currently utilizing Zod for schema validation and React Query for robust server-state management.",
-      },
-    ],
-    location: "Astana, Kazakhstan",
-    period: "Sep 2025 - Present",
-    role: "Middle Frontend Developer",
-  },
-  {
-    company: "ZIZ INC.",
-    highlights: [
-      {
-        name: "Skills Enbek Admin Dashboard",
-        summary:
-          "Built a scalable admin dashboard with real-time analytics for AI chatbot interactions, implementing accessible UI components and validated forms.",
-      },
-      {
-        name: "Chemexpress Marketplace",
-        summary:
-          "Engineered a chemical products platform with 1M+ items using React, Zustand, and React Query, featuring custom calculators and dynamic galleries.",
-      },
-    ],
-    location: "Astana, Kazakhstan",
-    period: "Jun 2023 - Jun 2025",
-    role: "Frontend Developer",
-  },
-];
 
 type ElementKey =
   | "company"
@@ -55,88 +22,124 @@ interface Phase {
   revealedKeys: ElementKey[];
 }
 
-const timelinePhases: Phase[] = [];
-
-experiences.forEach((exp, expIndex) => {
-  exp.highlights.forEach((_, hIndex) => {
-    const keysToReveal: ElementKey[] = [];
-    if (hIndex === 0) {
-      keysToReveal.push(
-        "company",
-        "location",
-        "role",
-        "period",
-        "highlight-name",
-        "highlight-summary",
-      );
-    } else {
-      keysToReveal.push("highlight-name", "highlight-summary");
-    }
-
-    const baseRevealed: ElementKey[] =
-      hIndex === 0 ? [] : ["company", "location", "role", "period"];
-
-    const currentRevealed = [...baseRevealed];
-
-    keysToReveal.forEach((key) => {
-      currentRevealed.push(key);
-      timelinePhases.push({
-        experienceIndex: expIndex,
-        highlightIndex: hIndex,
-        isEncryptingAll: false,
-        isEncryptingHighlight: false,
-        revealedKeys: [...currentRevealed],
-      });
-    });
-
-    const hasNextHighlight = hIndex < exp.highlights.length - 1;
-    const hasNextExperience = expIndex < experiences.length - 1;
-
-    if (hasNextHighlight) {
-      timelinePhases.push({
-        experienceIndex: expIndex,
-        highlightIndex: hIndex,
-        isEncryptingAll: false,
-        isEncryptingHighlight: true,
-        revealedKeys: [
-          "company",
-          "location",
-          "role",
-          "period",
-          "highlight-name",
-          "highlight-summary",
-        ],
-      });
-    } else if (hasNextExperience) {
-      timelinePhases.push({
-        experienceIndex: expIndex,
-        highlightIndex: hIndex,
-        isEncryptingAll: true,
-        isEncryptingHighlight: false,
-        revealedKeys: [
-          "company",
-          "location",
-          "role",
-          "period",
-          "highlight-name",
-          "highlight-summary",
-        ],
-      });
-    }
-  });
-});
-
 const ExperienceCard = ({
   scrollYProgress,
 }: {
   scrollYProgress: MotionValue<number>;
 }) => {
   const { theme } = useTheme();
+  const t = useTranslations("Experience");
   const isDark = theme === "dark";
   const titleText = isDark ? "text-neon" : "text-zinc-900";
   const bodyText = isDark ? "text-zinc-300" : "text-zinc-600";
   const mutedText = isDark ? "text-zinc-400" : "text-zinc-500";
   const chipBorder = isDark ? "border-white/10" : "border-zinc-900/10";
+
+  const { experiences, timelinePhases } = useMemo(() => {
+    const rawExperiences = [
+      {
+        company: t("data.digital_bridge.company"),
+        highlights: [
+          {
+            name: t("data.digital_bridge.highlights.0.name"),
+            summary: t("data.digital_bridge.highlights.0.summary"),
+          },
+        ],
+        location: t("data.digital_bridge.location"),
+        period: t("data.digital_bridge.period"),
+        role: t("data.digital_bridge.role"),
+      },
+      {
+        company: t("data.ziz_inc.company"),
+        highlights: [
+          {
+            name: t("data.ziz_inc.highlights.0.name"),
+            summary: t("data.ziz_inc.highlights.0.summary"),
+          },
+          {
+            name: t("data.ziz_inc.highlights.1.name"),
+            summary: t("data.ziz_inc.highlights.1.summary"),
+          },
+        ],
+        location: t("data.ziz_inc.location"),
+        period: t("data.ziz_inc.period"),
+        role: t("data.ziz_inc.role"),
+      },
+    ];
+
+    const generatedPhases: Phase[] = [];
+
+    rawExperiences.forEach((exp, expIndex) => {
+      exp.highlights.forEach((_, hIndex) => {
+        const keysToReveal: ElementKey[] = [];
+        if (hIndex === 0) {
+          keysToReveal.push(
+            "company",
+            "location",
+            "role",
+            "period",
+            "highlight-name",
+            "highlight-summary",
+          );
+        } else {
+          keysToReveal.push("highlight-name", "highlight-summary");
+        }
+
+        const baseRevealed: ElementKey[] =
+          hIndex === 0 ? [] : ["company", "location", "role", "period"];
+
+        const currentRevealed = [...baseRevealed];
+
+        keysToReveal.forEach((key) => {
+          currentRevealed.push(key);
+          generatedPhases.push({
+            experienceIndex: expIndex,
+            highlightIndex: hIndex,
+            isEncryptingAll: false,
+            isEncryptingHighlight: false,
+            revealedKeys: [...currentRevealed],
+          });
+        });
+
+        const hasNextHighlight = hIndex < exp.highlights.length - 1;
+        const hasNextExperience = expIndex < rawExperiences.length - 1;
+
+        if (hasNextHighlight) {
+          generatedPhases.push({
+            experienceIndex: expIndex,
+            highlightIndex: hIndex,
+            isEncryptingAll: false,
+            isEncryptingHighlight: true,
+            revealedKeys: [
+              "company",
+              "location",
+              "role",
+              "period",
+              "highlight-name",
+              "highlight-summary",
+            ],
+          });
+        } else if (hasNextExperience) {
+          generatedPhases.push({
+            experienceIndex: expIndex,
+            highlightIndex: hIndex,
+            isEncryptingAll: true,
+            isEncryptingHighlight: false,
+            revealedKeys: [
+              "company",
+              "location",
+              "role",
+              "period",
+              "highlight-name",
+              "highlight-summary",
+            ],
+          });
+        }
+      });
+    });
+
+    return { experiences: rawExperiences, timelinePhases: generatedPhases };
+  }, [t]);
 
   const [activeIndex, setActiveIndex] = useState(0);
 

@@ -48,6 +48,36 @@
     }
   },
   "Experience": {
+    "data": {
+      "digital_bridge": {
+        "company": "LLP Digital Bridge",
+        "location": "Astana, Kazakhstan",
+        "role": "Middle Frontend Developer",
+        "period": "Sep 2025 - Present",
+        "highlights": {
+          "0": {
+            "name": "School Nutrition Control System",
+            "summary": "Developing a state-mandated food control system using React.js, Vite, and TanStack Router. Currently utilizing Zod for schema validation and React Query for robust server-state management."
+          }
+        }
+      },
+      "ziz_inc": {
+        "company": "ZIZ INC.",
+        "location": "Astana, Kazakhstan",
+        "role": "Frontend Developer",
+        "period": "Jun 2023 - Jun 2025",
+        "highlights": {
+          "0": {
+            "name": "Skills Enbek Admin Dashboard",
+            "summary": "Built a scalable admin dashboard with real-time analytics for AI chatbot interactions, implementing accessible UI components and validated forms."
+          },
+          "1": {
+            "name": "Chemexpress Marketplace",
+            "summary": "Engineered a chemical products platform with 1M+ items using React, Zustand, and React Query, featuring custom calculators and dynamic galleries."
+          }
+        }
+      }
+    },
     "seo": {
       "title": "Experience - Nurdaulet",
       "description": "Discover the professional journey and work experience of Nurdaulet Orynbassarov."

@@ -48,6 +48,36 @@
     }
   },
   "Experience": {
+    "data": {
+      "digital_bridge": {
+        "company": "TOO Digital Bridge",
+        "location": "Astana, Qazaqstan",
+        "role": "Middle Frontend Ázirleýshisi",
+        "period": "Qyrkúıek 2025 - Qazirge deıin",
+        "highlights": {
+          "0": {
+            "name": "Mektep Tamaqtanýyn Baqylaý Júıesi",
+            "summary": "React.js, Vite jáne TanStack Router qoldana otyryp, memlekettik tamaqtanýdy baqylaý júıesin ázirleý. Qazirgi ýaqytta shemalardy tekserý úshin Zod jáne serverlik kárini senimdi basqarý úshin React Query qoldanylýda."
+          }
+        }
+      },
+      "ziz_inc": {
+        "company": "ZIZ INC.",
+        "location": "Astana, Qazaqstan",
+        "role": "Frontend Ázirleýshisi",
+        "period": "Maýsym 2023 - Maýsym 2025",
+        "highlights": {
+          "0": {
+            "name": "Skills Enbek Ákimshilik Basty Betti",
+            "summary": "AI chat-boty ózara is-qımyly úshin naqty ýaqyttaǵy analıtıkasy bar masshtabtalatyn ákimshilik taqtany ázirleý, qoljetimdi ınterfeıs komponentteri men tekserilgen formalardy engizý."
+          },
+          "1": {
+            "name": "Chemexpress Marketpleısi",
+            "summary": "React, Zustand jáne React Query arqyly 1M+ taýary bar hımıalyq ónimder rýbrikasyn qurý, jeke kalkýlátorlar men dınamıkalyq galereıalardy qosý."
+          }
+        }
+      }
+    },
     "seo": {
       "title": "Tájirıbe - Nurdáýlet",
       "description": "Nurdáýlet Orynbasarovtyń kásibı joly men jumys tájirıbesin ashyńyz."
