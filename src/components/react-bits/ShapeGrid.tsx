@@ -452,7 +452,7 @@ const ShapeGrid: React.FC<ShapeGridProps> = ({
 
   return (
     <canvas
-      className="block h-full w-full border-none"
+      className="fixed h-screen w-screen border-none"
       ref={canvasRef}
     ></canvas>
   );
