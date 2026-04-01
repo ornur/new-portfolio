@@ -72,7 +72,7 @@ function Index() {
           <li>
             <a
               aria-label="Telegram Profile"
-              href={"https://t.me/seqiza"}
+              href={"https://t.me/nurda_oryn"}
               rel="noopener noreferrer"
               target="_blank"
             >
