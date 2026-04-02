@@ -4,6 +4,7 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { ReactLenis } from "lenis/react";
 import { IntlProvider } from "use-intl";
 
 import { AppleStyleDock } from "@/components/custom/NavDock";
@@ -20,9 +21,11 @@ const RootLayout = () => {
   return (
     <>
       <IntlProvider locale={lang} messages={messages[lang]}>
-        <HeadContent />
-        <Outlet />
-        <AppleStyleDock />
+        <ReactLenis root>
+          <HeadContent />
+          <Outlet />
+          <AppleStyleDock />
+        </ReactLenis>
       </IntlProvider>
       <TanStackRouterDevtools />
     </>
