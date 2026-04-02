@@ -60,17 +60,17 @@ export default function TimelineCard({
     >
       <Suspense fallback={null}>
         <GlassSurface
-          blueOffset={20}
-          borderRadius={50}
-          brightness={70}
+          blueOffset={23}
+          borderRadius={30}
+          brightness={100}
           className="overflow-hidden"
           displace={0.1}
-          distortionScale={-150}
-          greenOffset={10}
+          distortionScale={-250}
+          greenOffset={20}
           height={"100%"}
           mixBlendMode="screen"
           opacity={0.93}
-          redOffset={0}
+          redOffset={10}
           width={isMobile ? "85vw" : "25vw"}
         >
           <Card className="h-full w-full border-none bg-transparent">
