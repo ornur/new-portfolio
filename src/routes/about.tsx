@@ -87,7 +87,6 @@ function About() {
       />
       <div className="sticky top-0 grid h-screen w-screen place-items-center overflow-hidden">
         <Suspense fallback={null}>
-          {isMobile ? null : (
             <Galaxy
               density={1.1}
               glowIntensity={0.2}
@@ -102,7 +101,6 @@ function About() {
               transparent
               twinkleIntensity={3}
             />
-          )}
         </Suspense>
 
         {data.map((item, index) => (
