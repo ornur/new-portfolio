@@ -5,6 +5,7 @@ import { lazy, Suspense, useRef } from "react";
 import { useTranslations } from "use-intl/react";
 
 import ExperienceCard from "@/components/experience/ExperienceSection";
+import { ScrollDownText } from "@/components/ScrollDownText";
 import { useSEO } from "@/hooks/useSEO";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -30,6 +31,7 @@ function RouteComponent() {
   });
   return (
     <div className="relative min-h-screen" ref={containerRef}>
+      <ScrollDownText />
       <motion.div
         id="scroll-indicator"
         style={{

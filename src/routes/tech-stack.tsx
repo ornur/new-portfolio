@@ -15,6 +15,7 @@ import { ShadcnSVG } from "@/components/logos/shadcn";
 import { TanstackSVG } from "@/components/logos/tanstack";
 import { VercelSVG } from "@/components/logos/vercel";
 import { ViteSVG } from "@/components/logos/vite";
+import { ScrollDownText } from "@/components/ScrollDownText";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useScrollRestore } from "@/hooks/useScrollRestore";
 import { useSEO } from "@/hooks/useSEO";
@@ -111,6 +112,7 @@ function RouteComponent() {
       ref={outerRef}
       style={{ height: `calc(${LOGO_COUNT * (isMobile ? 1000 : 2000)}px)` }}
     >
+      <ScrollDownText />
       <h1 className="absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2 transform text-2xl font-bold text-nowrap opacity-70 md:text-4xl">
         {t("title")}
       </h1>

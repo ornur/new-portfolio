@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown } from "lucide-react";
 import { Baby, Rocket, School, Star, University } from "lucide-react";
-import { useScroll, useTransform } from "motion/react";
+import { useScroll } from "motion/react";
 import * as motion from "motion/react-m";
 import { lazy, Suspense, useRef } from "react";
 import { useTranslations } from "use-intl";
 
 import TimelineCard from "@/components/about/TimelineCard";
+import { ScrollDownText } from "@/components/ScrollDownText";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useScrollRestore } from "@/hooks/useScrollRestore";
 import { useSEO } from "@/hooks/useSEO";
@@ -70,6 +70,7 @@ function About() {
 
   return (
     <div className="h-[500vh] bg-black" ref={containerRef}>
+      <ScrollDownText />
       <motion.div
         id="scroll-indicator"
         style={{
@@ -114,24 +115,6 @@ function About() {
             total={data.length}
           />
         ))}
-
-        <motion.h1
-          className="pointer-events-none absolute top-1/2 left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center gap-2 text-2xl font-bold text-nowrap text-neutral-500 opacity-0 md:text-4xl"
-          style={{
-            opacity: useTransform(scrollYProgress, [0, 0.05], [1, 0]),
-            pointerEvents: "none",
-          }}
-        >
-          <ArrowDown
-            className="animate-[caret-blink_1.7s_infinite_ease-out]"
-            size={32}
-          />
-          Scroll Down
-          <ArrowDown
-            className="animate-[caret-blink_1.7s_infinite_ease-out]"
-            size={32}
-          />
-        </motion.h1>
       </div>
     </div>
   );
