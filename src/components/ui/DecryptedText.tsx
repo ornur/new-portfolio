@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CHARACTERS =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+{}|:\"<>?~`-=[];',./0123456789";
@@ -6,7 +6,7 @@ const CHARACTERS =
 interface DecryptedTextProps {
   animate: "decrypt" | "encrypt" | "hidden" | "idle";
   className?: string;
-  delay?: number; // Delay in milliseconds before starting animation
+  delay?: number;
   speed?: number;
   text: string;
 }
@@ -20,17 +20,14 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
 }) => {
   const [displayText, setDisplayText] = useState("");
   const prevAnimate = useRef(animate);
-  const prevText = useRef(text);
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
     let intervalId: ReturnType<typeof setInterval>;
 
-    const isAnimateChange = prevAnimate.current !== animate;
     const wasDecrypt = prevAnimate.current === "decrypt";
-
+    const isAnimateChange = prevAnimate.current !== animate;
     prevAnimate.current = animate;
-    prevText.current = text;
 
     if (animate === "hidden") {
       setDisplayText("");
@@ -42,92 +39,73 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
       return;
     }
 
+    const scramble = () =>
+      text
+        .split("")
+        .map((c) =>
+          c === " "
+            ? " "
+            : CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)],
+        )
+        .join("");
+
     if (animate === "encrypt") {
-      if (
-        !isAnimateChange ||
-        (!wasDecrypt && prevText.current !== text) ||
-        !wasDecrypt
-      ) {
-        // Scramble instantly if text changed during encrypt or mounted as encrypt
-        setDisplayText(
-          text
-            .split("")
-            .map((c) =>
-              c === " "
-                ? " "
-                : CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)],
-            )
-            .join(""),
-        );
+      // Scramble instantly unless transitioning from decrypt
+      if (!isAnimateChange || !wasDecrypt) {
+        setDisplayText(scramble());
         return;
       }
 
       let iteration = text.length;
-      const startAnimation = () => {
+      const start = () => {
         intervalId = setInterval(() => {
-          setDisplayText((currentStr) =>
+          setDisplayText((cur) =>
             text
               .split("")
-              .map((char, index) => {
+              .map((char, i) => {
                 if (char === " ") return " ";
-                if (index < iteration) {
-                  return text[index];
-                }
-                const existing = currentStr[index];
-                return existing && existing !== text[index] && existing !== " "
-                  ? existing
+                if (i < iteration) return text[i];
+                const ex = cur[i];
+                return ex && ex !== text[i] && ex !== " "
+                  ? ex
                   : CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
               })
               .join(""),
           );
-
-          if (iteration <= 0) {
-            clearInterval(intervalId);
-          }
-
-          iteration -= 1 / 2;
+          iteration -= 0.5;
+          if (iteration <= 0) clearInterval(intervalId);
         }, speed);
       };
 
-      if (delay > 0) {
-        timeoutId = setTimeout(startAnimation, delay);
-      } else {
-        startAnimation();
-      }
-    } else if (animate === "decrypt") {
-      let iteration = 0;
-      const startAnimation = () => {
-        intervalId = setInterval(() => {
-          setDisplayText((currentStr) =>
-            text
-              .split("")
-              .map((char, index) => {
-                if (char === " ") return " ";
-                if (index < iteration) {
-                  return text[index];
-                }
-                const existing = currentStr[index];
-                return existing && existing !== text[index] && existing !== " "
-                  ? existing
-                  : CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
-              })
-              .join(""),
-          );
-
-          if (iteration >= text.length) {
-            clearInterval(intervalId);
-          }
-
-          iteration += 1 / 2; // Speed multiplier per interval
-        }, speed);
-      };
-
-      if (delay > 0) {
-        timeoutId = setTimeout(startAnimation, delay);
-      } else {
-        startAnimation();
-      }
+      if (delay > 0) timeoutId = setTimeout(start, delay);
+      else start();
+      return;
     }
+
+    // animate === "decrypt"
+    let iteration = 0;
+    const start = () => {
+      intervalId = setInterval(() => {
+        setDisplayText((cur) =>
+          text
+            .split("")
+            .map((char, i) => {
+              if (char === " ") return " ";
+              if (i < iteration) return text[i];
+              const ex = cur[i];
+              return ex && ex !== text[i] && ex !== " "
+                ? ex
+                : CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+            })
+            .join(""),
+        );
+        iteration += 0.5;
+        if (iteration >= text.length) clearInterval(intervalId);
+      }, speed);
+    };
+
+    if (delay > 0) timeoutId = setTimeout(start, delay);
+    else start();
 
     return () => {
       clearTimeout(timeoutId);
