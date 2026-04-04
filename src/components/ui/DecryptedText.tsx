@@ -4,7 +4,7 @@ const CHARACTERS =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+{}|:\"<>?~`-=[];',./0123456789";
 
 interface DecryptedTextProps {
-  animate: "decrypt" | "encrypt" | "hidden" | "idle";
+  animate: "decrypt" | "hidden" | "idle";
   className?: string;
   delay?: number;
   speed?: number;
@@ -25,19 +25,7 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
     let timeoutId: ReturnType<typeof setTimeout>;
     let intervalId: ReturnType<typeof setInterval>;
 
-    const wasDecrypt = prevAnimate.current === "decrypt";
-    const isAnimateChange = prevAnimate.current !== animate;
     prevAnimate.current = animate;
-
-    if (animate === "hidden") {
-      setDisplayText("");
-      return;
-    }
-
-    if (animate === "idle") {
-      setDisplayText(text);
-      return;
-    }
 
     const scramble = () =>
       text
@@ -49,36 +37,13 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
         )
         .join("");
 
-    if (animate === "encrypt") {
-      // Scramble instantly unless transitioning from decrypt
-      if (!isAnimateChange || !wasDecrypt) {
-        setDisplayText(scramble());
-        return;
-      }
+    if (animate === "hidden") {
+      setDisplayText(scramble());
+      return;
+    }
 
-      let iteration = text.length;
-      const start = () => {
-        intervalId = setInterval(() => {
-          setDisplayText((cur) =>
-            text
-              .split("")
-              .map((char, i) => {
-                if (char === " ") return " ";
-                if (i < iteration) return text[i];
-                const ex = cur[i];
-                return ex && ex !== text[i] && ex !== " "
-                  ? ex
-                  : CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
-              })
-              .join(""),
-          );
-          iteration -= 0.5;
-          if (iteration <= 0) clearInterval(intervalId);
-        }, speed);
-      };
-
-      if (delay > 0) timeoutId = setTimeout(start, delay);
-      else start();
+    if (animate === "idle") {
+      setDisplayText(text);
       return;
     }
 
