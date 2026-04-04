@@ -1,7 +1,9 @@
+"use client";
+
 import { Color, Mesh, Program, Renderer, Triangle } from "ogl";
 import { useEffect, useRef } from "react";
 
-const vertexShader = `
+const vertexShader = /* glsl */ `
 attribute vec2 uv;
 attribute vec2 position;
 varying vec2 vUv;
@@ -11,8 +13,7 @@ void main() {
 }
 `;
 
-const fragmentShader = `
-// Switched to mediump for mobile GPU compatibility
+const fragmentShader = /* glsl */ `
 precision mediump float;
 
 uniform float uTime;
@@ -39,7 +40,6 @@ varying vec2 vUv;
 
 #define STAR_COLOR_CUTOFF 0.2
 #define MAT45 mat2(0.7071, -0.7071, 0.7071, 0.7071)
-#define PERIOD 3.0
 
 float Hash21(vec2 p) {
   p = fract(p * vec2(123.34, 456.21));
@@ -59,14 +59,17 @@ vec3 hsv2rgb(vec3 c) {
 
 float Star(vec2 uv, float flare) {
   float d = length(uv);
-  float m = (0.05 * uGlowIntensity) / d;
   
-  // Optimization: Skip expensive flare rays on mobile if they are too small
+  // FIXED GLOW FOR MOBILE:
+  // We boost the base glow radius if uIsMobile is true to compensate for DPR 1.0
+  float baseGlow = uIsMobile ? (0.12 * uGlowIntensity) : (0.05 * uGlowIntensity);
+  float m = baseGlow / d;
+  
   if (!uIsMobile) {
       float rays = smoothstep(0.0, 1.0, 1.0 - abs(uv.x * uv.y * 1000.0));
       m += rays * flare * uGlowIntensity;
-      uv *= MAT45;
-      rays = smoothstep(0.0, 1.0, 1.0 - abs(uv.x * uv.y * 1000.0));
+      vec2 rv = uv * MAT45;
+      rays = smoothstep(0.0, 1.0, 1.0 - abs(rv.x * rv.y * 1000.0));
       m += rays * 0.3 * flare * uGlowIntensity;
   }
   
@@ -79,8 +82,6 @@ vec3 StarLayer(vec2 uv) {
   vec2 gv = fract(uv) - 0.5; 
   vec2 id = floor(uv);
 
-  // Optimization: Reduce loop complexity on mobile if possible
-  // Using constant loop bounds for Android compatibility
   for (int y = -1; y <= 1; y++) {
     for (int x = -1; x <= 1; x++) {
       vec2 offset = vec2(float(x), float(y));
@@ -88,8 +89,7 @@ vec3 StarLayer(vec2 uv) {
       float seed = Hash21(si);
       float size = fract(seed * 345.32);
       
-      // Star logic
-      float glossLocal = tri(uStarSpeed / (PERIOD * seed + 1.0));
+      float glossLocal = tri(uStarSpeed / (3.0 * seed + 1.0));
       float flareSize = smoothstep(0.9, 1.0, size) * glossLocal;
 
       vec3 base = vec3(
@@ -99,7 +99,6 @@ vec3 StarLayer(vec2 uv) {
       );
       base.g = min(base.r, base.b) * seed;
       
-      // Optimized Hue/Sat
       float hue = fract((atan(base.g - base.r, base.b - base.r) / 6.2831) + 0.5 + uHueShift / 360.0);
       float sat = length(base - dot(base, vec3(0.299, 0.587, 0.114))) * uSaturation;
       base = hsv2rgb(vec3(hue, sat, max(max(base.r, base.g), base.b)));
@@ -118,26 +117,25 @@ void main() {
   vec2 focalPx = uFocal * uResolution.xy;
   vec2 uv = (vUv * uResolution.xy - focalPx) / uResolution.y;
   
-  // Interaction Logic
-  if (uAutoCenterRepulsion > 0.0) {
-    float centerDist = length(uv);
-    uv += normalize(uv) * (uAutoCenterRepulsion / (centerDist + 0.1)) * 0.05;
-  } else if (uMouseRepulsion) {
-    vec2 mousePosUV = (uMouse * uResolution.xy - focalPx) / uResolution.y;
-    float mouseDist = length(uv - mousePosUV);
-    uv += normalize(uv - mousePosUV) * (uRepulsionStrength / (mouseDist + 0.1)) * 0.05 * uMouseActiveFactor;
-  } else {
-    uv += (uMouse - 0.5) * 0.1 * uMouseActiveFactor;
+  // Interaction Logic - Only active if NOT mobile
+  if (!uIsMobile) {
+    if (uAutoCenterRepulsion > 0.0) {
+      float centerDist = length(uv);
+      uv += normalize(uv) * (uAutoCenterRepulsion / (centerDist + 0.1)) * 0.05;
+    } else if (uMouseRepulsion) {
+      vec2 mousePosUV = (uMouse * uResolution.xy - focalPx) / uResolution.y;
+      float mouseDist = length(uv - mousePosUV);
+      uv += normalize(uv - mousePosUV) * (uRepulsionStrength / (mouseDist + 0.1)) * 0.05 * uMouseActiveFactor;
+    } else {
+      uv += (uMouse - 0.5) * 0.1 * uMouseActiveFactor;
+    }
   }
 
-  // Rotations
   float ang = uTime * uRotationSpeed;
   uv *= mat2(cos(ang), -sin(ang), sin(ang), cos(ang));
   uv *= mat2(uRotation.x, -uRotation.y, uRotation.y, uRotation.x);
 
   vec3 col = vec3(0.0);
-  
-  // Optimization: Reduce number of layers on mobile
   float layers = uIsMobile ? 2.0 : 4.0; 
   for (float i = 0.0; i < 4.0; i += 1.0) {
     if (i >= layers) break;
@@ -204,19 +202,13 @@ export default function Galaxy({
     if (!ctnDom.current) return;
     const ctn = ctnDom.current;
 
-    const isAndroid = /Android/i.test(navigator.userAgent);
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-    // CRITICAL: Lower DPR for Android to prevent lag
+    const isAndroid = /Android/i.test(navigator.userAgent);
     const dpr = isAndroid ? 1.0 : Math.min(1.5, window.devicePixelRatio || 1);
 
     let renderer: Renderer;
     try {
-      renderer = new Renderer({
-        alpha: transparent,
-        dpr: dpr, // Apply the optimized DPR
-        premultipliedAlpha: false,
-      });
+      renderer = new Renderer({ alpha: transparent, dpr });
     } catch {
       return;
     }
@@ -227,7 +219,6 @@ export default function Galaxy({
       gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     }
 
-    const geometry = new Triangle(gl);
     const program = new Program(gl, {
       fragment: fragmentShader,
       uniforms: {
@@ -254,18 +245,16 @@ export default function Galaxy({
       vertex: vertexShader,
     });
 
-    const mesh = new Mesh(gl, { geometry, program });
+    const mesh = new Mesh(gl, { geometry: new Triangle(gl), program });
 
-    function resize() {
-      const width = ctn.offsetWidth;
-      const height = ctn.offsetHeight;
-      renderer.setSize(width, height);
+    const resize = () => {
+      renderer.setSize(ctn.offsetWidth, ctn.offsetHeight);
       program.uniforms.uResolution.value.set(
         gl.canvas.width,
         gl.canvas.height,
         gl.canvas.width / gl.canvas.height,
       );
-    }
+    };
 
     const ro = new ResizeObserver(resize);
     ro.observe(ctn);
@@ -281,18 +270,20 @@ export default function Galaxy({
         program.uniforms.uStarSpeed.value = (time * starSpeed) / 10.0;
       }
 
-      // Smooth interaction
-      const lerp = 0.05;
-      smoothMousePos.current.x +=
-        (targetMousePos.current.x - smoothMousePos.current.x) * lerp;
-      smoothMousePos.current.y +=
-        (targetMousePos.current.y - smoothMousePos.current.y) * lerp;
-      smoothMouseActive.current +=
-        (targetMouseActive.current - smoothMouseActive.current) * lerp;
+      // Interaction Logic - DISABLED FOR MOBILE
+      if (!isMobile) {
+        const lerp = 0.05;
+        smoothMousePos.current.x +=
+          (targetMousePos.current.x - smoothMousePos.current.x) * lerp;
+        smoothMousePos.current.y +=
+          (targetMousePos.current.y - smoothMousePos.current.y) * lerp;
+        smoothMouseActive.current +=
+          (targetMouseActive.current - smoothMouseActive.current) * lerp;
 
-      program.uniforms.uMouse.value[0] = smoothMousePos.current.x;
-      program.uniforms.uMouse.value[1] = smoothMousePos.current.y;
-      program.uniforms.uMouseActiveFactor.value = smoothMouseActive.current;
+        program.uniforms.uMouse.value[0] = smoothMousePos.current.x;
+        program.uniforms.uMouse.value[1] = smoothMousePos.current.y;
+        program.uniforms.uMouseActiveFactor.value = smoothMouseActive.current;
+      }
 
       renderer.render({ scene: mesh });
     }
@@ -300,7 +291,7 @@ export default function Galaxy({
     animateId = requestAnimationFrame(update);
     ctn.appendChild(gl.canvas);
 
-    // Event Handlers
+    // Only attach event listeners if NOT mobile
     const handlePointerMove = (e: PointerEvent) => {
       const rect = ctn.getBoundingClientRect();
       targetMousePos.current = {
@@ -310,11 +301,13 @@ export default function Galaxy({
       targetMouseActive.current = 1.0;
     };
 
-    ctn.addEventListener("pointermove", handlePointerMove);
-    ctn.addEventListener(
-      "pointerleave",
-      () => (targetMouseActive.current = 0.0),
-    );
+    if (!isMobile && mouseInteraction) {
+      ctn.addEventListener("pointermove", handlePointerMove);
+      ctn.addEventListener(
+        "pointerleave",
+        () => (targetMouseActive.current = 0.0),
+      );
+    }
 
     return () => {
       cancelAnimationFrame(animateId);

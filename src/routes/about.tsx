@@ -91,7 +91,7 @@ function About() {
               density={1.1}
               glowIntensity={0.2}
               hueShift={140}
-              mouseInteraction={false}
+              mouseInteraction={true}
               mouseRepulsion={false}
               repulsionStrength={0}
               rotationSpeed={0}
