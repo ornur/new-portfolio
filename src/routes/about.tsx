@@ -87,20 +87,20 @@ function About() {
       />
       <div className="sticky top-0 grid h-screen w-screen place-items-center overflow-hidden">
         <Suspense fallback={null}>
-            <Galaxy
-              density={1.1}
-              glowIntensity={0.2}
-              hueShift={140}
-              mouseInteraction={true}
-              mouseRepulsion={false}
-              repulsionStrength={0}
-              rotationSpeed={0}
-              saturation={0}
-              speed={0.2}
-              starSpeed={3}
-              transparent
-              twinkleIntensity={3}
-            />
+          <Galaxy
+            density={1.1}
+            glowIntensity={0.2}
+            hueShift={140}
+            mouseInteraction={true}
+            mouseRepulsion={false}
+            repulsionStrength={0}
+            rotationSpeed={0}
+            saturation={0}
+            speed={0.2}
+            starSpeed={3}
+            transparent
+            twinkleIntensity={3}
+          />
         </Suspense>
 
         {data.map((item, index) => (

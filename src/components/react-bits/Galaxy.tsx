@@ -60,9 +60,9 @@ vec3 hsv2rgb(vec3 c) {
 float Star(vec2 uv, float flare) {
   float d = length(uv);
   
-  // FIXED GLOW FOR MOBILE:
-  // We boost the base glow radius if uIsMobile is true to compensate for DPR 1.0
-  float baseGlow = uIsMobile ? (0.12 * uGlowIntensity) : (0.05 * uGlowIntensity);
+  // BOOSTED VISIBILITY FOR MOBILE
+  // 0.15 provides a thicker core so stars don't "vanish" on low DPR
+  float baseGlow = uIsMobile ? (0.15 * uGlowIntensity) : (0.05 * uGlowIntensity);
   float m = baseGlow / d;
   
   if (!uIsMobile) {
@@ -136,11 +136,19 @@ void main() {
   uv *= mat2(uRotation.x, -uRotation.y, uRotation.y, uRotation.x);
 
   vec3 col = vec3(0.0);
+  
+  // DENSITY COMPENSATION
+  // If mobile, we multiply the density by 1.5x to 2.0x to fill the gaps
+  float mobileDensity = uIsMobile ? (uDensity * 1.8) : uDensity;
+  
   float layers = uIsMobile ? 2.0 : 4.0; 
   for (float i = 0.0; i < 4.0; i += 1.0) {
     if (i >= layers) break;
     float depth = fract(i * 0.25 + uStarSpeed * uSpeed);
-    float scale = mix(20.0 * uDensity, 0.5 * uDensity, depth);
+    
+    // Use mobileDensity here
+    float scale = mix(20.0 * mobileDensity, 0.5 * mobileDensity, depth);
+    
     float fade = depth * smoothstep(1.0, 0.9, depth);
     col += StarLayer(uv * scale + i * 453.32) * fade;
   }
@@ -337,7 +345,7 @@ export default function Galaxy({
 
   return (
     <div
-      className="relative h-full w-full bg-black overflow-hidden"
+      className="relative h-full w-full overflow-hidden bg-black"
       ref={ctnDom}
       {...rest}
     />
