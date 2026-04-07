@@ -69,7 +69,7 @@ function About() {
   ];
 
   return (
-    <div className="h-[500vh] bg-black" ref={containerRef}>
+    <div className="h-[500vh] bg-black dark:bg-black" ref={containerRef}>
       <ScrollDownText />
       <motion.div
         id="scroll-indicator"

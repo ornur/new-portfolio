@@ -5,7 +5,6 @@ import {
   FolderCode,
   HomeIcon,
   IdCardLanyard,
-  Languages,
   Moon,
   Sun,
 } from "lucide-react";
@@ -16,7 +15,7 @@ import type { SimpleTranslator } from "@/i18n/getTranslations";
 import { Dock, DockIcon, DockItem, DockLabel } from "@/features/nav/Dock";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useTheme } from "@/hooks/useTheme";
-import { changeLocale } from "@/i18n/LocaleStore";
+import { changeLocale, useLocale } from "@/i18n/LocaleStore";
 import { cn } from "@/lib/utils";
 
 import { WaitLink } from "../../components/ui/LinkWait";
@@ -63,7 +62,7 @@ export function AppleStyleDock() {
       <Dock
         className={cn(
           "dark:border-foreground/30 cursor-pointer items-end border border-black/20 pb-3 backdrop-blur-[3px]",
-          pathname === "/tech-stack"
+          pathname === "/tech-stack" || pathname === "/about"
             ? "bg-white dark:bg-black"
             : "bg-transparent dark:bg-transparent",
         )}
@@ -109,18 +108,21 @@ export function AppleStyleDock() {
 
 function LanguageDock() {
   const t = useTranslations("Nav");
+  const lang = useLocale();
   return (
     <div>
       <DockItem
         aria-label={t("language")}
         aria-labelledby={`dock-item-language`}
-        className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 backdrop-blur-[50px] hover:bg-black/15"
+        className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 text-sm backdrop-blur-[50px] duration-120 hover:bg-black/15 hover:text-2xl"
         key="language"
         onClick={changeLocale}
       >
         <DockLabel>{t("language")}</DockLabel>
         <DockIcon>
-          <Languages className="size-full" />
+          <span className="size-full text-center leading-none font-bold uppercase">
+            {lang.toUpperCase()}
+          </span>
         </DockIcon>
       </DockItem>
     </div>
@@ -129,7 +131,6 @@ function LanguageDock() {
 
 function ThemeDock() {
   const t = useTranslations("Nav");
-  const { pathname } = useLocation();
   const { theme, toggleTheme } = useTheme();
   return (
     <div>
@@ -137,13 +138,9 @@ function ThemeDock() {
         aria-label={t("theme")}
         aria-labelledby={`dock-item-theme`}
         className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 backdrop-blur-[50px] hover:bg-black/15"
-        disabled={pathname === "/about"} // Disable on About page
         key={theme}
         onClick={() => toggleTheme()}
       >
-        <DockLabel>
-          {pathname === "/about" ? "You can't :)" : t("theme")}
-        </DockLabel>
         {theme === "dark" ? (
           <DockIcon className="animate-in fade-in" key="dark">
             <Sun className="size-full" />

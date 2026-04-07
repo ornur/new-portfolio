@@ -345,7 +345,7 @@ export default function Galaxy({
 
   return (
     <div
-      className="relative h-full w-full overflow-hidden bg-black"
+      className="relative h-full w-full overflow-hidden bg-black dark:bg-black"
       ref={ctnDom}
       {...rest}
     />

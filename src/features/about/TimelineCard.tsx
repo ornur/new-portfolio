@@ -75,19 +75,19 @@ export default function TimelineCard({
         >
           <Card className="h-full w-full border-none bg-transparent">
             <CardHeader className="flex flex-row items-center gap-4 space-y-0">
-              <div className="text-primary rounded-full p-3">
+              <div className="text-background dark:text-foreground rounded-full p-3">
                 <item.icon size={32} />
               </div>
               <div>
-                <p className="font-mono text-sm tracking-widest uppercase">
+                <p className="text-background dark:text-foreground font-mono text-sm tracking-widest uppercase">
                   {item.date}
                 </p>
-                <CardTitle className="text-foreground text-base font-bold md:text-2xl">
+                <CardTitle className="text-background dark:text-foreground text-base font-bold md:text-2xl">
                   {item.title}
                 </CardTitle>
               </div>
             </CardHeader>
-            <CardContent className="text-foreground text-justify text-xs leading-relaxed md:text-lg">
+            <CardContent className="text-background dark:text-foreground text-justify text-xs leading-relaxed md:text-lg">
               {item.desc}
             </CardContent>
           </Card>
