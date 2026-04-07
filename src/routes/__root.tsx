@@ -7,7 +7,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { ReactLenis } from "lenis/react";
 import { IntlProvider } from "use-intl";
 
-import { AppleStyleDock } from "@/components/custom/NavDock";
+import { AppleStyleDock } from "@/features/nav/NavDock";
 import { useLocale } from "@/i18n/LocaleStore";
 import { messages } from "@/i18n/messages";
 import appCss from "@/styles/index.css?url";

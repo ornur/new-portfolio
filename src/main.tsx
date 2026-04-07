@@ -5,7 +5,7 @@ import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 
 import "./styles/index.css";
-import ScreenTransition from "./components/loader/ScreenTransition";
+import ScreenTransition from "./features/loader/ScreenTransition";
 import { useTheme } from "./hooks/useTheme";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";

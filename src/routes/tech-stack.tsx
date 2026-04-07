@@ -9,13 +9,13 @@ import {
 } from "react-icons/si";
 import { useTranslations } from "use-intl";
 
-import { LogoSlide, type TechLogo } from "@/components/custom/LogoSlide";
-import { MotionSVG } from "@/components/logos/motion";
-import { ShadcnSVG } from "@/components/logos/shadcn";
-import { TanstackSVG } from "@/components/logos/tanstack";
-import { VercelSVG } from "@/components/logos/vercel";
-import { ViteSVG } from "@/components/logos/vite";
-import { ScrollDownText } from "@/components/ScrollDownText";
+import { MotionSVG } from "@/components/logos/motion.svg";
+import { ShadcnSVG } from "@/components/logos/shadcn.svg";
+import { TanstackSVG } from "@/components/logos/tanstack.svg";
+import { VercelSVG } from "@/components/logos/vercel.svg";
+import { ViteSVG } from "@/components/logos/vite.svg";
+import { ScrollDownText } from "@/components/ui/ScrollDownText";
+import { LogoSlide, type TechLogo } from "@/features/tech-stack/LogoSlide";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useScrollRestore } from "@/hooks/useScrollRestore";
 import { useSEO } from "@/hooks/useSEO";

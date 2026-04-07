@@ -7,7 +7,7 @@ import { forwardRef } from "react";
 
 import { useTheme } from "@/hooks/useTheme";
 
-import { transitionStore } from "../loader/TransitionStore";
+import { transitionStore } from "../../features/loader/TransitionStore";
 
 type BasicLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   disabled?: boolean;

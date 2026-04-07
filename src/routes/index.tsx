@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa6";
 import { useTranslations } from "use-intl";
 
-import { BoxReveal } from "@/components/BoxReveal";
-import { GridPattern } from "@/components/GridPattern";
+import { GridPattern } from "@/components/backgrounds/GridPattern";
+import { BoxReveal } from "@/components/ui/BoxReveal";
 import { useSEO } from "@/hooks/useSEO";
 import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";

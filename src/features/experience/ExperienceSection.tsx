@@ -7,9 +7,8 @@ import * as motion from "motion/react-m";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "use-intl";
 
+import { DecryptedText } from "@/components/ui/DecryptedText";
 import { useTheme } from "@/hooks/useTheme";
-
-import { DecryptedText } from "../ui/DecryptedText";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -88,7 +87,7 @@ function buildTimelinePhases(
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-const ExperienceCard = ({ scrollYProgress }: ExperienceCardProps) => {
+export const ExperienceCard = ({ scrollYProgress }: ExperienceCardProps) => {
   const { theme } = useTheme();
   const t = useTranslations("Experience");
 
@@ -406,5 +405,3 @@ const ExperienceCard = ({ scrollYProgress }: ExperienceCardProps) => {
     </div>
   );
 };
-
-export default ExperienceCard;

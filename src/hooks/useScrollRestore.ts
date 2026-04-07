@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { scrollStore } from "@/utils/scrollStore";
+import { scrollStore } from "@/lib/scrollStore";
 
 export function useScrollRestore(routeKey: string) {
   useEffect(() => {

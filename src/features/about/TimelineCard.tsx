@@ -6,7 +6,7 @@ import { lazy, Suspense } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const GlassSurface = lazy(() => import("@/components/react-bits/GlassSurface"));
+const GlassSurface = lazy(() => import("@/features/about/GlassSurface"));
 
 interface TimelineCardProps {
   index: number;

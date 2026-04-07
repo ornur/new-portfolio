@@ -13,17 +13,13 @@ import { useTranslations } from "use-intl/react";
 
 import type { SimpleTranslator } from "@/i18n/getTranslations";
 
-import { WaitLink } from "@/components/custom/LinkWait";
-import {
-  Dock,
-  DockIcon,
-  DockItem,
-  DockLabel,
-} from "@/components/motion-primitives/dock";
+import { Dock, DockIcon, DockItem, DockLabel } from "@/features/nav/Dock";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useTheme } from "@/hooks/useTheme";
 import { changeLocale } from "@/i18n/LocaleStore";
 import { cn } from "@/lib/utils";
+
+import { WaitLink } from "../../components/ui/LinkWait";
 
 const links = (t: SimpleTranslator<"Nav">) => [
   {

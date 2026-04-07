@@ -286,7 +286,7 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] }),
   ],
-  publicDir: "src/public",
+  publicDir: "public",
   resolve: { alias: { "@": "/src" } },
   staged: {
     "*": "",

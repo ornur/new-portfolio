@@ -5,13 +5,13 @@ import * as motion from "motion/react-m";
 import { lazy, Suspense, useRef } from "react";
 import { useTranslations } from "use-intl";
 
-import TimelineCard from "@/components/about/TimelineCard";
-import { ScrollDownText } from "@/components/ScrollDownText";
+import { ScrollDownText } from "@/components/ui/ScrollDownText";
+import TimelineCard from "@/features/about/TimelineCard";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useScrollRestore } from "@/hooks/useScrollRestore";
 import { useSEO } from "@/hooks/useSEO";
 
-const Galaxy = lazy(() => import("@/components/react-bits/Galaxy"));
+const Galaxy = lazy(() => import("@/components/backgrounds/Galaxy"));
 
 export const Route = createFileRoute("/about")({
   component: About,

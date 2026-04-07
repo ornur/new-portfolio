@@ -4,12 +4,12 @@ import * as motion from "motion/react-m";
 import { lazy, Suspense, useRef } from "react";
 import { useTranslations } from "use-intl/react";
 
-import ExperienceCard from "@/components/experience/ExperienceSection";
-import { ScrollDownText } from "@/components/ScrollDownText";
+import { ScrollDownText } from "@/components/ui/ScrollDownText";
+import { ExperienceCard } from "@/features/experience/ExperienceSection";
 import { useSEO } from "@/hooks/useSEO";
 import { useTheme } from "@/hooks/useTheme";
 
-const ShapeGrid = lazy(() => import("@/components/react-bits/ShapeGrid"));
+const ShapeGrid = lazy(() => import("@/components/backgrounds/ShapeGrid"));
 
 export const Route = createFileRoute("/experience")({
   component: RouteComponent,
