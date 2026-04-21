@@ -23,6 +23,10 @@ export default defineConfig({
               name: "motion",
               test: /[\\/]node_modules[\\/](motion\/react)[\\/]/,
             },
+            {
+              name: "3dsvg",
+              test: /[\\/]node_modules[\\/](3dsvg)[\\/]/,
+            },
           ],
         },
       },

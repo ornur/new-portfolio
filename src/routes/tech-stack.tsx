@@ -1,98 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useScroll } from "motion/react";
-import { useRef } from "react";
-import {
-  SiNextdotjs,
-  SiReact,
-  SiTailwindcss,
-  SiTypescript,
-} from "react-icons/si";
+import { lazy, Suspense, useRef } from "react";
 import { useTranslations } from "use-intl";
 
-import { MotionSVG } from "@/components/logos/motion.svg";
-import { ShadcnSVG } from "@/components/logos/shadcn.svg";
-import { TanstackSVG } from "@/components/logos/tanstack.svg";
-import { VercelSVG } from "@/components/logos/vercel.svg";
-import { ViteSVG } from "@/components/logos/vite.svg";
 import { ScrollDownText } from "@/components/ui/ScrollDownText";
-import { LogoSlide, type TechLogo } from "@/features/tech-stack/LogoSlide";
+import techLogos from "@/features/tech-stack/logos";
+import { LogoSlide } from "@/features/tech-stack/LogoSlide";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useScrollRestore } from "@/hooks/useScrollRestore";
 import { useSEO } from "@/hooks/useSEO";
+import { useTheme } from "@/hooks/useTheme";
 
 export const Route = createFileRoute("/tech-stack")({
   component: RouteComponent,
 });
 
-const techLogos: TechLogo[] = [
-  {
-    bgColor: "#20232a",
-    href: "https://react.dev",
-    node: <SiReact className="bg-[#20232a] text-[#61dbfb]" />,
-    textColor: "#61dbfb",
-    title: "React",
-  },
-  {
-    bgColor: "#faf9f8",
-    href: "https://www.typescriptlang.org",
-    node: <SiTypescript className="bg-[#faf9f8] text-[#3178c6]" />,
-    textColor: "#3178c6",
-    title: "TypeScript",
-  },
-  {
-    bgColor: "#0f172a",
-    href: "https://tailwindcss.com",
-    node: <SiTailwindcss className="bg-slate-900 text-cyan-500" />,
-    textColor: "#06b6d4",
-    title: "Tailwind CSS",
-  },
-  {
-    bgColor: "#ffffff",
-    href: "https://nextjs.org",
-    node: <SiNextdotjs className="bg-[#ffffff] text-[#000000]" />,
-    textColor: "#000000",
-    title: "Next.js",
-  },
-  {
-    bgColor: "#232323",
-    href: "https://vitejs.dev",
-    node: <ViteSVG className="bg-[#232323]" />,
-    textColor: "#ffffff",
-    title: "Vite",
-  },
-  {
-    bgColor: "#ffffff",
-    href: "https://tanstack.com",
-    node: <TanstackSVG className="bg-white" />,
-    textColor: "#000000",
-    title: "Tanstack",
-  },
-  {
-    bgColor: "#000000",
-    href: "https://ui.shadcn.com",
-    node: <ShadcnSVG className="bg-black text-white" />,
-    textColor: "#ffffff",
-    title: "Shadcn/ui",
-  },
-  {
-    bgColor: "#FFF312",
-    href: "https://motion.dev/",
-    node: <MotionSVG className="bg-[#FFF312]" />,
-    textColor: "#000000",
-    title: "Motion",
-  },
-  {
-    bgColor: "#000000",
-    href: "https://vercel.com",
-    node: <VercelSVG className="bg-[#000000]" />,
-    textColor: "#ffffff",
-    title: "Vercel",
-  },
-];
-
-const LOGO_COUNT = techLogos.length;
+const SVG3D = lazy(() =>
+  import("3dsvg").then((mod) => ({
+    default: mod.SVG3D,
+  })),
+);
 
 function RouteComponent() {
+  const { theme } = useTheme();
   const outerRef = useRef<HTMLDivElement>(null);
   const t = useTranslations("TechStack");
   const { isMobile } = useIsMobile();
@@ -110,20 +40,35 @@ function RouteComponent() {
   return (
     <div
       ref={outerRef}
-      style={{ height: `calc(${LOGO_COUNT * (isMobile ? 1000 : 2000)}px)` }}
+      style={{ height: `calc(${9 * (isMobile ? 1000 : 2000)}px)` }}
     >
       <ScrollDownText />
-      <h1 className="absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2 transform text-2xl font-bold text-nowrap opacity-70 md:text-4xl">
-        {t("title")}
-      </h1>
+      <div className="absolute top-1/2 left-1/2 z-0 h-1/3 w-3/4 -translate-x-1/2 -translate-y-1/2 transform md:h-3/4 md:w-1/3">
+        <Suspense fallback={null}>
+          <SVG3D
+            ambientIntensity={0.1}
+            animate="swing"
+            className="cursor-grab font-bold text-nowrap opacity-70"
+            color={theme === "dark" ? "#e2f72e" : "black"}
+            // cursorOrbit
+            lightIntensity={0.1}
+            material="plastic"
+            resetDelay={1}
+            resetOnIdle
+            shadow={false}
+            text={"TECH STACK"}
+            zoom={isMobile ? 4.5 : 6.5}
+          />
+        </Suspense>
+      </div>
       <div className="sticky top-0 h-screen overflow-hidden">
         {techLogos.map((logo, i) => (
           <LogoSlide
             index={i}
             key={logo.title}
             logo={logo}
-            logoCount={LOGO_COUNT}
-            logoSize={isMobile ? "18vh" : "35vh"}
+            logoCount={9}
+            logoSize={isMobile ? "40vh" : "65vh"}
             scrollYProgress={scrollYProgress}
           />
         ))}

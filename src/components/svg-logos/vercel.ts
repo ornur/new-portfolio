@@ -1,12 +1,9 @@
-import type { SVGProps } from "react";
-const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
-  <svg
+export const vercelSvg = `<svg
     fill="none"
     height="1em"
     viewBox="0 0 2048 407"
     width="1em"
     xmlns="http://www.w3.org/2000/svg"
-    {...props}
   >
     <path
       clipRule="evenodd"
@@ -14,6 +11,4 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
       fill="#fff"
       fillRule="evenodd"
     />
-  </svg>
-);
-export { SvgComponent as VercelSVG };
+  </svg>`;
