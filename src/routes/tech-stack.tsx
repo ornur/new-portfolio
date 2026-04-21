@@ -4,7 +4,7 @@ import { lazy, Suspense, useRef } from "react";
 import { useTranslations } from "use-intl";
 
 import { ScrollDownText } from "@/components/ui/ScrollDownText";
-import techLogos from "@/features/tech-stack/logos";
+import getTechLogos from "@/features/tech-stack/logos";
 import { LogoSlide } from "@/features/tech-stack/LogoSlide";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useScrollRestore } from "@/hooks/useScrollRestore";
@@ -26,6 +26,7 @@ function RouteComponent() {
   const outerRef = useRef<HTMLDivElement>(null);
   const t = useTranslations("TechStack");
   const { isMobile } = useIsMobile();
+  const techLogos = getTechLogos(isMobile);
   useScrollRestore("/tech-stack");
   useSEO({
     description: t("seo.description"),
@@ -40,26 +41,34 @@ function RouteComponent() {
   return (
     <div
       ref={outerRef}
-      style={{ height: `calc(${9 * (isMobile ? 1000 : 2000)}px)` }}
+      style={{
+        height: `calc(${techLogos.length * (isMobile ? 750 : 2000)}px)`,
+      }}
     >
       <ScrollDownText />
       <div className="absolute top-1/2 left-1/2 z-0 h-1/3 w-3/4 -translate-x-1/2 -translate-y-1/2 transform md:h-3/4 md:w-1/3">
-        <Suspense fallback={null}>
-          <SVG3D
-            ambientIntensity={0.1}
-            animate="swing"
-            className="cursor-grab font-bold text-nowrap opacity-70"
-            color={theme === "dark" ? "#e2f72e" : "black"}
-            // cursorOrbit
-            lightIntensity={0.1}
-            material="plastic"
-            resetDelay={1}
-            resetOnIdle
-            shadow={false}
-            text={"TECH STACK"}
-            zoom={isMobile ? 4.5 : 6.5}
-          />
-        </Suspense>
+        {isMobile ? (
+          <h1 className="text-center text-5xl font-bold tracking-wide text-nowrap opacity-35">
+            TECH STACK
+          </h1>
+        ) : (
+          <Suspense fallback={null}>
+            <SVG3D
+              ambientIntensity={0.1}
+              animate="swing"
+              className="cursor-grab font-bold text-nowrap opacity-70"
+              color={theme === "dark" ? "#e2f72e" : "black"}
+              // cursorOrbit
+              lightIntensity={0.1}
+              material="plastic"
+              resetDelay={1}
+              resetOnIdle
+              shadow={false}
+              text={"TECH STACK"}
+              zoom={6.5}
+            />
+          </Suspense>
+        )}
       </div>
       <div className="sticky top-0 h-screen overflow-hidden">
         {techLogos.map((logo, i) => (
@@ -67,8 +76,8 @@ function RouteComponent() {
             index={i}
             key={logo.title}
             logo={logo}
-            logoCount={9}
-            logoSize={isMobile ? "40vh" : "65vh"}
+            logoCount={techLogos.length}
+            logoSize={isMobile ? "30vh" : "65vh"}
             scrollYProgress={scrollYProgress}
           />
         ))}

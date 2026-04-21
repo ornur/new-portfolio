@@ -3,13 +3,10 @@ export const shadcnSvg = `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" v
   <defs>
     <style>
       .st1 {
-        stroke: #000;
+        stroke: currentColor;
         stroke-linecap: round;
         stroke-linejoin: round;
         stroke-width: 32px;
-        stroke-linejoin: round;
-        ry: 8px;
-        rx: 8px;
       }
     </style>
   </defs>

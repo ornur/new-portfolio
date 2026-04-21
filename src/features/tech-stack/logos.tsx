@@ -20,194 +20,117 @@ const SVG3D = lazy(() =>
   })),
 );
 
-const techLogos: TechLogo[] = [
+const normalizeSvgForContainer = (svg: string) =>
+  svg
+    .replace('height="200px"', 'height="100%"')
+    .replace('width="200px"', 'width="100%"');
+
+const renderStaticSvg = (svg: string, color: string) => (
+  <div
+    className="h-full w-full [&_svg]:h-full [&_svg]:w-full"
+    dangerouslySetInnerHTML={{
+      __html: normalizeSvgForContainer(svg),
+    }}
+    style={{ color }}
+  />
+);
+
+const renderLogoNode = (
+  isMobile: boolean,
+  svg: string,
+  color: string,
+  debugLabel?: string,
+) => {
+  if (isMobile) {
+    return renderStaticSvg(svg, color);
+  }
+
+  return (
+    <SVG3D
+      animate="spinFloat"
+      className="cursor-grab"
+      color={color}
+      cursorOrbit
+      metalness={0}
+      onLoadingChange={(loading, progress) => {
+        if (debugLabel) {
+          if (loading) console.log(`${debugLabel}: ${progress}%`);
+          else console.log(`${debugLabel}: done`);
+        }
+      }}
+      opacity={0}
+      resetOnIdle
+      roughness={1}
+      shadow={false}
+      svg={svg}
+    />
+  );
+};
+
+const getTechLogos = (isMobile: boolean): TechLogo[] => [
   {
     bgColor: "#20232a",
     href: "https://react.dev",
-    node: (
-      <SVG3D
-        animate="spinFloat"
-        className="cursor-grab"
-        color="#61dbfb"
-        cursorOrbit
-        metalness={0}
-        onLoadingChange={(loading, progress) => {
-          if (loading) console.log(`Processing: ${progress}%`);
-          else console.log("Done");
-        }}
-        opacity={0}
-        resetOnIdle
-        roughness={1}
-        shadow={false}
-        svg={reactSvg}
-      />
-    ),
+    node: renderLogoNode(isMobile, reactSvg, "#61dbfb", "react"),
     textColor: "#61dbfb",
     title: "React",
   },
   {
     bgColor: "#faf9f8",
     href: "https://www.typescriptlang.org",
-    node: (
-      <SVG3D
-        animate="spinFloat"
-        className="cursor-grab"
-        color="#3178c6"
-        cursorOrbit
-        metalness={0}
-        opacity={0}
-        resetOnIdle
-        roughness={1}
-        shadow={false}
-        svg={typescriptSvg}
-      />
-    ),
+    node: renderLogoNode(isMobile, typescriptSvg, "#3178c6"),
     textColor: "#3178c6",
     title: "TypeScript",
   },
   {
     bgColor: "#0f172a",
     href: "https://tailwindcss.com",
-    node: (
-      <SVG3D
-        animate="spinFloat"
-        className="cursor-grab"
-        color="#06b6d4"
-        cursorOrbit
-        metalness={0}
-        opacity={0}
-        resetOnIdle
-        roughness={1}
-        shadow={false}
-        svg={tailwindSvg}
-      />
-    ),
+    node: renderLogoNode(isMobile, tailwindSvg, "#06b6d4"),
     textColor: "#06b6d4",
     title: "Tailwind CSS",
   },
   {
     bgColor: "#ffffff",
     href: "https://nextjs.org",
-    node: (
-      <SVG3D
-        animate="spinFloat"
-        className="cursor-grab"
-        color="#000000"
-        cursorOrbit
-        metalness={0}
-        opacity={0}
-        resetOnIdle
-        roughness={1}
-        shadow={false}
-        svg={nextjsSvg}
-      />
-    ),
+    node: renderLogoNode(isMobile, nextjsSvg, "#000000"),
     textColor: "#000000",
     title: "Next.js",
   },
   {
     bgColor: "#232323",
     href: "https://vitejs.dev",
-    node: (
-      <SVG3D
-        animate="spinFloat"
-        className="cursor-grab"
-        color="#863BFF"
-        cursorOrbit
-        metalness={0}
-        opacity={0}
-        resetOnIdle
-        roughness={1}
-        shadow={false}
-        svg={viteSvg}
-      />
-    ),
+    node: renderLogoNode(isMobile, viteSvg, "#863BFF"),
     textColor: "#ffffff",
     title: "Vite",
   },
   {
     bgColor: "#ffffff",
     href: "https://tanstack.com",
-    node: (
-      <SVG3D
-        animate="spinFloat"
-        className="cursor-grab"
-        color="#000000"
-        cursorOrbit
-        metalness={0}
-        opacity={0}
-        resetOnIdle
-        roughness={1}
-        shadow={false}
-        svg={tanstackSvg}
-      />
-    ),
+    node: renderLogoNode(isMobile, tanstackSvg, "#000000"),
     textColor: "#000000",
     title: "Tanstack",
   },
   {
     bgColor: "#000000",
     href: "https://ui.shadcn.com",
-    // node: <ShadcnSVG className="bg-black text-white" />,
-    node: (
-      <SVG3D
-        animate="spinFloat"
-        className="cursor-grab"
-        color="#ffffff"
-        cursorOrbit
-        metalness={0}
-        opacity={0}
-        resetOnIdle
-        roughness={1}
-        shadow={false}
-        svg={shadcnSvg}
-      />
-    ),
+    node: renderLogoNode(isMobile, shadcnSvg, "#ffffff"),
     textColor: "#ffffff",
     title: "Shadcn/ui",
   },
   {
     bgColor: "#FFF312",
     href: "https://motion.dev/",
-    // node: <MotionSVG className="bg-[#FFF312]" />,
-    node: (
-      <SVG3D
-        animate="spinFloat"
-        className="cursor-grab"
-        color="#000000"
-        cursorOrbit
-        metalness={0}
-        opacity={0}
-        resetOnIdle
-        roughness={1}
-        shadow={false}
-        svg={motionSvg}
-      />
-    ),
+    node: renderLogoNode(isMobile, motionSvg, "#000000"),
     textColor: "#000000",
     title: "Motion",
   },
   {
     bgColor: "#000000",
     href: "https://vercel.com",
-    // node: <VercelSVG className="bg-[#000000]" />,
-    node: (
-      <SVG3D
-        animate="spinFloat"
-        className="cursor-grab"
-        color="#ffffff"
-        cursorOrbit
-        metalness={0}
-        opacity={0}
-        resetOnIdle
-        roughness={1}
-        shadow={false}
-        svg={vercelSvg}
-      />
-    ),
+    node: renderLogoNode(isMobile, vercelSvg, "#ffffff"),
     textColor: "#ffffff",
     title: "Vercel",
   },
 ];
 
-export default techLogos;
+export default getTechLogos;
