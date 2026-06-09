@@ -103,10 +103,10 @@ const projectsData = [
   },
 ];
 
-export function Projects() {
+export function Projects({ isMobile }: { isMobile: boolean }) {
   const { theme } = useTheme();
   return projectsData.map((project) => (
-    <CarouselItem className="basis-1/3 cursor-grab pt-1" key={project.id}>
+    <CarouselItem className="cursor-grab pt-1 lg:basis-1/3" key={project.id}>
       <Card className="flex h-full w-full items-center justify-center bg-transparent backdrop-blur-sm">
         <CardContent>
           <Folder
@@ -117,7 +117,7 @@ export function Projects() {
               theme === "dark" ? "var(--neon-foreground)" : "var(--neon)"
             }
             items={project.ReactNode}
-            size={2}
+            size={isMobile ? 1.6 : 2}
             title={project.title}
           />
         </CardContent>

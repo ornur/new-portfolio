@@ -97,7 +97,7 @@ const Folder: React.FC<FolderProps> = ({
     <div className={className} style={scaleStyle}>
       <div
         className={`group relative cursor-pointer transition-all duration-200 ease-in ${
-          !open ? "hover:-translate-y-2" : "mt-40"
+          !open ? "hover:-translate-y-2" : "mt-20 lg:mt-30"
         }`}
         onClick={handleClick}
         style={{

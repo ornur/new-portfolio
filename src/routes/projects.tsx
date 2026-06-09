@@ -22,7 +22,7 @@ function RouteComponent() {
     title: t("seo.title"),
   });
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-screen w-full">
       <Suspense fallback={null}>
         <Ferrofluid
           colors={colors}
