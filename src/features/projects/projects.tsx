@@ -20,7 +20,7 @@ const projectsData = [
         alt="Neo Home"
         className="size-full object-contain"
         key="image-1"
-        src="/projects/neohome.png"
+        src="/projects/neohome.webp"
       />,
     ],
     title: "Neo Home",
@@ -39,7 +39,7 @@ const projectsData = [
         alt="Alibi Portfolio"
         className="size-full object-contain"
         key="image-2"
-        src="/projects/alibi-portfolio.png"
+        src="/projects/alibi-portfolio.webp"
       />,
     ],
     title: "Alibi Portfolio",
@@ -58,7 +58,7 @@ const projectsData = [
         alt="Creative Lab"
         className="size-full object-contain"
         key="image-3"
-        src="/projects/creative-lab.png"
+        src="/projects/creative-lab.webp"
       />,
     ],
     title: "Creative Lab",
@@ -77,7 +77,7 @@ const projectsData = [
         alt="SAAS Project"
         className="size-full object-contain"
         key="image-4"
-        src="/projects/saas-project.png"
+        src="/projects/saas-project.webp"
       />,
     ],
     title: "SAAS Project",
@@ -96,7 +96,7 @@ const projectsData = [
         alt="Lets Car"
         className="size-full object-contain"
         key="image-5"
-        src="/projects/lets-car.png"
+        src="/projects/lets-car.webp"
       />,
     ],
     title: "Lets Car",
