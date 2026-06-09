@@ -5,6 +5,8 @@ import {
 } from "@tanstack/react-router";
 import { forwardRef } from "react";
 
+import { useIsMobile } from "@/hooks/useIsMobile";
+
 import { transitionStore } from "../../features/loader/TransitionStore";
 
 type BasicLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
@@ -16,6 +18,7 @@ const BasicLinkComponent = forwardRef<HTMLAnchorElement, BasicLinkProps>(
   (props, ref) => {
     const { disabled, href, ...rest } = props;
     const navigate = useNavigate();
+    const { isMobile } = useIsMobile();
 
     const handleClick = async (event: React.MouseEvent<HTMLAnchorElement>) => {
       event.preventDefault();
@@ -25,6 +28,13 @@ const BasicLinkComponent = forwardRef<HTMLAnchorElement, BasicLinkProps>(
       await transitionStore.awaitDrawComplete();
       // Navigate — TanStack Router resolves when all loaders are done
       await navigate({ to: href });
+      if (href === "/tech-stack") {
+        if (!isMobile) {
+          // Hold the transition until the tech-stack page marks SVG3D as ready
+          await transitionStore.awaitSvgReady();
+        }
+        await new Promise((resolve) => window.setTimeout(resolve, 500));
+      }
       transitionStore.startScaling();
     };
 

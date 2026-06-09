@@ -4,6 +4,7 @@ import { lazy, Suspense, useRef } from "react";
 import { useTranslations } from "use-intl";
 
 import { ScrollDownText } from "@/components/ui/ScrollDownText";
+import { transitionStore } from "@/features/loader/TransitionStore";
 import getTechLogos from "@/features/tech-stack/logos";
 import { LogoSlide } from "@/features/tech-stack/LogoSlide";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -24,6 +25,8 @@ const SVG3D = lazy(() =>
 function RouteComponent() {
   const { theme } = useTheme();
   const outerRef = useRef<HTMLDivElement>(null);
+  const svgReadySignaled = useRef(false);
+
   const t = useTranslations("TechStack");
   const { isMobile } = useIsMobile();
   const techLogos = getTechLogos(isMobile);
@@ -37,6 +40,13 @@ function RouteComponent() {
     offset: ["start start", "end end"],
     target: outerRef,
   });
+
+  const handleSvgReady = () => {
+    if (isMobile) return;
+    if (svgReadySignaled.current) return;
+    svgReadySignaled.current = true;
+    transitionStore.markSvgReady();
+  };
 
   return (
     <div
@@ -61,6 +71,9 @@ function RouteComponent() {
               // cursorOrbit
               lightIntensity={0.1}
               material="plastic"
+              onLoadingChange={(loading) => {
+                if (!loading) handleSvgReady();
+              }}
               resetDelay={1}
               resetOnIdle
               shadow={false}

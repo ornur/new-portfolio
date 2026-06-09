@@ -18,12 +18,16 @@ type State = {
 type TransitionStore = State & {
   /** Promise that resolves when the draw animation is done */
   awaitDrawComplete: () => Promise<void>;
+  /** Promise that resolves when the entering page's SVG3D is ready */
+  awaitSvgReady: () => Promise<void>;
   /** Kick off the transition (panels slide in) */
   begin: () => void;
   /** End the transition and return to idle */
   finish: () => void;
   /** Signal that the draw animation finished; unblocks awaitDrawComplete() */
   markDrawComplete: () => void;
+  /** Signal that the SVG3D render is ready; unblocks awaitSvgReady() */
+  markSvgReady: () => void;
   /** Advance to the drawing phase */
   startDrawing: () => void;
   /** Advance to the scale-up phase (called after nav resolves) */
@@ -37,14 +41,20 @@ const emit = () => listeners.forEach((fn) => fn());
 
 let resolveDrawComplete: (() => void) | null = null;
 let drawCompletePromise: Promise<void> = Promise.resolve();
+let resolveSvgReady: (() => void) | null = null;
+let svgReadyPromise: Promise<void> = Promise.resolve();
 
 // ─── Store ───────────────────────────────────────────────────────────────────
 export const transitionStore: TransitionStore = {
   awaitDrawComplete: () => drawCompletePromise,
+  awaitSvgReady: () => svgReadyPromise,
 
   begin: () => {
     drawCompletePromise = new Promise<void>((res) => {
       resolveDrawComplete = res;
+    });
+    svgReadyPromise = new Promise<void>((res) => {
+      resolveSvgReady = res;
     });
     state = { isActive: true, phase: Phase.panelsIn };
     emit();
@@ -62,6 +72,11 @@ export const transitionStore: TransitionStore = {
   markDrawComplete: () => {
     resolveDrawComplete?.();
     resolveDrawComplete = null;
+  },
+
+  markSvgReady: () => {
+    resolveSvgReady?.();
+    resolveSvgReady = null;
   },
 
   get phase() {
