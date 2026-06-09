@@ -50,6 +50,14 @@ const ROUTES = [
     title: "Experience - Nurdaulet | Middle Frontend Developer",
     url: `${SITE_URL}/experience`,
   },
+  {
+    description:
+      "Check out the projects and accomplishments of Nurdaulet Orynbassarov, a frontend developer with a passion for React and TypeScript.",
+    image: DEFAULT_IMAGE,
+    path: "/projects",
+    title: "Projects - Nurdaulet | Middle Frontend Developer",
+    url: `${SITE_URL}/projects`,
+  },
 ];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────

@@ -83,6 +83,13 @@
       "description": "Discover the professional journey and work experience of Nurdaulet Orynbassarov."
     }
   },
+  "Projects": {
+    "title": "My Projects",
+    "seo": {
+      "title": "Projects - Nurdaulet",
+      "description": "Explore the software projects that Nurdaulet Orynbassarov has worked on."
+    }
+  },
   "Nav": {
     "home": "Home",
     "about": "About",

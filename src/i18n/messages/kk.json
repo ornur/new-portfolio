@@ -83,6 +83,13 @@
       "description": "Nurdáýlet Orynbasarovtyń kásibı joly men jumys tájirıbesin ashyńyz."
     }
   },
+  "Projects": {
+    "title": "Meniń Jobalarym",
+    "seo": {
+      "title": "Jobalar - Nurdáýlet",
+      "description": "Nurdáýlet Orynbasarovtyń software jobalarymen tanystyrynyz."
+    }
+  },
   "Nav": {
     "home": "Basty bet",
     "about": "Men týraly",

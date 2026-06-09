@@ -1,12 +1,12 @@
-import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
-import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite-plus";
 
 // https://vite.dev/config/
 export default defineConfig({
   build: {
+    chunkSizeWarningLimit: 1500,
     rolldownOptions: {
       output: {
         codeSplitting: {
@@ -284,12 +284,7 @@ export default defineConfig({
       "react-hooks/rules-of-hooks": "error",
     },
   },
-  plugins: [
-    tanstackRouter(),
-    tailwindcss(),
-    react(),
-    babel({ presets: [reactCompilerPreset()] }),
-  ],
+  plugins: [tanstackRouter(), tailwindcss(), react()],
   publicDir: "public",
   resolve: { alias: { "@": "/src" } },
   staged: {

@@ -62,7 +62,9 @@ export function AppleStyleDock() {
       <Dock
         className={cn(
           "dark:border-foreground/30 cursor-pointer items-end border border-black/20 pb-3 backdrop-blur-[3px]",
-          pathname === "/tech-stack" || pathname === "/about"
+          pathname === "/tech-stack" ||
+            pathname === "/about" ||
+            pathname === "/projects"
             ? "bg-white dark:bg-black"
             : "bg-transparent dark:bg-transparent",
         )}
