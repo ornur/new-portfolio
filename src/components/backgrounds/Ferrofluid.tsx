@@ -247,12 +247,15 @@ const Ferrofluid: React.FC<FerrofluidProps> = ({
     const container = containerRef.current;
     if (!container) return;
 
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    const resolvedDpr =
+      dpr ?? (isAndroid ? 1.0 : Math.min(1.5, window.devicePixelRatio || 1));
+
     const renderer = new Renderer({
       alpha: true,
       antialias: true,
-      dpr:
-        dpr ??
-        (typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1),
+      dpr: resolvedDpr,
     });
     rendererRef.current = renderer;
     const gl = renderer.gl;
@@ -284,7 +287,7 @@ const Ferrofluid: React.FC<FerrofluidProps> = ({
       uFluidity: { value: fluidity },
       uGlow: { value: glow },
       uMouseColor: { value: avg },
-      uMouseEnabled: { value: mouseInteraction ? 1 : 0 },
+      uMouseEnabled: { value: mouseInteraction && !isMobile ? 1 : 0 },
       uMouseRadius: { value: mouseRadius },
       uMouseStrength: { value: mouseStrength },
       uOpacity: { value: opacity },
@@ -328,7 +331,7 @@ const Ferrofluid: React.FC<FerrofluidProps> = ({
         uniforms.iMouse.value = [x, y];
       }
     };
-    if (mouseInteraction) {
+    if (mouseInteraction && !isMobile) {
       canvas.addEventListener("pointermove", onPointerMove);
     }
 
