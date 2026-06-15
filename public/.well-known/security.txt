@@ -1,4 +1,24 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
 Contact: mailto:nurdauletaidaruli@gmail.com
 Expires: 2027-12-31T23:59:59.000Z
 Preferred-Languages: en
 Acknowledgments: https://nurda.vercel.app/thanks
+-----BEGIN PGP SIGNATURE-----
+
+iQJPBAEBCAA5FiEEymTolyn2AOZiiUKLeHC66tNlQ78FAmovsnkbFIAAAAAABAAO
+bWFudTIsMi41KzEuMTIsMiwxAAoJEHhwuurTZUO/VRoP/1pI/mUjnOBJowM+/Tw0
+kxy41USrGo6rSy6Zus9bcjHQI26sts4pvahNkJhCYn8/FDOgtBWRwQOFZ8kdVb0G
+/3B8d0n6tpZvBEBf+B/dcjAU3oNkSzayWhHLzg5bwHsyrrGH7Simnj5xrhEfrXeP
+x5Ix91yLFfVGY7sxH4fPQEBCGCO9iV7o2A4xWhyzPKiOx5pxtVhw6PtRX/DKXXyk
+5t/CSwTRl1d+ybRVID7xqPAnE92vrLg1NEuvogwJyobz58QJMqqy3DbKFZQWc68r
+Pk/PlpSWh/TxowF7YHzEfBTKtuzt7u7AEcfTILyfaxP2gbaUUPn3JrXC1xSrhquG
+nbnq0lzQrRHnUMpb78NBryNoq519sVnwpwoJfO7dEz/ivQYk2cZ2oyTG/2q3D7oB
+dFBdACfmlUFcG14ot8gMyWXiUkWzDM5yayqnqs5MP3sszNB1wlCY5LAbk4pwjTN4
+COx+heAcDej/R3XR9UUs7s3PXsa9Shj2skfpFzGGFIg7Y1mvTScScG8jW56Q4tZx
+QDM03xGPXzzKXbRlCp86t1IDTaUyF7AkW5hQvc2v/djivc7CGO7jiqGj40koEv9q
+s8/79ejSGzSt6+bDkbaoDPmr+Qh6bZTgikJ+Nioi2FM7f6M2MiMPBHhyHdflLb+b
+gxAYQugQdc4ytc3i9nfrG+dP
+=NC52
+-----END PGP SIGNATURE-----
