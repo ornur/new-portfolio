@@ -1,8 +1,44 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/((?!about$).*)",
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/experience",
+      "destination": "/experience/index.html"
+    },
+    {
+      "source": "/projects",
+      "destination": "/projects/index.html"
+    },
+    {
+      "source": "/tech-stack",
+      "destination": "/tech-stack/index.html"
+    },
+    {
+      "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
     }
   ]
 }
