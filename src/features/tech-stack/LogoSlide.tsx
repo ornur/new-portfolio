@@ -9,53 +9,51 @@ export interface TechLogo {
   title: string;
 }
 
+const FIRST_SLIDE_WEIGHT = 0.4;
+const FILL_THRESHOLD = 0.6;
+const FADE_RANGE = 0.25;
+const HOLD_RATIO = 0.3;
+
 export function LogoSlide({
-  entryNudge = 0,
-  fadeRange = 0.25,
-  fillThreshold = 0.6,
-  gap = 0.3,
   index,
   logo,
   logoCount,
   logoSize = "40vh",
   scrollYProgress,
 }: {
-  entryNudge?: number;
-  fadeRange?: number;
-  fillThreshold?: number;
-  /** Fraction [0–1] of each logo's scroll window used as a hold/pause after the
-   *  fill completes, before the next logo begins. 0 = no gap, 0.5 = half the
-   *  window is a pause. Default 0.3. */
-  gap?: number;
   index: number;
   logo: TechLogo;
   logoCount: number;
   logoSize?: string;
   scrollYProgress: MotionValue<number>;
 }) {
-  // Each logo owns a [start, end] slice of the global 0–1 progress.
-  const start = index / logoCount;
-  const end = (index + 1) / logoCount;
-
-  // Active animation window: shrunk by `gap` so the logo holds fully-revealed
-  // for (gap * windowSize) worth of scroll before the next logo kicks in.
-  const activeEnd = start + (1 - gap) / logoCount;
-
-  // Map global progress into local 0–1 for this logo's window.
-  // useTransform clamps automatically, so local stays at 1 during the hold.
+  const isFirstSlide = index === 0;
+  const totalWeight = logoCount - 1 + FIRST_SLIDE_WEIGHT;
+  const start = isFirstSlide
+    ? 0
+    : (FIRST_SLIDE_WEIGHT + index - 1) / totalWeight;
+  const end = (FIRST_SLIDE_WEIGHT + index) / totalWeight;
+  const activeEnd = start + (end - start) * (1 - HOLD_RATIO);
   const local = useTransform(scrollYProgress, [start, activeEnd], [0, 1]);
 
-  // Fill bar: even index → left→right, odd → right→left.
-  const fillWidth = useTransform(local, [0, 1], ["0%", "100%"]);
-  const fillFromRight = index % 2 !== 0;
-
-  // Icon fades in + rises after fillThreshold is crossed.
-  const fadeEnd = Math.min(fillThreshold + fadeRange, 1);
-  const logoOpacity = useTransform(local, [fillThreshold, fadeEnd], [0, 1]);
-  const logoBounce = useTransform(local, [fillThreshold, fadeEnd], [20, 0], {
-    clamp: false,
-  });
-  const logoY = useTransform(local, [fillThreshold, fadeEnd], [entryNudge, 0]);
+  const animatedFillWidth = useTransform(local, [0, 1], ["0%", "100%"]);
+  const fadeEnd = Math.min(FILL_THRESHOLD + FADE_RANGE, 1);
+  const animatedLogoOpacity = useTransform(
+    local,
+    [FILL_THRESHOLD, fadeEnd],
+    [0, 1],
+  );
+  const animatedLogoBounce = useTransform(
+    local,
+    [FILL_THRESHOLD, fadeEnd],
+    [20, 0],
+    {
+      clamp: false,
+    },
+  );
+  const fillWidth = isFirstSlide ? "100%" : animatedFillWidth;
+  const logoOpacity = isFirstSlide ? 1 : animatedLogoOpacity;
+  const logoBounce = isFirstSlide ? 0 : animatedLogoBounce;
 
   const slideVisibility = useTransform(scrollYProgress, (v) =>
     v >= start && v <= end + 0.5 ? "visible" : "hidden",
@@ -76,19 +74,15 @@ export function LogoSlide({
         zIndex: slideZIndex,
       }}
     >
-      <div
-        className="absolute inset-x-0 overflow-hidden"
-        style={{ height: "100vh", zIndex: 1 }}
-      >
-        <motion.div
-          className="absolute inset-y-0"
-          style={{
-            backgroundColor: logo.bgColor,
-            width: fillWidth,
-            ...(fillFromRight ? { right: 0 } : { left: 0 }),
-          }}
-        />
-      </div>
+      <motion.div
+        className="absolute inset-y-0"
+        style={{
+          backgroundColor: logo.bgColor,
+          width: fillWidth,
+          zIndex: 1,
+          ...(index % 2 ? { right: 0 } : { left: 0 }),
+        }}
+      />
 
       <div className="relative" style={{ zIndex: 2 }}>
         <motion.div
@@ -96,7 +90,6 @@ export function LogoSlide({
           style={{
             opacity: logoOpacity,
             translateY: logoBounce,
-            y: logoY,
           }}
         >
           <div

@@ -18,7 +18,7 @@ type State = {
 type TransitionStore = State & {
   /** Promise that resolves when the draw animation is done */
   awaitDrawComplete: () => Promise<void>;
-  /** Promise that resolves when the entering page's SVG3D is ready */
+  /** Promise that resolves after the entering page's 3D SVG has rendered */
   awaitSvgReady: () => Promise<void>;
   /** Kick off the transition (panels slide in) */
   begin: () => void;
@@ -26,7 +26,7 @@ type TransitionStore = State & {
   finish: () => void;
   /** Signal that the draw animation finished; unblocks awaitDrawComplete() */
   markDrawComplete: () => void;
-  /** Signal that the SVG3D render is ready; unblocks awaitSvgReady() */
+  /** Signal that the entering page's 3D SVG has rendered */
   markSvgReady: () => void;
   /** Advance to the drawing phase */
   startDrawing: () => void;

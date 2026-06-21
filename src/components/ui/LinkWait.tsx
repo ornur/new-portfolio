@@ -30,7 +30,6 @@ const BasicLinkComponent = forwardRef<HTMLAnchorElement, BasicLinkProps>(
       await navigate({ to: href });
       if (href === "/tech-stack") {
         if (!isMobile) {
-          // Hold the transition until the tech-stack page marks SVG3D as ready
           await transitionStore.awaitSvgReady();
         }
         await new Promise((resolve) => window.setTimeout(resolve, 500));
