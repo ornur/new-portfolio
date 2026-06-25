@@ -1,4 +1,5 @@
 import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { LazyMotion } from "motion/react";
 import { StrictMode } from "react";
@@ -34,6 +35,7 @@ function App() {
         <ScreenTransition />
         <RouterProvider context={{ theme }} router={router} />
         <SpeedInsights />
+        <Analytics />
       </LazyMotion>
     </>
   );
