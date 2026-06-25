@@ -4,4 +4,4 @@ Allow: /tech-stack
 Allow: /experience
 Allow: /projects
 
-Sitemap: https://nurda.vercel.app/sitemap.xml
+Sitemap: https://nurda.dev/sitemap.xml

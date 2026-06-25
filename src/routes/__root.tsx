@@ -77,7 +77,7 @@ export const Route = createRootRouteWithContext<TRootContext>()({
             "https://www.linkedin.com/in/ornur/",
             "https://t.me/nurda_oryn",
           ],
-          url: "https://nurda.vercel.app",
+          url: "https://nurda.dev",
           worksFor: {
             "@type": "Organization",
             name: "LLP Digital Bridge",

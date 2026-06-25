@@ -12,7 +12,7 @@ export function useSEO({ description, title }: SeoProps) {
 
   useEffect(() => {
     const path = window.location.pathname;
-    const canonicalUrl = `https://nurda.vercel.app${path}`;
+    const canonicalUrl = `https://nurda.dev${path}`;
 
     // Update the document title
     document.title = title;

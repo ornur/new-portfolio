@@ -20,7 +20,7 @@ const distDir = resolve(__dirname, "../dist");
 
 // ── Route definitions ────────────────────────────────────────────────────────
 
-const SITE_URL = "https://nurda.vercel.app";
+const SITE_URL = "https://nurda.dev";
 const DEFAULT_IMAGE = `${SITE_URL}/opengraph-image.png`;
 const PROFILE_LINKS = {
   github: "https://github.com/ornur",
