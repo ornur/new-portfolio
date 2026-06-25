@@ -41,11 +41,13 @@ function App() {
 
 // Render the app
 const rootElement = document.getElementById("root")!;
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
-  root.render(
-    <StrictMode>
-      <App />
-    </StrictMode>,
-  );
+if (rootElement.innerHTML.trim()) {
+  rootElement.replaceChildren();
 }
+
+const root = ReactDOM.createRoot(rootElement);
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);

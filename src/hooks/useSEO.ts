@@ -11,6 +11,9 @@ export function useSEO({ description, title }: SeoProps) {
   const locale = useLocale();
 
   useEffect(() => {
+    const path = window.location.pathname;
+    const canonicalUrl = `https://nurda.vercel.app${path}`;
+
     // Update the document title
     document.title = title;
 
@@ -29,12 +32,25 @@ export function useSEO({ description, title }: SeoProps) {
       element.setAttribute("content", content);
     };
 
+    const setLinkTag = (rel: string, href: string) => {
+      let element = document.querySelector(`link[rel="${rel}"]`);
+      if (!element) {
+        element = document.createElement("link");
+        element.setAttribute("rel", rel);
+        document.head.appendChild(element);
+      }
+      element.setAttribute("href", href);
+    };
+
     // Update standard description
     setMetaTag("name", "description", description);
+    setMetaTag("name", "robots", "index, follow");
+    setLinkTag("canonical", canonicalUrl);
 
     // Update Open Graph tags (optional, mainly if tools like Telegram read them post-load)
     setMetaTag("property", "og:title", title);
     setMetaTag("property", "og:description", description);
+    setMetaTag("property", "og:url", canonicalUrl);
 
     // Update Twitter tags
     setMetaTag("name", "twitter:title", title);
