@@ -28,14 +28,6 @@ const DEFAULT_IMAGE = `${SITE_URL}/opengraph-image.png`;
 const ROUTES = [
   {
     description:
-      "Learn more about Nurdaulet Orynbassarov — a frontend developer passionate about React, TypeScript, and building great user experiences.",
-    image: DEFAULT_IMAGE,
-    path: "/about",
-    title: "About - Nurdaulet | Middle Frontend Developer",
-    url: `${SITE_URL}/about`,
-  },
-  {
-    description:
       "Explore the tech stack of Nurdaulet Orynbassarov, a frontend developer specializing in React, TypeScript, and modern web technologies.",
     image: DEFAULT_IMAGE,
     path: "/tech-stack",

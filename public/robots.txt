@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Allow: /about
 Allow: /tech-stack
 Allow: /experience
 Allow: /projects

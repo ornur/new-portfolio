@@ -4,7 +4,6 @@ import {
   Database,
   FolderCode,
   HomeIcon,
-  IdCardLanyard,
   Moon,
   Sun,
 } from "lucide-react";
@@ -13,7 +12,6 @@ import { useTranslations } from "use-intl/react";
 import type { SimpleTranslator } from "@/i18n/getTranslations";
 
 import { Dock, DockIcon, DockItem, DockLabel } from "@/features/nav/Dock";
-import { useIsMobile } from "@/hooks/useIsMobile";
 import { useTheme } from "@/hooks/useTheme";
 import { changeLocale, useLocale } from "@/i18n/LocaleStore";
 import { cn } from "@/lib/utils";
@@ -27,12 +25,12 @@ const links = (t: SimpleTranslator<"Nav">) => [
     id: "home",
     title: t("home"),
   },
-  {
-    href: "/about",
-    icon: <IdCardLanyard className="size-full" />,
-    id: "about",
-    title: t("about"),
-  },
+  // {
+  //   href: "/about",
+  //   icon: <IdCardLanyard className="size-full" />,
+  //   id: "about",
+  //   title: t("about"),
+  // },
   {
     href: "/tech-stack",
     icon: <Database className="size-full" />,
@@ -55,7 +53,6 @@ const links = (t: SimpleTranslator<"Nav">) => [
 
 export function AppleStyleDock() {
   const { pathname } = useLocation();
-  const { isMobile } = useIsMobile();
   const data = links(useTranslations("Nav"));
   return (
     <nav className="fixed bottom-2 left-1/2 z-10 max-w-full -translate-x-1/2">
@@ -97,11 +94,7 @@ export function AppleStyleDock() {
             </DockItem>
           </WaitLink>
         ))}
-        {!isMobile && (
-          <>
-            <ThemeDock />
-          </>
-        )}
+        <ThemeDock />
         <LanguageDock />
       </Dock>
     </nav>
