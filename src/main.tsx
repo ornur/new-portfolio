@@ -1,5 +1,5 @@
 import { createRouter, RouterProvider } from "@tanstack/react-router";
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { LazyMotion } from "motion/react";
 import { StrictMode } from "react";
