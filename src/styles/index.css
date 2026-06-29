@@ -159,7 +159,7 @@
     @apply font-space-mono;
   }
   :lang(kk) {
-    @apply font-space-mono;
+    @apply font-montserrat;
   }
   :lang(ru) {
     @apply font-montserrat;

@@ -1,102 +1,102 @@
 {
   "Home": {
-    "name": "Men Nurdáýlet",
-    "profession": "Baǵdarlamalyq Injener",
+    "name": "Нұрдәулет Орынбасаров",
+    "profession": "Бағдарламалық инженер",
     "seo": {
-      "title": "Nurdáýlet - Middle Frontend Developer",
-      "description": "Meniń jeke portfolıom - bul React jáne TypeScript kómegimen ınterfeısti damytýǵa mamandandyrylǵan baǵdarlamalyq jasaqtama ınjeneri retinde meniń jobalarymdy, daǵdylarymdy jáne tájirıbemdi kórsetý."
+      "title": "Нұрдәулет Орынбасаров | Frontend әзірлеушісі",
+      "description": "Нұрдәулет Орынбасаров - Астана, Қазақстандағы frontend әзірлеушісі. React және TypeScript жобалары, дағдылары және тәжірибесі."
     }
   },
   "About": {
     "data": {
       "2004": {
         "date": "2004",
-        "desc": "Men 2004 jyly 1 qańtarda Kentaý qalasynda, Qazaqstanda týyldym. Men árqashan ınjenerıa jáne tehnologıalarmen baılanysty mamandyq tańdaıtynymdy bilgem, biraq Baǵdarlamalyq Jasaqtama damytýymen baılanysty bolatynyn kútpedim.",
-        "title": "Bastama - Kentaý"
+        "desc": "Мен 2004 жылы 1 қаңтарда Қазақстандағы Кентау қаласында дүниеге келдім. Мен әрқашан инженерия және технологиялармен байланысты мамандық таңдайтынымды білетінмін, бірақ оның бағдарламалық жасақтама әзірлеумен байланысты болатынын күтпедім.",
+        "title": "Бастама - Кентау"
       },
       "2016": {
         "date": "2016",
-        "desc": "2016 jyly men Shymkentte Nazarbaev Zıatkerlik Mektebine tústim. Bul maǵan tamasha tájirıbe boldy, óıtkeni men baǵdarlamalaý jáne basqa tehnıkalyq pánderdi oqý múmkindigine ıe boldym.",
-        "title": "Mektep - NIS"
+        "desc": "2016 жылы мен Шымкенттегі Назарбаев Зияткерлік мектебіне түстім. Бұл мен үшін тамаша тәжірибе болды, өйткені бағдарламалау және басқа да техникалық пәндерді оқу мүмкіндігіне ие болдым.",
+        "title": "Мектеп - NIS"
       },
       "2022": {
         "date": "2022",
-        "desc": "2022 jyly men Astana IT University-ge tústim. Men Software Engineering mamandyǵyn tańdadym, óıtkeni baǵdarlamalyq jasaqtama damytýy týraly kóbirek bilgim keldi jáne damytýshy bolǵym keldi.",
-        "title": "Ýnıversıtet - AITU"
+        "desc": "2022 жылы мен Astana IT University университетіне түстім. Мен Software Engineering мамандығын таңдадым, өйткені бағдарламалық жасақтама әзірлеу туралы көбірек білгім және әзірлеуші болғым келді.",
+        "title": "Университет - AITU"
       },
       "2023": {
         "date": "2023",
-        "desc": "Aýtsorsıng kompanıasynda taǵylymdanýdan keıin maǵan ZIZ INC kompanıasynda frontend ázirleýshisiniń laýazymyn usyndy. Men elektrondy saýda jáne korporatıvtik vebsaıttaryn qosa alǵanda, ártúrli jobalar boıynsha jumys istedim. Árıne, basqa ázirleýshilermen jumys isteý tamasha tájirıbe boldy.",
-        "title": "Kareradaǵy birinshi qadam - ZIZ INC."
+        "desc": "Аутсорсинг компаниясында тағылымдамадан өткеннен кейін маған ZIZ INC. компаниясында frontend әзірлеушісі лауазымы ұсынылды. Мен электрондық сауда және корпоративтік веб-сайттарды қоса алғанда, әртүрлі жобаларда жұмыс істедім. Әрине, басқа әзірлеушілермен жұмыс істеу және олардан үйрену мен үшін тамаша тәжірибе болды.",
+        "title": "Мансаптағы алғашқы қадам - ZIZ INC."
       },
       "Today": {
-        "date": "Búgin",
-        "desc": "Men qazirgi ýaqytta TOO Digital Bridge kompanıasynda middle frontend ázirleýshisi bolyp jumys istep jatyrmyn, onda óz daǵdylarymdy damytýdy jáne qyzyqty jobalarmen jumys jasaýdamyn.",
-        "title": "Qazir - TOO Digital Bridge"
+        "date": "Бүгін",
+        "desc": "Мен қазіргі уақытта ЖШС Digital Bridge компаниясында middle frontend әзірлеушісі болып жұмыс істеймін, онда өз дағдыларымды дамытып, қызықты жобаларға үлес қосып жүрмін.",
+        "title": "Қазір - ЖШС Digital Bridge"
       }
     },
     "seo": {
-      "title": "Men týraly - Nurdáýlet",
-      "description": "Nurdáýlet Orynbasarov - frontend ázirleýshisi týraly kóbirek bilińiz."
+      "title": "Мен туралы - Нұрдәулет Орынбасаров",
+      "description": "Нұрдәулет Орынбасаров - frontend әзірлеушісі туралы көбірек біліңіз."
     }
   },
   "TechStack": {
-    "title": "Meniń Teh-Stekim",
+    "title": "Менің технологиялар стекім",
     "seo": {
-      "title": "Tehnologıalar Steki - Nurdáýlet",
-      "description": "Nurdáýlet Orynbasarov software damytý jobalarynda qoldanatyn tehnologıalarmen quraldardy zertteńiz."
+      "title": "Технологиялар стекі - Нұрдәулет Орынбасаров",
+      "description": "Нұрдәулет Орынбасаров бағдарламалық жасақтама әзірлеу жобаларында қолданатын технологиялар мен құралдарды қараңыз."
     }
   },
   "Experience": {
     "data": {
       "digital_bridge": {
-        "company": "TOO Digital Bridge",
-        "location": "Astana, Qazaqstan",
-        "role": "Middle Frontend Ázirleýshisi",
-        "period": "Qyrkúıek 2025 - Qazirge deıin",
+        "company": "ЖШС Digital Bridge",
+        "location": "Астана, Қазақстан",
+        "role": "Middle Frontend әзірлеушісі",
+        "period": "Қыркүйек 2025 - Қазіргі уақытқа дейін",
         "highlights": {
           "0": {
-            "name": "Mektep Tamaqtanýyn Baqylaý Júıesi",
-            "summary": "React.js, Vite jáne TanStack Router qoldana otyryp, memlekettik tamaqtanýdy baqylaý júıesin ázirleý. Qazirgi ýaqytta shemalardy tekserý úshin Zod jáne serverlik kárini senimdi basqarý úshin React Query qoldanylýda."
+            "name": "Мектеп тамақтануын бақылау жүйесі",
+            "summary": "React.js, Vite және TanStack Router қолдана отырып, мемлекеттік тамақтануды бақылау жүйесін әзірлеу. Қазіргі уақытта схемаларды тексеру үшін Zod және серверлік күйді сенімді басқару үшін React Query қолданылады."
           }
         }
       },
       "ziz_inc": {
         "company": "ZIZ INC.",
-        "location": "Astana, Qazaqstan",
-        "role": "Frontend Ázirleýshisi",
-        "period": "Maýsym 2023 - Maýsym 2025",
+        "location": "Астана, Қазақстан",
+        "role": "Frontend әзірлеушісі",
+        "period": "Маусым 2023 - Маусым 2025",
         "highlights": {
           "0": {
-            "name": "Skills Enbek Ákimshilik Basty Betti",
-            "summary": "AI chat-boty ózara is-qımyly úshin naqty ýaqyttaǵy analıtıkasy bar masshtabtalatyn ákimshilik taqtany ázirleý, qoljetimdi ınterfeıs komponentteri men tekserilgen formalardy engizý."
+            "name": "Skills Enbek әкімшілік панелі",
+            "summary": "AI чат-ботымен өзара әрекеттесуге арналған нақты уақыттағы аналитикасы бар масштабталатын әкімшілік панель әзірлеу, қолжетімді интерфейс компоненттері мен тексерілетін формаларды енгізу."
           },
           "1": {
-            "name": "Chemexpress Marketpleısi",
-            "summary": "React, Zustand jáne React Query arqyly 1M+ taýary bar hımıalyq ónimder rýbrikasyn qurý, jeke kalkýlátorlar men dınamıkalyq galereıalardy qosý."
+            "name": "Chemexpress маркетплейсі",
+            "summary": "React, Zustand және React Query арқылы 1 миллионнан астам тауары бар химиялық өнімдер платформасын әзірлеу, жеке калькуляторлар мен динамикалық галереяларды қосу."
           }
         }
       }
     },
     "seo": {
-      "title": "Tájirıbe - Nurdáýlet",
-      "description": "Nurdáýlet Orynbasarovtyń kásibı joly men jumys tájirıbesin ashyńyz."
+      "title": "Тәжірибе - Нұрдәулет Орынбасаров",
+      "description": "Нұрдәулет Орынбасаровтың кәсіби жолы мен жұмыс тәжірибесін қараңыз."
     }
   },
   "Projects": {
-    "title": "Meniń Jobalarym",
+    "title": "Менің жобаларым",
     "seo": {
-      "title": "Jobalar - Nurdáýlet",
-      "description": "Nurdáýlet Orynbasarovtyń software jobalarymen tanystyrynyz."
+      "title": "Жобалар - Нұрдәулет Орынбасаров",
+      "description": "Нұрдәулет Орынбасаров жұмыс істеген бағдарламалық жасақтама жобаларымен танысыңыз."
     }
   },
   "Nav": {
-    "home": "Basty bet",
-    "about": "Men týraly",
-    "techStack": "Tehnologıalar steki",
-    "experience": "Tájirıbe",
-    "projects": "Jobalar",
-    "theme": "Tema",
-    "language": "Til"
+    "home": "Басты бет",
+    "about": "Мен туралы",
+    "techStack": "Технологиялар стекі",
+    "experience": "Тәжірибе",
+    "projects": "Жобалар",
+    "theme": "Тақырып",
+    "language": "Тіл"
   }
 }

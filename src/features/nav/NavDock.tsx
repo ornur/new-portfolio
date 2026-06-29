@@ -1,4 +1,4 @@
-import { useLocation } from "@tanstack/react-router";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 import {
   BriefcaseBusiness,
   Database,
@@ -13,7 +13,13 @@ import type { SimpleTranslator } from "@/i18n/getTranslations";
 
 import { Dock, DockIcon, DockItem, DockLabel } from "@/features/nav/Dock";
 import { useTheme } from "@/hooks/useTheme";
-import { changeLocale, useLocale } from "@/i18n/LocaleStore";
+import { localizePath, stripLocaleFromPath } from "@/i18n/localePaths";
+import {
+  changeLocale,
+  type Locale,
+  locales,
+  useLocale,
+} from "@/i18n/LocaleStore";
 import { cn } from "@/lib/utils";
 
 import { WaitLink } from "../../components/ui/LinkWait";
@@ -53,15 +59,20 @@ const links = (t: SimpleTranslator<"Nav">) => [
 
 export function AppleStyleDock() {
   const { pathname } = useLocation();
-  const data = links(useTranslations("Nav"));
+  const lang = useLocale();
+  const basePath = stripLocaleFromPath(pathname);
+  const data = links(useTranslations("Nav")).map((item) => ({
+    ...item,
+    href: localizePath(item.href, lang),
+  }));
   return (
     <nav className="fixed bottom-2 left-1/2 z-10 max-w-full -translate-x-1/2">
       <Dock
         className={cn(
           "dark:border-foreground/30 cursor-pointer items-end border border-black/20 pb-3 backdrop-blur-[3px]",
-          pathname === "/tech-stack" ||
-            pathname === "/about" ||
-            pathname === "/projects"
+          basePath === "/tech-stack" ||
+            basePath === "/about" ||
+            basePath === "/projects"
             ? "bg-white dark:bg-black"
             : "bg-transparent dark:bg-transparent",
         )}
@@ -104,6 +115,17 @@ export function AppleStyleDock() {
 function LanguageDock() {
   const t = useTranslations("Nav");
   const lang = useLocale();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const handleLocaleChange = async () => {
+    const currentIndex = locales.indexOf(lang);
+    const next = locales[(currentIndex + 1) % locales.length] as Locale;
+    const nextPath = localizePath(stripLocaleFromPath(pathname), next);
+    changeLocale(next);
+    await navigate({ to: nextPath });
+  };
+
   return (
     <div>
       <DockItem
@@ -111,7 +133,7 @@ function LanguageDock() {
         aria-labelledby={`dock-item-language`}
         className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 text-sm backdrop-blur-[50px] duration-120 hover:bg-black/15 hover:text-2xl"
         key="language"
-        onClick={changeLocale}
+        onClick={handleLocaleChange}
       >
         <DockLabel>{t("language")}</DockLabel>
         <DockIcon>

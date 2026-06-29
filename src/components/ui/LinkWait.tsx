@@ -6,6 +6,7 @@ import {
 import { forwardRef } from "react";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { stripLocaleFromPath } from "@/i18n/localePaths";
 
 import { transitionStore } from "../../features/loader/TransitionStore";
 
@@ -28,7 +29,7 @@ const BasicLinkComponent = forwardRef<HTMLAnchorElement, BasicLinkProps>(
       await transitionStore.awaitDrawComplete();
       // Navigate — TanStack Router resolves when all loaders are done
       await navigate({ to: href });
-      if (href === "/tech-stack") {
+      if (stripLocaleFromPath(href) === "/tech-stack") {
         if (!isMobile) {
           await transitionStore.awaitSvgReady();
         }

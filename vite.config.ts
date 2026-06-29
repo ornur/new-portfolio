@@ -284,6 +284,9 @@ export default defineConfig({
       "react-hooks/rules-of-hooks": "error",
     },
   },
+  optimizeDeps: {
+    include: ["3dsvg"],
+  },
   plugins: [tanstackRouter(), tailwindcss(), react()],
   publicDir: "public",
   resolve: { alias: { "@": "/src" } },

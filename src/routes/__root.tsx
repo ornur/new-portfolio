@@ -2,13 +2,15 @@ import {
   createRootRouteWithContext,
   HeadContent,
   Outlet,
+  useLocation,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { ReactLenis } from "lenis/react";
+import { useEffect } from "react";
 import { IntlProvider } from "use-intl";
 
 import { AppleStyleDock } from "@/features/nav/NavDock";
-import { useLocale } from "@/i18n/LocaleStore";
+import { syncLocaleFromPath, useLocale } from "@/i18n/LocaleStore";
 import { messages } from "@/i18n/messages";
 import appCss from "@/styles/index.css?url";
 
@@ -17,7 +19,13 @@ type TRootContext = {
 };
 
 const RootLayout = () => {
+  const { pathname } = useLocation();
   const lang = useLocale();
+
+  useEffect(() => {
+    syncLocaleFromPath(pathname);
+  }, [pathname]);
+
   return (
     <>
       <IntlProvider locale={lang} messages={messages[lang]}>
@@ -55,6 +63,12 @@ export const Route = createRootRouteWithContext<TRootContext>()({
             addressCountry: "Kazakhstan",
             addressLocality: "Astana",
           },
+          alternateName: [
+            "Nurdaulet Orynbasarov",
+            "Нурдаулет Орынбасаров",
+            "Нұрдәулет Орынбасаров",
+            "Nurdáýlet Orynbasarov",
+          ],
           alumniOf: {
             "@type": "CollegeOrUniversity",
             name: "Astana IT University",
