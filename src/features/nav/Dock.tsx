@@ -19,6 +19,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useWebHaptics } from "web-haptics/react";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { cn } from "@/lib/utils";
@@ -146,6 +147,7 @@ function DockItem({
 }: DockItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { isMobile } = useIsMobile();
+  const { isSupported, trigger } = useWebHaptics();
   const { distance, magnification, mouseX, spring } = useDock();
 
   const isHovered = useMotionValue(0);
@@ -165,6 +167,12 @@ function DockItem({
   const staticWidth = useMotionValue(40);
   const width = isMobile ? staticWidth : animatedWidth;
 
+  const handleClick = () => {
+    if (disabled) return;
+    if (isSupported) void trigger("selection");
+    onClick?.();
+  };
+
   return (
     <motion.div
       aria-haspopup="true"
@@ -173,7 +181,7 @@ function DockItem({
         className,
       )}
       onBlur={() => isHovered.set(0)}
-      onClick={disabled ? undefined : onClick}
+      onClick={handleClick}
       onFocus={isMobile ? undefined : () => isHovered.set(1)}
       onHoverEnd={isMobile ? undefined : () => isHovered.set(0)}
       onHoverStart={isMobile ? undefined : () => isHovered.set(1)}
