@@ -21,11 +21,11 @@ const HOLD_RATIO = 0.3;
 
 export function LogoSlide({
   deferInactiveLogo = false,
-  renderPaddingRatio = 0.75,
   index,
   logo,
   logoCount,
   logoSize = "40vh",
+  renderPaddingRatio = 0.75,
   scrollYProgress,
 }: {
   deferInactiveLogo?: boolean;
