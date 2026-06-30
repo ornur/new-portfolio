@@ -1,5 +1,3 @@
-import { lazy } from "react";
-
 import type { TechLogo } from "@/features/tech-stack/LogoSlide";
 
 import { motionSvg } from "@/components/svg-logos/motion";
@@ -12,11 +10,10 @@ import { typescriptSvg } from "@/components/svg-logos/typescript";
 import { vercelSvg } from "@/components/svg-logos/vercel";
 import { viteSvg } from "@/components/svg-logos/vite";
 
-const SVG3D = lazy(() =>
-  import("3dsvg").then(({ SVG3D }) => ({ default: SVG3D })),
-);
+import type { LogoDefinition, LogoRenderMode } from "./logoTypes";
 
-type LogoDefinition = Omit<TechLogo, "node"> & { color: string; svg: string };
+import { Logo3d } from "./Logo3d";
+import { StaticLogo } from "./StaticLogo";
 
 const logos: LogoDefinition[] = [
   {
@@ -93,60 +90,33 @@ const logos: LogoDefinition[] = [
   },
 ];
 
-const staticSvg = (svg: string, color: string) => (
-  <div
-    className="h-full w-full [&_svg]:h-full [&_svg]:w-full"
-    dangerouslySetInnerHTML={{
-      __html: svg
-        .replace('height="200px"', 'height="100%"')
-        .replace('width="200px"', 'width="100%"'),
-    }}
-    style={{ color }}
-  />
-);
-
 const logoNode = (
   logo: LogoDefinition,
-  isMobile: boolean,
+  mode: LogoRenderMode,
   onRendered?: () => void,
 ) => {
-  if (isMobile) return staticSvg(logo.svg, logo.color);
+  if (mode === "static") {
+    return (
+      <StaticLogo color={logo.color} onRendered={onRendered} svg={logo.svg} />
+    );
+  }
 
-  return (
-    <SVG3D
-      animate="spinFloat"
-      className="cursor-grab"
-      color={logo.color}
-      cursorOrbit
-      metalness={0}
-      onLoadingChange={
-        onRendered
-          ? (loading, progress) => {
-              if (!loading && progress === 100) {
-                window.requestAnimationFrame(onRendered);
-              }
-            }
-          : undefined
-      }
-      opacity={0}
-      resetOnIdle
-      roughness={1}
-      shadow={false}
-      svg={logo.svg}
-    />
-  );
+  return <Logo3d logo={logo} mode={mode} onRendered={onRendered} />;
 };
 
 export default function getTechLogos(
   isMobile: boolean,
+  canRender3dSvg: boolean,
   onFirstLogoRendered?: () => void,
 ): TechLogo[] {
+  const mode: LogoRenderMode = isMobile
+    ? canRender3dSvg
+      ? "mobile-3d"
+      : "static"
+    : "desktop";
+
   return logos.map((logo, index) => ({
     ...logo,
-    node: logoNode(
-      logo,
-      isMobile,
-      index === 0 ? onFirstLogoRendered : undefined,
-    ),
+    node: logoNode(logo, mode, index === 0 ? onFirstLogoRendered : undefined),
   }));
 }

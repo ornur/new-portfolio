@@ -1,5 +1,10 @@
-import { type MotionValue, useTransform } from "motion/react";
+import {
+  type MotionValue,
+  useMotionValueEvent,
+  useTransform,
+} from "motion/react";
 import * as motion from "motion/react-m";
+import { useState } from "react";
 
 export interface TechLogo {
   bgColor: string;
@@ -15,12 +20,14 @@ const FADE_RANGE = 0.25;
 const HOLD_RATIO = 0.3;
 
 export function LogoSlide({
+  deferInactiveLogo = false,
   index,
   logo,
   logoCount,
   logoSize = "40vh",
   scrollYProgress,
 }: {
+  deferInactiveLogo?: boolean;
   index: number;
   logo: TechLogo;
   logoCount: number;
@@ -35,6 +42,20 @@ export function LogoSlide({
   const end = (FIRST_SLIDE_WEIGHT + index) / totalWeight;
   const activeEnd = start + (end - start) * (1 - HOLD_RATIO);
   const local = useTransform(scrollYProgress, [start, activeEnd], [0, 1]);
+  const renderPadding = (end - start) * 0.75;
+  const isWithinRenderRange = (value: number) =>
+    value >= start - renderPadding && value <= end + renderPadding;
+  const [isNearActiveSlide, setIsNearActiveSlide] = useState(() =>
+    isWithinRenderRange(scrollYProgress.get()),
+  );
+  const shouldRenderLogo = !deferInactiveLogo || isNearActiveSlide;
+
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    const nextIsNearActiveSlide = isWithinRenderRange(value);
+    setIsNearActiveSlide((current) =>
+      current === nextIsNearActiveSlide ? current : nextIsNearActiveSlide,
+    );
+  });
 
   const animatedFillWidth = useTransform(local, [0, 1], ["0%", "100%"]);
   const fadeEnd = Math.min(FILL_THRESHOLD + FADE_RANGE, 1);
@@ -100,7 +121,7 @@ export function LogoSlide({
               width: logoSize,
             }}
           >
-            {logo.node}
+            {shouldRenderLogo ? logo.node : null}
           </div>
           <a
             className="flex flex-col items-center gap-2 no-underline"

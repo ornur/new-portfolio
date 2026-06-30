@@ -7,6 +7,7 @@ import { ScrollDownText } from "@/components/ui/ScrollDownText";
 import { transitionStore } from "@/features/loader/TransitionStore";
 import getTechLogos from "@/features/tech-stack/logos";
 import { LogoSlide } from "@/features/tech-stack/LogoSlide";
+import { useCanRender3dSvg } from "@/hooks/useCanRender3dSvg";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useScrollRestore } from "@/hooks/useScrollRestore";
 import { useSEO } from "@/hooks/useSEO";
@@ -15,8 +16,14 @@ export function TechStackPage() {
   const outerRef = useRef<HTMLDivElement>(null);
 
   const t = useTranslations("TechStack");
-  const { isMobile } = useIsMobile();
-  const techLogos = getTechLogos(isMobile, transitionStore.markSvgReady);
+  const { isLoading, isMobile } = useIsMobile();
+  const effectiveIsMobile = isLoading || isMobile;
+  const canRender3dSvg = useCanRender3dSvg(effectiveIsMobile);
+  const techLogos = getTechLogos(
+    effectiveIsMobile,
+    canRender3dSvg,
+    transitionStore.markSvgReady,
+  );
   useScrollRestore("/tech-stack");
   useSEO({
     description: t("seo.description"),
@@ -32,33 +39,26 @@ export function TechStackPage() {
     <div
       ref={outerRef}
       style={{
-        height: `calc(${techLogos.length * (isMobile ? 750 : 2000)}px)`,
+        height: `calc(${techLogos.length * (effectiveIsMobile ? 750 : 2000)}px)`,
       }}
     >
       <ScrollDownText />
       <motion.div
+        className="scroll-progress-indicator scroll-progress-indicator--difference"
         id="scroll-indicator"
         style={{
-          backgroundColor: "var(--neon)",
-          height: 10,
-          left: 0,
-          mixBlendMode: "difference",
-          originX: 0,
-          position: "fixed",
-          right: 0,
           scaleX: scrollYProgress,
-          top: 0,
-          zIndex: 50,
         }}
       />
       <div className="sticky top-0 h-screen overflow-hidden">
         {techLogos.map((logo, i) => (
           <LogoSlide
+            deferInactiveLogo={effectiveIsMobile && canRender3dSvg}
             index={i}
             key={logo.title}
             logo={logo}
             logoCount={techLogos.length}
-            logoSize={isMobile ? "30vh" : "65vh"}
+            logoSize={effectiveIsMobile ? "40vh" : "65vh"}
             scrollYProgress={scrollYProgress}
           />
         ))}

@@ -166,6 +166,23 @@
   }
 }
 
+@layer components {
+  .scroll-progress-indicator {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 50;
+    height: 10px;
+    transform-origin: left center;
+    background-color: var(--neon);
+  }
+
+  .scroll-progress-indicator--difference {
+    mix-blend-mode: difference;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
