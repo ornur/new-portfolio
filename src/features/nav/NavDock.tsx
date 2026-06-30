@@ -1,3 +1,5 @@
+import type { Messages, NestedKeyOf } from "use-intl";
+
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import {
   BriefcaseBusiness,
@@ -8,8 +10,6 @@ import {
   Sun,
 } from "lucide-react";
 import { useTranslations } from "use-intl/react";
-
-import type { SimpleTranslator } from "@/i18n/getTranslations";
 
 import { Dock, DockIcon, DockItem, DockLabel } from "@/features/nav/Dock";
 import { useTheme } from "@/hooks/useTheme";
@@ -23,6 +23,11 @@ import {
 import { cn } from "@/lib/utils";
 
 import { WaitLink } from "../../components/ui/LinkWait";
+
+type SimpleTranslator<N extends keyof Messages> = (
+  key: NestedKeyOf<Messages[N]>,
+  values?: Record<string, Date | number | string>,
+) => string;
 
 const links = (t: SimpleTranslator<"Nav">) => [
   {

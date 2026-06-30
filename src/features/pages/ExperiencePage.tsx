@@ -28,17 +28,10 @@ export function ExperiencePage() {
     <div className="relative min-h-screen" ref={containerRef}>
       <ScrollDownText />
       <motion.div
+        className="scroll-progress-indicator"
         id="scroll-indicator"
         style={{
-          backgroundColor: "var(--neon)",
-          height: 10,
-          left: 0,
-          originX: 0,
-          position: "fixed",
-          right: 0,
           scaleX: scrollYProgress,
-          top: 0,
-          zIndex: 50,
         }}
       />
       <Suspense fallback={null}>

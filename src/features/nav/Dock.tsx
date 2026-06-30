@@ -13,7 +13,7 @@ import {
   Children,
   cloneElement,
   createContext,
-  useContext,
+  use,
   useEffect,
   useMemo,
   useRef,
@@ -238,7 +238,7 @@ function DockProvider({ children, value }: DockProviderProps) {
 }
 
 function useDock() {
-  const context = useContext(DockContext);
+  const context = use(DockContext);
   if (!context) {
     throw new Error("useDock must be used within an DockProvider");
   }
