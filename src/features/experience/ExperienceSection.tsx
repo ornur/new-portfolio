@@ -2,16 +2,18 @@ import {
   type MotionValue,
   useAnimation,
   useMotionValueEvent,
+  useReducedMotion,
 } from "motion/react";
 import * as motion from "motion/react-m";
-import { useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslations } from "use-intl";
+import { useWebHaptics } from "web-haptics/react";
 
 import { useTheme } from "@/hooks/useTheme";
 
 import { ExperienceHeader } from "./ExperienceHeader";
 import { ExperienceHighlightChip } from "./ExperienceHighlightChip";
-import { ExperienceProgressBadge } from "./ExperienceProgressBadge";
+import { ExperienceTimelineRail } from "./ExperienceTimelineRail";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -72,6 +74,10 @@ const ALL_KEYS: ElementKey[] = [
 
 const META_KEYS: ElementKey[] = ["company", "location", "role", "period"];
 const HIGHLIGHT_KEYS: ElementKey[] = ["highlight-name", "highlight-summary"];
+const CARD_SHADOW_DARK =
+  "0 18px 70px rgba(0,0,0,0.48), 0 0 0 1px rgba(255,255,255,0.08)";
+const CARD_SHADOW_LIGHT =
+  "0 18px 60px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.06)";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -112,6 +118,9 @@ function buildTimelinePhases(experiences: ExperienceData[]): Phase[] {
 export const ExperienceCard = ({ scrollYProgress }: ExperienceCardProps) => {
   const { theme } = useTheme();
   const t = useTranslations("Experience");
+  const { trigger } = useWebHaptics();
+  const shouldReduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   // ── Theme tokens ────────────────────────────────────────────────────────────
 
@@ -165,8 +174,9 @@ export const ExperienceCard = ({ scrollYProgress }: ExperienceCardProps) => {
   // ── State & derived values ──────────────────────────────────────────────────
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const bounceControls = useAnimation();
+  const cardControls = useAnimation();
   const prevPhaseKind = useRef<PhaseKind>("reveal");
+  const prevVisibleIndex = useRef(0);
 
   const totalPhases = timelinePhases.length;
 
@@ -179,6 +189,15 @@ export const ExperienceCard = ({ scrollYProgress }: ExperienceCardProps) => {
     [timelinePhases],
   );
 
+  const visiblePhaseIndexes = useMemo(
+    () =>
+      timelinePhases.reduce<number[]>((indexes, currentPhase, index) => {
+        if (currentPhase.kind !== "hold") indexes.push(index);
+        return indexes;
+      }, []),
+    [timelinePhases],
+  );
+
   const visibleIndex = useMemo(() => {
     let count = 0;
     for (let i = 0; i <= activeIndex && i < timelinePhases.length; i++) {
@@ -187,75 +206,92 @@ export const ExperienceCard = ({ scrollYProgress }: ExperienceCardProps) => {
     return count;
   }, [timelinePhases, activeIndex]);
 
-  // ── Hold-phase bounce + glow animation ─────────────────────────────────────
+  const activeMilestoneIndex = Math.max(visibleIndex - 1, 0);
 
-  const startHoldBounceAnimation = () => {
-    void bounceControls.start({
-      // Border sweeps neon then fades
-      borderColor: isDark
-        ? [
-            "rgba(255,255,255,0.08)",
-            "var(--neon)",
-            "var(--neon)",
-            "rgba(255,255,255,0.08)",
-          ]
-        : [
-            "rgba(0,0,0,0.08)",
-            "rgba(0,0,0,0.45)",
-            "rgba(0,0,0,0.45)",
-            "rgba(0,0,0,0.08)",
-          ],
-      borderWidth: [1, 1.5, 1.5, 1],
+  const scrollToMilestone = useCallback(
+    (milestoneIndex: number) => {
+      const targetPhaseIndex = visiblePhaseIndexes[milestoneIndex];
+      const section = sectionRef.current;
+      if (targetPhaseIndex === undefined || !section) return;
 
-      // Glow blooms then dissolves
-      boxShadow: isDark
-        ? [
-            "0 0 0px 0px rgba(0,0,0,0), 0 8px 32px rgba(0,0,0,0.4)",
-            "0 0 28px 8px var(--neon), 0 0 60px 16px color-mix(in srgb, var(--neon) 30%, transparent), 0 12px 40px rgba(0,0,0,0.5)",
-            "0 0 14px 3px var(--neon), 0 10px 36px rgba(0,0,0,0.45)",
-            "0 0 0px 0px rgba(0,0,0,0), 0 8px 32px rgba(0,0,0,0.4)",
-          ]
-        : [
-            "0 4px 16px rgba(0,0,0,0.06)",
-            "0 12px 48px rgba(0,0,0,0.16), 0 2px 8px rgba(0,0,0,0.08)",
-            "0 8px 36px rgba(0,0,0,0.12)",
-            "0 4px 16px rgba(0,0,0,0.06)",
-          ],
+      void trigger("selection");
 
-      scale: [1, 1.025, 0.995, 1],
-      transition: {
-        // border and glow linger longer - gives the neon pulse room to breathe
-        borderColor: {
-          duration: 1.2,
-          ease: "easeInOut",
-          times: [0, 0.25, 0.6, 1],
+      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+      const scrollableHeight = Math.max(
+        section.offsetHeight - window.innerHeight,
+        0,
+      );
+      const targetProgress = Math.min(
+        (targetPhaseIndex + 0.15) / totalPhases,
+        1,
+      );
+
+      window.scrollTo({
+        behavior: shouldReduceMotion ? "auto" : "smooth",
+        top: sectionTop + scrollableHeight * targetProgress,
+      });
+    },
+    [shouldReduceMotion, totalPhases, trigger, visiblePhaseIndexes],
+  );
+
+  // ── Phase feedback animation ───────────────────────────────────────────────
+
+  const startPhaseFeedback = useCallback(
+    (kind: PhaseKind) => {
+      if (shouldReduceMotion) {
+        void cardControls.start({
+          borderColor: "var(--border)",
+          boxShadow: isDark ? CARD_SHADOW_DARK : CARD_SHADOW_LIGHT,
+        });
+        return;
+      }
+
+      const isHold = kind === "hold";
+      void cardControls.start({
+        borderColor: isDark
+          ? [
+              "rgba(255,255,255,0.08)",
+              isHold ? "var(--neon)" : "rgba(255,255,255,0.22)",
+              isHold ? "var(--neon)" : "rgba(255,255,255,0.14)",
+              "rgba(255,255,255,0.08)",
+            ]
+          : [
+              "rgba(0,0,0,0.08)",
+              isHold ? "rgba(0,0,0,0.45)" : "rgba(0,0,0,0.2)",
+              isHold ? "rgba(0,0,0,0.38)" : "rgba(0,0,0,0.12)",
+              "rgba(0,0,0,0.08)",
+            ],
+        boxShadow: isDark
+          ? [
+              CARD_SHADOW_DARK,
+              isHold
+                ? "0 0 30px 8px var(--neon), 0 18px 72px rgba(0,0,0,0.55)"
+                : "0 0 18px 2px color-mix(in srgb, var(--neon) 22%, transparent), 0 18px 64px rgba(0,0,0,0.48)",
+              CARD_SHADOW_DARK,
+            ]
+          : [
+              CARD_SHADOW_LIGHT,
+              isHold
+                ? "0 22px 70px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.12)"
+                : "0 18px 56px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.08)",
+              CARD_SHADOW_LIGHT,
+            ],
+
+        transition: {
+          borderColor: {
+            duration: isHold ? 1.1 : 0.55,
+            ease: "easeInOut",
+            times: [0, 0.35, 0.75, 1],
+          },
+          boxShadow: {
+            duration: isHold ? 1.2 : 0.65,
+            ease: [0.16, 1, 0.3, 1],
+          },
         },
-        borderWidth: {
-          duration: 1.2,
-          ease: "easeInOut",
-          times: [0, 0.25, 0.6, 1],
-        },
-        boxShadow: {
-          duration: 1.4,
-          ease: [0.16, 1, 0.3, 1],
-          times: [0, 0.3, 0.55, 1],
-        },
-        scale: {
-          duration: 0.55,
-          ease: [0.34, 1.56, 0.64, 1],
-          times: [0, 0.3, 0.65, 1],
-        },
-        // y and scale snap quickly - feels physical
-        y: {
-          duration: 0.85,
-          ease: [0.34, 1.56, 0.64, 1],
-          times: [0, 0.3, 0.65, 1],
-        },
-      },
-      // Subtle lift, gentle overshoot, settle
-      y: [0, -8, 1, 0],
-    });
-  };
+      });
+    },
+    [cardControls, isDark, shouldReduceMotion],
+  );
 
   // ── Scroll → phase sync ─────────────────────────────────────────────────────
 
@@ -268,48 +304,83 @@ export const ExperienceCard = ({ scrollYProgress }: ExperienceCardProps) => {
 
     const isEnteringHold =
       nextPhase.kind === "hold" && prevPhaseKind.current !== "hold";
+    const nextVisibleIndex = timelinePhases
+      .slice(0, next + 1)
+      .filter((p) => p.kind !== "hold").length;
 
-    if (isEnteringHold) startHoldBounceAnimation();
+    if (isEnteringHold) {
+      void trigger("light");
+      startPhaseFeedback("hold");
+    } else if (nextVisibleIndex !== prevVisibleIndex.current) {
+      void trigger("selection");
+      startPhaseFeedback("reveal");
+    }
 
     prevPhaseKind.current = nextPhase.kind;
+    prevVisibleIndex.current = nextVisibleIndex;
     setActiveIndex(next);
   });
 
   // ── Reveal animation state ──────────────────────────────────────────────────
 
   const getAnimState = (key: ElementKey): "decrypt" | "hidden" | "idle" => {
+    const latestKey = phase.revealedKeys.at(-1);
+    if (!phase.revealedKeys.includes(key)) return "hidden";
     if (phase.kind === "hold") return "idle";
-    return phase.revealedKeys.includes(key) ? "decrypt" : "hidden";
+    return key === latestKey ? "decrypt" : "idle";
   };
 
   // ── Render ──────────────────────────────────────────────────────────────────
 
   return (
-    <div style={{ height: `${totalPhases * 50}vh`, width: "100%" }}>
+    <div
+      ref={sectionRef}
+      style={{ height: `${totalPhases * 50}vh`, width: "100%" }}
+    >
       <div className="pointer-events-none sticky top-1/2 flex w-full -translate-y-1/2 items-center justify-center px-4">
-        <motion.div
-          animate={bounceControls}
-          className="border-foreground/20 pointer-events-auto flex w-full max-w-3xl flex-col gap-4 overflow-hidden rounded-3xl border p-6 shadow-2xl backdrop-blur-xl transition-colors duration-300 md:p-8"
-          initial={false}
-          style={{ borderColor: "var(--border)" }}
-        >
-          <ExperienceProgressBadge
+        <div className="flex w-full max-w-5xl items-center justify-center gap-5">
+          <ExperienceTimelineRail
+            activeIndex={activeMilestoneIndex}
+            className="hidden h-80 w-12 shrink-0 md:block"
+            onSelect={scrollToMilestone}
+            progress={scrollYProgress}
             total={visibleTotal}
-            visibleIndex={visibleIndex}
           />
-          <ExperienceHeader
-            experiences={experiences}
-            getAnimState={getAnimState}
-            stepData={stepData}
-            styles={styles}
-          />
-          <ExperienceHighlightChip
-            activeHighlight={activeHighlight}
-            experiences={experiences}
-            getAnimState={getAnimState}
-            styles={styles}
-          />
-        </motion.div>
+          <motion.div
+            animate={cardControls}
+            className="border-foreground/20 bg-background/70 pointer-events-auto flex w-full max-w-3xl flex-col gap-5 overflow-hidden rounded-3xl border p-5 shadow-2xl backdrop-blur-xl transition-colors duration-300 md:p-8"
+            initial={false}
+            style={{
+              borderColor: "var(--border)",
+              boxShadow: isDark ? CARD_SHADOW_DARK : CARD_SHADOW_LIGHT,
+            }}
+          >
+            <div className="flex items-center">
+              <ExperienceTimelineRail
+                activeIndex={activeMilestoneIndex}
+                className="h-8 w-full md:hidden"
+                onSelect={scrollToMilestone}
+                progress={scrollYProgress}
+                total={visibleTotal}
+              />
+            </div>
+            <ExperienceHeader
+              experiences={experiences}
+              getAnimState={getAnimState}
+              phaseKey={`${phase.experienceIndex}-${phase.highlightIndex}-${activeIndex}`}
+              stepData={stepData}
+              styles={styles}
+            />
+            <ExperienceHighlightChip
+              activeHighlight={activeHighlight}
+              experiences={experiences}
+              getAnimState={getAnimState}
+              isComplete={phase.kind === "hold"}
+              phaseKey={`${phase.experienceIndex}-${phase.highlightIndex}-${activeIndex}`}
+              styles={styles}
+            />
+          </motion.div>
+        </div>
       </div>
     </div>
   );

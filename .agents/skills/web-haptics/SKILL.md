@@ -90,10 +90,10 @@ Nuxt/SvelteKit: works directly, library handles SSR.
 All named string presets have a corresponding object in `defaultPatterns`. Use when you need to pass a preset as a value rather than a string literal:
 
 ```ts
-import { WebHaptics, defaultPatterns } from 'web-haptics'
+import { WebHaptics, defaultPatterns } from "web-haptics";
 
-const haptics = new WebHaptics()
-haptics.trigger(defaultPatterns.light)
+const haptics = new WebHaptics();
+haptics.trigger(defaultPatterns.light);
 ```
 
 Extra presets not listed above: `"soft"`, `"rigid"`, `"nudge"`, `"buzz"`. See `defaultPatterns` for all available values.

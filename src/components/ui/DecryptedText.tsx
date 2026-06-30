@@ -11,6 +11,25 @@ interface DecryptedTextProps {
   text: string;
 }
 
+function getScrambledCharacter(text: string, index: number) {
+  let hash = 0;
+
+  for (let i = 0; i < text.length; i++) {
+    hash = (hash * 31 + text.charCodeAt(i) + index * 17) >>> 0;
+  }
+
+  return CHARACTERS[hash % CHARACTERS.length];
+}
+
+function getStableScramble(text: string) {
+  return text
+    .split("")
+    .map((char, index) =>
+      char === " " ? " " : getScrambledCharacter(text, index),
+    )
+    .join("");
+}
+
 export const DecryptedText: React.FC<DecryptedTextProps> = ({
   animate,
   className = "",
@@ -27,18 +46,8 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
 
     prevAnimate.current = animate;
 
-    const scramble = () =>
-      text
-        .split("")
-        .map((c) =>
-          c === " "
-            ? " "
-            : CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)],
-        )
-        .join("");
-
     if (animate === "hidden") {
-      setDisplayText(scramble());
+      setDisplayText(getStableScramble(text));
       return;
     }
 
@@ -49,6 +58,8 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
 
     // animate === "decrypt"
     let iteration = 0;
+    setDisplayText(getStableScramble(text));
+
     const start = () => {
       intervalId = setInterval(() => {
         setDisplayText((cur) =>
