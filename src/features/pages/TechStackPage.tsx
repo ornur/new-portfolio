@@ -24,6 +24,7 @@ export function TechStackPage() {
     canRender3dSvg,
     transitionStore.markSvgReady,
   );
+  const useMobile3dProfile = effectiveIsMobile && canRender3dSvg;
   useScrollRestore("/tech-stack");
   useSEO({
     description: t("seo.description"),
@@ -53,12 +54,13 @@ export function TechStackPage() {
       <div className="sticky top-0 h-screen overflow-hidden">
         {techLogos.map((logo, i) => (
           <LogoSlide
-            deferInactiveLogo={effectiveIsMobile && canRender3dSvg}
+            deferInactiveLogo={useMobile3dProfile}
             index={i}
             key={logo.title}
             logo={logo}
             logoCount={techLogos.length}
-            logoSize={effectiveIsMobile ? "40vh" : "65vh"}
+            logoSize={effectiveIsMobile ? "30vh" : "65vh"}
+            renderPaddingRatio={useMobile3dProfile ? 0.08 : 0.75}
             scrollYProgress={scrollYProgress}
           />
         ))}

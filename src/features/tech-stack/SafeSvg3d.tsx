@@ -30,15 +30,16 @@ export function SafeSvg3d({
       <Suspense fallback={<StaticLogo color={logo.color} svg={logo.svg} />}>
         <SVG3D
           ambientIntensity={isMobile3d ? 0.45 : undefined}
-          animate="spinFloat"
-          animateSpeed={isMobile3d ? 0.95 : undefined}
+          animate={isMobile3d ? "spin" : "spinFloat"}
+          animateSpeed={isMobile3d ? 0.3 : undefined}
           className={isMobile3d ? "pointer-events-none" : "cursor-grab"}
           color={logo.color}
           cursorOrbit={!isMobile3d}
-          depth={isMobile3d ? 0.65 : undefined}
+          depth={isMobile3d ? 0.42 : undefined}
+          draggable={!isMobile3d}
           fov={isMobile3d ? 40 : undefined}
           intro={isMobile3d ? "fade" : undefined}
-          introDuration={isMobile3d ? 0.6 : undefined}
+          introDuration={isMobile3d ? 0.25 : undefined}
           metalness={0}
           onLoadingChange={
             onRendered
@@ -54,9 +55,9 @@ export function SafeSvg3d({
           roughness={1}
           scrollZoom={false}
           shadow={false}
-          smoothness={isMobile3d ? 0.08 : undefined}
+          smoothness={isMobile3d ? 0.04 : undefined}
           svg={logo.svg}
-          zoom={isMobile3d ? 7.5 : undefined}
+          zoom={isMobile3d ? 7 : undefined}
         />
       </Suspense>
     </Svg3dErrorBoundary>

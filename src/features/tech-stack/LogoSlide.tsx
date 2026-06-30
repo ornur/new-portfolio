@@ -21,6 +21,7 @@ const HOLD_RATIO = 0.3;
 
 export function LogoSlide({
   deferInactiveLogo = false,
+  renderPaddingRatio = 0.75,
   index,
   logo,
   logoCount,
@@ -32,6 +33,7 @@ export function LogoSlide({
   logo: TechLogo;
   logoCount: number;
   logoSize?: string;
+  renderPaddingRatio?: number;
   scrollYProgress: MotionValue<number>;
 }) {
   const isFirstSlide = index === 0;
@@ -42,7 +44,7 @@ export function LogoSlide({
   const end = (FIRST_SLIDE_WEIGHT + index) / totalWeight;
   const activeEnd = start + (end - start) * (1 - HOLD_RATIO);
   const local = useTransform(scrollYProgress, [start, activeEnd], [0, 1]);
-  const renderPadding = (end - start) * 0.75;
+  const renderPadding = (end - start) * renderPaddingRatio;
   const isWithinRenderRange = (value: number) =>
     value >= start - renderPadding && value <= end + renderPadding;
   const [isNearActiveSlide, setIsNearActiveSlide] = useState(() =>
