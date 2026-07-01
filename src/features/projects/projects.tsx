@@ -26,6 +26,25 @@ const projectsData = [
     title: "Neo Home",
   },
   {
+    codeUrl: "https://github.com/ornur/lets_car_frontend",
+    demoUrl: "https://lets-car.nurda.dev/",
+    id: "lets-car",
+    ReactNode: [
+      <FaGithub
+        className="dark:text-background size-full p-3"
+        key="github-5"
+        size={48}
+      />,
+      <img
+        alt="Lets Car"
+        className="size-full object-contain"
+        key="image-5"
+        src="/projects/lets-car.webp"
+      />,
+    ],
+    title: "Lets Car",
+  },
+  {
     codeUrl: "https://github.com/ornur/alibi-portfolio",
     demoUrl: "https://alibialisher.kz/",
     id: "alibi-portfolio",
@@ -43,25 +62,6 @@ const projectsData = [
       />,
     ],
     title: "Alibi Portfolio",
-  },
-  {
-    codeUrl: "https://github.com/ornur/creative-lab",
-    demoUrl: "https://www.creative-hub.kz/",
-    id: "creative-lab",
-    ReactNode: [
-      <FaGithub
-        className="dark:text-background size-full p-3"
-        key="github-3"
-        size={48}
-      />,
-      <img
-        alt="Creative Lab"
-        className="size-full object-contain"
-        key="image-3"
-        src="/projects/creative-lab.webp"
-      />,
-    ],
-    title: "Creative Lab",
   },
   {
     codeUrl: "https://github.com/ornur/saasNextFramerMotion",
@@ -83,23 +83,23 @@ const projectsData = [
     title: "SAAS Project",
   },
   {
-    codeUrl: "https://github.com/ornur/lets_car_frontend",
-    demoUrl: "https://lets-car.nurda.dev/",
-    id: "lets-car",
+    codeUrl: "https://github.com/ornur/creative-lab",
+    demoUrl: "https://www.creative-hub.kz/",
+    id: "creative-lab",
     ReactNode: [
       <FaGithub
         className="dark:text-background size-full p-3"
-        key="github-5"
+        key="github-3"
         size={48}
       />,
       <img
-        alt="Lets Car"
+        alt="Creative Lab"
         className="size-full object-contain"
-        key="image-5"
-        src="/projects/lets-car.webp"
+        key="image-3"
+        src="/projects/creative-lab.webp"
       />,
     ],
-    title: "Lets Car",
+    title: "Creative Lab",
   },
 ];
 

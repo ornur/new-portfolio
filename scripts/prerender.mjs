@@ -438,10 +438,7 @@ const PAGES = [
             ["Neo Home demo", "https://neohouse.nurda.dev/"],
             ["Alibi Portfolio demo", "https://alibialisher.kz/"],
             ["Creative Lab demo", "https://www.creative-hub.kz/"],
-            [
-              "SAAS Project demo",
-              "https://saas.nurda.dev/",
-            ],
+            ["SAAS Project demo", "https://saas.nurda.dev/"],
             ["Lets Car demo", "https://lets-car.nurda.dev/"],
           ],
           sections: [
@@ -470,10 +467,7 @@ const PAGES = [
             ["Neo Home demo", "https://neohouse.nurda.dev/"],
             ["Alibi Portfolio demo", "https://alibialisher.kz/"],
             ["Creative Lab demo", "https://www.creative-hub.kz/"],
-            [
-              "SAAS Project demo",
-              "https://saas.nurda.dev/",
-            ],
+            ["SAAS Project demo", "https://saas.nurda.dev/"],
             ["Lets Car demo", "https://lets-car.nurda.dev/"],
           ],
           sections: [
