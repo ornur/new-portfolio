@@ -3,3 +3,15 @@ packages:
 
 minimumReleaseAge: 10080
 trustPolicy: no-downgrade
+
+ignoredBuiltDependencies:
+  - esbuild
+  - msw
+
+overrides:
+  semver@6.3.1: 7.8.4
+  vite: npm:@voidzero-dev/vite-plus-core@latest
+  vitest: npm:@voidzero-dev/vite-plus-test@latest
+
+allowBuilds:
+  esbuild: false

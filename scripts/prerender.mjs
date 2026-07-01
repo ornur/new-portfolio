@@ -16,6 +16,7 @@ const distDir = resolve(__dirname, "../dist");
 const SITE_URL = "https://nurda.dev";
 const DEFAULT_IMAGE = `${SITE_URL}/opengraph-image.png`;
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
+const PROFILE_DATE_CREATED = "2025-12-06T17:39:58+05:00";
 
 const PROFILE_LINKS = {
   github: "https://github.com/ornur",
@@ -46,16 +47,34 @@ const NAME_VARIANTS = [
   "Nurdáýlet Orynbasarov",
 ];
 
-const PERSON_SCHEMA_BY_LOCALE = {
-  en: buildPersonSchema({
+const PROFILE_SKILLS = [
+  "Frontend Development",
+  "React",
+  "Next.js",
+  "TypeScript",
+  "TanStack Router",
+  "Tailwind CSS",
+  "React Query",
+  "Vite",
+  "Docker",
+];
+
+const PROFILE_SCHEMA_BY_LOCALE = {
+  en: buildProfileSchema({
+    description:
+      "Nurdaulet Orynbassarov is a middle frontend developer in Astana, Kazakhstan, building React, TypeScript, and modern web applications.",
     jobTitle: "Middle Frontend Developer",
     name: "Nurdaulet Orynbassarov",
   }),
-  kk: buildPersonSchema({
+  kk: buildProfileSchema({
+    description:
+      "Нұрдәулет Орынбасаров - Астана, Қазақстандағы frontend әзірлеушісі. React және TypeScript жобалары, дағдылары және тәжірибесі.",
     jobTitle: "Frontend әзірлеушісі",
     name: "Нұрдәулет Орынбасаров",
   }),
-  ru: buildPersonSchema({
+  ru: buildProfileSchema({
+    description:
+      "Нурдаулет Орынбасаров - frontend разработчик из Астаны, Казахстан. Портфолио Нурдаулета Орынбасарова с проектами, навыками и опытом разработки на React и TypeScript.",
     jobTitle: "Frontend разработчик",
     name: "Нурдаулет Орынбасаров",
   }),
@@ -559,42 +578,45 @@ function buildMetaBlock({
     ${schemas}`.trimStart();
 }
 
-function buildPersonSchema({ jobTitle, name }) {
+function buildProfileSchema({ description, jobTitle, name }) {
   return {
     "@context": "https://schema.org",
-    "@type": "Person",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "Kazakhstan",
-      addressLocality: "Astana",
-    },
-    alternateName: NAME_VARIANTS.filter((variant) => variant !== name),
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: "Astana IT University",
-    },
-    jobTitle,
-    knowsAbout: [
-      "Frontend Development",
-      "React",
-      "Next.js",
-      "TypeScript",
-      "TanStack Router",
-      "Tailwind CSS",
-      "React Query",
-      "Vite",
-      "Docker",
-    ],
-    name,
-    sameAs: [
-      PROFILE_LINKS.github,
-      PROFILE_LINKS.linkedin,
-      PROFILE_LINKS.telegram,
-    ],
-    url: SITE_URL,
-    worksFor: {
-      "@type": "Organization",
-      name: "LLP Digital Bridge",
+    "@type": "ProfilePage",
+    dateCreated: PROFILE_DATE_CREATED,
+    dateModified: new Date().toISOString(),
+    mainEntity: {
+      "@type": "Person",
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "Kazakhstan",
+        addressLocality: "Astana",
+      },
+      alternateName: NAME_VARIANTS.filter((variant) => variant !== name),
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: "Astana IT University",
+      },
+      description,
+      identifier: "nurdaulet-orynbassarov-portfolio",
+      image: DEFAULT_IMAGE,
+      jobTitle,
+      knowsAbout: PROFILE_SKILLS,
+      name,
+      nationality: {
+        "@type": "Country",
+        name: "Kazakhstan",
+      },
+      sameAs: [
+        PROFILE_LINKS.github,
+        PROFILE_LINKS.linkedin,
+        PROFILE_LINKS.telegram,
+      ],
+      skills: PROFILE_SKILLS,
+      url: SITE_URL,
+      worksFor: {
+        "@type": "Organization",
+        name: "LLP Digital Bridge",
+      },
     },
   };
 }
@@ -623,7 +645,7 @@ function buildRoute(page, locale) {
     path,
     priority: page.priority,
     structuredData:
-      page.key === "home" ? [PERSON_SCHEMA_BY_LOCALE[locale]] : [],
+      page.key === "home" ? [PROFILE_SCHEMA_BY_LOCALE[locale]] : [],
     url,
   };
 }

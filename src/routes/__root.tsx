@@ -18,6 +18,18 @@ type TRootContext = {
   theme: "dark" | "light";
 };
 
+const profileSkills = [
+  "Frontend Development",
+  "React",
+  "Next.js",
+  "TypeScript",
+  "TanStack Router",
+  "Tailwind CSS",
+  "React Query",
+  "Vite",
+  "Docker",
+];
+
 const RootLayout = () => {
   const { pathname } = useLocation();
   const lang = useLocale();
@@ -57,44 +69,48 @@ export const Route = createRootRouteWithContext<TRootContext>()({
       {
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Person",
-          address: {
-            "@type": "PostalAddress",
-            addressCountry: "Kazakhstan",
-            addressLocality: "Astana",
-          },
-          alternateName: [
-            "Nurdaulet Orynbasarov",
-            "Нурдаулет Орынбасаров",
-            "Нұрдәулет Орынбасаров",
-            "Nurdáýlet Orynbasarov",
-          ],
-          alumniOf: {
-            "@type": "CollegeOrUniversity",
-            name: "Astana IT University",
-          },
-          jobTitle: "Middle Frontend Developer",
-          knowsAbout: [
-            "Frontend Development",
-            "React",
-            "Next.js",
-            "TypeScript",
-            "TanStack Router",
-            "Tailwind CSS",
-            "React Query",
-            "Vite",
-            "Docker",
-          ],
-          name: "Nurdaulet Orynbassarov",
-          sameAs: [
-            "https://github.com/ornur",
-            "https://www.linkedin.com/in/ornur/",
-            "https://t.me/nurda_oryn",
-          ],
-          url: "https://nurda.dev",
-          worksFor: {
-            "@type": "Organization",
-            name: "LLP Digital Bridge",
+          "@type": "ProfilePage",
+          dateCreated: "2025-12-06T17:39:58+05:00",
+          dateModified: new Date().toISOString(),
+          mainEntity: {
+            "@type": "Person",
+            address: {
+              "@type": "PostalAddress",
+              addressCountry: "Kazakhstan",
+              addressLocality: "Astana",
+            },
+            alternateName: [
+              "Nurdaulet Orynbasarov",
+              "Нурдаулет Орынбасаров",
+              "Нұрдәулет Орынбасаров",
+              "Nurdáýlet Orynbasarov",
+            ],
+            alumniOf: {
+              "@type": "CollegeOrUniversity",
+              name: "Astana IT University",
+            },
+            description:
+              "Nurdaulet Orynbassarov is a middle frontend developer in Astana, Kazakhstan, building React, TypeScript, and modern web applications.",
+            identifier: "nurdaulet-orynbassarov-portfolio",
+            image: "https://nurda.dev/opengraph-image.png",
+            jobTitle: "Middle Frontend Developer",
+            knowsAbout: profileSkills,
+            name: "Nurdaulet Orynbassarov",
+            nationality: {
+              "@type": "Country",
+              name: "Kazakhstan",
+            },
+            sameAs: [
+              "https://github.com/ornur",
+              "https://www.linkedin.com/in/ornur/",
+              "https://t.me/nurda_oryn",
+            ],
+            skills: profileSkills,
+            url: "https://nurda.dev",
+            worksFor: {
+              "@type": "Organization",
+              name: "LLP Digital Bridge",
+            },
           },
         }),
         type: "application/ld+json",
