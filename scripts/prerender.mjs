@@ -406,14 +406,11 @@ const PAGES = [
           intro:
             "Selected frontend projects by Nurdaulet Orynbassarov with source code and live demos.",
           links: [
-            ["Neo Home demo", "https://neohouse.vercel.app/"],
+            ["Neo Home demo", "https://neohouse.nurda.dev/"],
             ["Alibi Portfolio demo", "https://alibialisher.kz/"],
             ["Creative Lab demo", "https://www.creative-hub.kz/"],
-            [
-              "SAAS Project demo",
-              "https://saas-next-framer-motion.vercel.app/",
-            ],
-            ["Lets Car demo", "https://lets-car.vercel.app/"],
+            ["SAAS Project demo", "https://saas.nurda.dev/"],
+            ["Lets Car demo", "https://lets-car.nurda.dev/"],
           ],
           sections: [
             {
@@ -438,14 +435,14 @@ const PAGES = [
           intro:
             "Нұрдәулет Орынбасаров жасаған таңдаулы frontend жобалары, source code және live demo сілтемелері.",
           links: [
-            ["Neo Home demo", "https://neohouse.vercel.app/"],
+            ["Neo Home demo", "https://neohouse.nurda.dev/"],
             ["Alibi Portfolio demo", "https://alibialisher.kz/"],
             ["Creative Lab demo", "https://www.creative-hub.kz/"],
             [
               "SAAS Project demo",
-              "https://saas-next-framer-motion.vercel.app/",
+              "https://saas.nurda.dev/",
             ],
-            ["Lets Car demo", "https://lets-car.vercel.app/"],
+            ["Lets Car demo", "https://lets-car.nurda.dev/"],
           ],
           sections: [
             {
@@ -470,14 +467,14 @@ const PAGES = [
           intro:
             "Избранные frontend проекты Нурдаулета Орынбасарова с исходным кодом и live demo.",
           links: [
-            ["Neo Home demo", "https://neohouse.vercel.app/"],
+            ["Neo Home demo", "https://neohouse.nurda.dev/"],
             ["Alibi Portfolio demo", "https://alibialisher.kz/"],
             ["Creative Lab demo", "https://www.creative-hub.kz/"],
             [
               "SAAS Project demo",
-              "https://saas-next-framer-motion.vercel.app/",
+              "https://saas.nurda.dev/",
             ],
-            ["Lets Car demo", "https://lets-car.vercel.app/"],
+            ["Lets Car demo", "https://lets-car.nurda.dev/"],
           ],
           sections: [
             {

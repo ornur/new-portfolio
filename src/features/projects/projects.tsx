@@ -8,7 +8,7 @@ import { useTheme } from "@/hooks/useTheme";
 const projectsData = [
   {
     codeUrl: "https://github.com/ornur/neohome",
-    demoUrl: "https://neohouse.vercel.app/",
+    demoUrl: "https://neohouse.nurda.dev/",
     id: "neo-home",
     ReactNode: [
       <FaGithub
@@ -65,7 +65,7 @@ const projectsData = [
   },
   {
     codeUrl: "https://github.com/ornur/saasNextFramerMotion",
-    demoUrl: "https://saas-next-framer-motion.vercel.app/",
+    demoUrl: "https://saas.nurda.dev/",
     id: "saas-project",
     ReactNode: [
       <FaGithub
@@ -84,7 +84,7 @@ const projectsData = [
   },
   {
     codeUrl: "https://github.com/ornur/lets_car_frontend",
-    demoUrl: "https://lets-car.vercel.app/",
+    demoUrl: "https://lets-car.nurda.dev/",
     id: "lets-car",
     ReactNode: [
       <FaGithub
