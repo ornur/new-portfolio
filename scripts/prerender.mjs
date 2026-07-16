@@ -13,7 +13,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = resolve(__dirname, "../dist");
 
-const SITE_URL = "https://nurda.dev";
+const SITE_URL = "https://www.nurda.dev";
 const DEFAULT_IMAGE = `${SITE_URL}/opengraph-image.png`;
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
 const PROFILE_DATE_CREATED = "2025-12-06T17:39:58+05:00";

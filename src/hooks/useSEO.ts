@@ -17,7 +17,7 @@ export function useSEO({ description, title }: SeoProps) {
 
   useEffect(() => {
     const path = window.location.pathname;
-    const canonicalUrl = `https://nurda.dev${path}`;
+    const canonicalUrl = `https://www.nurda.dev${path}`;
     const basePath = stripLocaleFromPath(path);
 
     // Update the document title
@@ -65,28 +65,28 @@ export function useSEO({ description, title }: SeoProps) {
     setLinkTag("canonical", canonicalUrl);
     setLinkTag(
       "alternate",
-      `https://nurda.dev${localizePath(basePath, "en")}`,
+      `https://www.nurda.dev${localizePath(basePath, "en")}`,
       {
         hreflang: "en",
       },
     );
     setLinkTag(
       "alternate",
-      `https://nurda.dev${localizePath(basePath, "ru")}`,
+      `https://www.nurda.dev${localizePath(basePath, "ru")}`,
       {
         hreflang: "ru",
       },
     );
     setLinkTag(
       "alternate",
-      `https://nurda.dev${localizePath(basePath, "kk")}`,
+      `https://www.nurda.dev${localizePath(basePath, "kk")}`,
       {
         hreflang: "kk",
       },
     );
     setLinkTag(
       "alternate",
-      `https://nurda.dev${localizePath(basePath, defaultLocale)}`,
+      `https://www.nurda.dev${localizePath(basePath, defaultLocale)}`,
       {
         hreflang: "x-default",
       },

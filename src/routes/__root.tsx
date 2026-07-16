@@ -92,7 +92,7 @@ export const Route = createRootRouteWithContext<TRootContext>()({
             description:
               "Nurdaulet Orynbassarov is a middle frontend developer in Astana, Kazakhstan, building React, TypeScript, and modern web applications.",
             identifier: "nurdaulet-orynbassarov-portfolio",
-            image: "https://nurda.dev/opengraph-image.png",
+            image: "https://www.nurda.dev/opengraph-image.png",
             jobTitle: "Middle Frontend Developer",
             knowsAbout: profileSkills,
             name: "Nurdaulet Orynbassarov",
@@ -106,7 +106,7 @@ export const Route = createRootRouteWithContext<TRootContext>()({
               "https://t.me/nurda_oryn",
             ],
             skills: profileSkills,
-            url: "https://nurda.dev",
+            url: "https://www.nurda.dev",
             worksFor: {
               "@type": "Organization",
               name: "LLP Digital Bridge",

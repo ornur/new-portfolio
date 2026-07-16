@@ -4,4 +4,4 @@ Allow: /tech-stack
 Allow: /experience
 Allow: /projects
 
-Sitemap: https://nurda.dev/sitemap.xml
+Sitemap: https://www.nurda.dev/sitemap.xml
