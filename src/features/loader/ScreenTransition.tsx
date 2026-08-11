@@ -1,4 +1,4 @@
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence, type Variants } from "motion/react";
 import * as motion from "motion/react-m";
 import { useEffect } from "react";
 
@@ -6,6 +6,11 @@ import { useTheme } from "@/hooks/useTheme";
 
 import * as constants from "./constants";
 import { Phase, useTransitionStore } from "./TransitionStore";
+
+const clipVariants = {
+  hidden: (initY: number) => ({ height: 0, y: initY }),
+  visible: { height: constants.SVG_H, y: 0 },
+} satisfies Variants;
 
 export default function ScreenTransition() {
   const { isActive, phase } = useTransitionStore();
@@ -105,17 +110,15 @@ function ClipRect({
 }) {
   return (
     <motion.rect
-      animate={
-        phase >= Phase.drawing
-          ? { height: constants.SVG_H, y: 0 }
-          : { height: 0, y: initY }
-      }
-      initial={{ height: 0, y: initY }}
+      animate={phase >= Phase.drawing ? "visible" : "hidden"}
+      custom={initY}
+      initial="hidden"
       transition={
         phase === Phase.drawing
           ? { delay, duration: constants.PATH_TIME, ease: "easeInOut" }
           : { duration: 0 }
       }
+      variants={clipVariants}
       width="120"
       x="-5"
     />

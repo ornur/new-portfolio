@@ -136,7 +136,7 @@ function LanguageDock() {
       <DockItem
         aria-label={t("language")}
         aria-labelledby={`dock-item-language`}
-        className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 text-sm backdrop-blur-[50px] duration-120 hover:bg-black/15 hover:text-2xl"
+        className="dark:bg-foreground/20 dark:hover:bg-foreground/10 active:bg-neon dark:active:bg-neon aspect-square rounded-full bg-black/10 text-sm backdrop-blur-[50px] transition-[background-color,color,font-size] duration-120 hover:bg-black/15 hover:text-2xl"
         key="language"
         onClick={handleLocaleChange}
       >

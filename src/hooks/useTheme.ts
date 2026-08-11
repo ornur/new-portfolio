@@ -3,11 +3,13 @@ import { useLayoutEffect, useState } from "react";
 
 export function useTheme() {
   const [theme, setTheme] = useState<"dark" | "light">(() => {
-    const saved = (localStorage.getItem("theme") as "dark" | "light") ?? "dark";
-    document.documentElement.classList.toggle("dark", saved === "dark");
-    localStorage.setItem("theme", saved);
-    return saved;
+    return (localStorage.getItem("theme") as "dark" | "light") ?? "dark";
   });
+
+  useLayoutEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   useLayoutEffect(() => {
     // Listen for theme changes using MutationObserver
@@ -43,18 +45,19 @@ export function useTheme() {
   }, []);
 
   const toggleTheme = (value?: "dark" | "light") => {
-    setTheme((prev) => {
-      const newTheme = value ?? (prev === "dark" ? "light" : "dark");
-      document.documentElement.classList.toggle("dark", newTheme === "dark");
-      localStorage.setItem("theme", newTheme);
+    const currentTheme = document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+    const newTheme = value ?? (currentTheme === "dark" ? "light" : "dark");
 
-      // Dispatch custom event asynchronously to avoid render conflicts
-      setTimeout(() => {
-        window.dispatchEvent(new CustomEvent("themechange"));
-      }, 0);
+    setTheme(newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    localStorage.setItem("theme", newTheme);
 
-      return newTheme;
-    });
+    // Dispatch custom event asynchronously to avoid render conflicts
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent("themechange"));
+    }, 0);
   };
 
   return { theme, toggleTheme };
