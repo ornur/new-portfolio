@@ -7,8 +7,8 @@ import { useTheme } from "@/hooks/useTheme";
 
 const projectsData = [
   {
-    codeUrl: "https://github.com/ornur/neohome",
-    demoUrl: "https://neohouse.nurda.dev/",
+    codeUrl: "https://github.com/ornur/alibi-jan-auen",
+    demoUrl: "https://janaueni.kz/",
     id: "neo-home",
     ReactNode: [
       <FaGithub
@@ -17,9 +17,28 @@ const projectsData = [
         size={48}
       />,
       <img
-        alt="Neo Home"
+        alt="Jan Aueni"
         className="size-full object-contain"
         key="image-1"
+        src="/projects/jan-aueni.webp"
+      />,
+    ],
+    title: "Jan Aueni",
+  },
+  {
+    codeUrl: "https://github.com/ornur/neohome",
+    demoUrl: "https://neohouse.nurda.dev/",
+    id: "neo-home",
+    ReactNode: [
+      <FaGithub
+        className="dark:text-background size-full p-3"
+        key="github-2"
+        size={48}
+      />,
+      <img
+        alt="Neo Home"
+        className="size-full object-contain"
+        key="image-2"
         src="/projects/neohome.webp"
       />,
     ],
@@ -32,13 +51,13 @@ const projectsData = [
     ReactNode: [
       <FaGithub
         className="dark:text-background size-full p-3"
-        key="github-5"
+        key="github-3"
         size={48}
       />,
       <img
         alt="Lets Car"
         className="size-full object-contain"
-        key="image-5"
+        key="image-3"
         src="/projects/lets-car.webp"
       />,
     ],
@@ -51,13 +70,13 @@ const projectsData = [
     ReactNode: [
       <FaGithub
         className="dark:text-background size-full p-3"
-        key="github-2"
+        key="github-4"
         size={48}
       />,
       <img
         alt="Alibi Portfolio"
         className="size-full object-contain"
-        key="image-2"
+        key="image-4"
         src="/projects/alibi-portfolio.webp"
       />,
     ],
@@ -70,13 +89,13 @@ const projectsData = [
     ReactNode: [
       <FaGithub
         className="dark:text-background size-full p-3"
-        key="github-4"
+        key="github-5"
         size={48}
       />,
       <img
         alt="SAAS Project"
         className="size-full object-contain"
-        key="image-4"
+        key="image-5"
         src="/projects/saas-project.webp"
       />,
     ],
@@ -89,13 +108,13 @@ const projectsData = [
     ReactNode: [
       <FaGithub
         className="dark:text-background size-full p-3"
-        key="github-3"
+        key="github-6"
         size={48}
       />,
       <img
         alt="Creative Lab"
         className="size-full object-contain"
-        key="image-3"
+        key="image-6"
         src="/projects/creative-lab.webp"
       />,
     ],
