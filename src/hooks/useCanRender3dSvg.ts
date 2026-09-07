@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 type NavigatorWithDeviceMemory = Navigator & {
   deviceMemory?: number;
@@ -6,6 +6,8 @@ type NavigatorWithDeviceMemory = Navigator & {
 
 const MOBILE_BREAKPOINT = 768;
 const MIN_MOBILE_DEVICE_MEMORY_GB = 3;
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+let webGLSupported: boolean | undefined;
 
 const hasWebGLSupport = () => {
   const canvas = document.createElement("canvas");
@@ -16,43 +18,40 @@ const hasWebGLSupport = () => {
 };
 
 export function useCanRender3dSvg(isMobile: boolean) {
-  const [canRender, setCanRender] = useState(!isMobile);
+  const canRenderOnMobile = useSyncExternalStore(
+    subscribeToCapability,
+    getMobileCapability,
+    getServerCapability,
+  );
 
-  useEffect(() => {
-    if (!isMobile) {
-      setCanRender(true);
-      return;
-    }
+  return !isMobile || canRenderOnMobile;
+}
 
-    const reducedMotionQuery = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
+function getMobileCapability() {
+  const { deviceMemory } = navigator as NavigatorWithDeviceMemory;
 
-    const checkCapability = () => {
-      const navigatorWithMemory = navigator as NavigatorWithDeviceMemory;
-      const deviceMemory = navigatorWithMemory.deviceMemory;
-      const hasEnoughMemory =
-        deviceMemory == null || deviceMemory >= MIN_MOBILE_DEVICE_MEMORY_GB;
-      const isMobileViewport = window.innerWidth <= MOBILE_BREAKPOINT;
+  return (
+    window.innerWidth <= MOBILE_BREAKPOINT &&
+    (deviceMemory == null || deviceMemory >= MIN_MOBILE_DEVICE_MEMORY_GB) &&
+    !window.matchMedia(REDUCED_MOTION_QUERY).matches &&
+    webGLSupported === true
+  );
+}
 
-      setCanRender(
-        isMobileViewport &&
-          hasEnoughMemory &&
-          !reducedMotionQuery.matches &&
-          hasWebGLSupport(),
-      );
-    };
+function getServerCapability() {
+  return false;
+}
 
-    checkCapability();
+function subscribeToCapability(onStoreChange: () => void) {
+  const reducedMotionQuery = window.matchMedia(REDUCED_MOTION_QUERY);
+  // Probe once when subscribing, keeping WebGL allocation out of rendering.
+  webGLSupported ??= hasWebGLSupport();
 
-    reducedMotionQuery.addEventListener("change", checkCapability);
-    window.addEventListener("resize", checkCapability);
+  reducedMotionQuery.addEventListener("change", onStoreChange);
+  window.addEventListener("resize", onStoreChange);
 
-    return () => {
-      reducedMotionQuery.removeEventListener("change", checkCapability);
-      window.removeEventListener("resize", checkCapability);
-    };
-  }, [isMobile]);
-
-  return canRender;
+  return () => {
+    reducedMotionQuery.removeEventListener("change", onStoreChange);
+    window.removeEventListener("resize", onStoreChange);
+  };
 }

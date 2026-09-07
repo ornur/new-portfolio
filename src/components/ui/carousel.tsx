@@ -46,14 +46,37 @@ function Carousel({
     },
     plugins,
   );
-  const [canScrollPrev, setCanScrollPrev] = React.useState(false);
-  const [canScrollNext, setCanScrollNext] = React.useState(false);
+  const subscribe = React.useCallback(
+    (onStoreChange: () => void) => {
+      if (!api) return () => {};
+      api.on("reInit", onStoreChange);
+      api.on("select", onStoreChange);
 
-  const onSelect = React.useCallback((api: CarouselApi) => {
-    if (!api) return;
-    setCanScrollPrev(api.canScrollPrev());
-    setCanScrollNext(api.canScrollNext());
-  }, []);
+      return () => {
+        api.off("reInit", onStoreChange);
+        api.off("select", onStoreChange);
+      };
+    },
+    [api],
+  );
+  const getCanScrollPrev = React.useCallback(
+    () => api?.canScrollPrev() ?? false,
+    [api],
+  );
+  const getCanScrollNext = React.useCallback(
+    () => api?.canScrollNext() ?? false,
+    [api],
+  );
+  const canScrollPrev = React.useSyncExternalStore(
+    subscribe,
+    getCanScrollPrev,
+    getServerCanScroll,
+  );
+  const canScrollNext = React.useSyncExternalStore(
+    subscribe,
+    getCanScrollNext,
+    getServerCanScroll,
+  );
 
   const scrollPrev = React.useCallback(() => {
     api?.scrollPrev();
@@ -80,17 +103,6 @@ function Carousel({
     if (!api || !setApi) return;
     setApi(api);
   }, [api, setApi]);
-
-  React.useEffect(() => {
-    if (!api) return;
-    onSelect(api);
-    api.on("reInit", onSelect);
-    api.on("select", onSelect);
-
-    return () => {
-      api?.off("select", onSelect);
-    };
-  }, [api, onSelect]);
 
   return (
     <CarouselContext.Provider
@@ -217,6 +229,10 @@ function CarouselPrevious({
       <span className="sr-only">Previous slide</span>
     </Button>
   );
+}
+
+function getServerCanScroll() {
+  return false;
 }
 
 function useCarousel() {

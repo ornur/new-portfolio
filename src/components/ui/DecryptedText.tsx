@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const CHARACTERS =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+{}|:\"<>?~`-=[];',./0123456789";
@@ -37,28 +37,36 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
   speed = 30,
   text,
 }) => {
-  const [displayText, setDisplayText] = useState("");
-  const prevAnimate = useRef(animate);
+  return (
+    <span className={className}>
+      {animate === "decrypt" ? (
+        <DecryptingText
+          delay={delay}
+          key={JSON.stringify([text, speed, delay])}
+          speed={speed}
+          text={text}
+        />
+      ) : animate === "hidden" ? (
+        getStableScramble(text)
+      ) : (
+        text
+      )}
+    </span>
+  );
+};
+
+function DecryptingText({
+  delay,
+  speed,
+  text,
+}: Required<Pick<DecryptedTextProps, "delay" | "speed" | "text">>) {
+  const [displayText, setDisplayText] = useState(() => getStableScramble(text));
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
     let intervalId: ReturnType<typeof setInterval>;
 
-    prevAnimate.current = animate;
-
-    if (animate === "hidden") {
-      setDisplayText(getStableScramble(text));
-      return;
-    }
-
-    if (animate === "idle") {
-      setDisplayText(text);
-      return;
-    }
-
-    // animate === "decrypt"
     let iteration = 0;
-    setDisplayText(getStableScramble(text));
 
     const start = () => {
       intervalId = setInterval(() => {
@@ -87,7 +95,7 @@ export const DecryptedText: React.FC<DecryptedTextProps> = ({
       clearTimeout(timeoutId);
       clearInterval(intervalId);
     };
-  }, [text, animate, speed, delay]);
+  }, [text, speed, delay]);
 
-  return <span className={className}>{displayText}</span>;
-};
+  return displayText;
+}
