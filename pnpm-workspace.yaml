@@ -10,8 +10,26 @@ ignoredBuiltDependencies:
 
 overrides:
   semver@6.3.1: 7.8.4
-  vite: npm:@voidzero-dev/vite-plus-core@latest
-  vitest: npm:@voidzero-dev/vite-plus-test@latest
+  vite@*: npm:@voidzero-dev/vite-plus-core@0.3.0
+  vitest@*: 4.1.11
 
 allowBuilds:
   esbuild: false
+minimumReleaseAgeExclude:
+  - "@types/react-dom@19.2.7"
+  - "@typescript-eslint/eslint-plugin@8.69.0"
+  - "@typescript-eslint/parser@8.69.0"
+  - "@typescript-eslint/project-service@8.69.0"
+  - "@typescript-eslint/scope-manager@8.69.0"
+  - "@typescript-eslint/tsconfig-utils@8.69.0"
+  - "@typescript-eslint/type-utils@8.69.0"
+  - "@typescript-eslint/types@8.69.0"
+  - "@typescript-eslint/typescript-estree@8.69.0"
+  - "@typescript-eslint/utils@8.69.0"
+  - "@typescript-eslint/visitor-keys@8.69.0"
+  - cn@0.2.4
+  - icu-minify@4.14.2
+  - lucide-react@1.41.0
+  - shadcn@4.21.0
+  - typescript-eslint@8.69.0
+  - use-intl@4.14.2
